@@ -1,0 +1,13 @@
+Ciągi zastępowane:
+
+[jeśli Verbose == true]
+
+::test_failure::	- usuwa z tekstu dialogu, aktywuje Test Result i wypisuje w nim PORAŻKA
+::test_success::	- usuwa z tekstu dialogu, aktywuje Test Result i wypisuje w nim SUKCES
+
+
+
+[zawsze]
+
+::player_name::		- zastępowane imieniem wybranym przez gracza
+::npc_name {arg}::	- zastępuje ciąg między ":: ::" ciągiem {arg}
