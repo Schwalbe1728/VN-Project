@@ -28,6 +28,7 @@ public class PortraitOcclusionFillScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             PlayerInfo.ChangeSanity(-1);
+            Debug.Log(PlayerInfo.CurrentSanity.ToString() + ", " + PlayerInfo.SanityPercentage);
         }
     }
 

@@ -342,7 +342,7 @@ public class CharacterInfoScript : MonoBehaviour
 
         ChangeHealth(healValue);
 
-        if(UnityEngine.Random.Range(0, 100) < 66 - StressPenalty)
+        if(UnityEngine.Random.Range(0, 100) < 66 - 2 * StressPenalty)
         {
             ChangeSanity(healValue);
         }
