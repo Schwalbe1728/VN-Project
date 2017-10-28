@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void MinutePassed();
+public delegate void HourPassed();
+public delegate void DayPassed();
 
 public class TimeManagerScript : MonoBehaviour
 {
     public event MinutePassed OnMinutePassed;
+    public event HourPassed OnHourPassed;
+    public event DayPassed OnDayPassed;
 
     [SerializeField]
     private float RealTimeToGameSecond;
@@ -82,6 +86,11 @@ public class TimeManagerScript : MonoBehaviour
         {
             Minutes -= 60;
             AddHour();
+
+            if(OnHourPassed != null)
+            {
+                OnHourPassed();
+            }
         }
     }
 
@@ -93,6 +102,11 @@ public class TimeManagerScript : MonoBehaviour
         {
             Hours -= 24;
             AddDay();
+
+            if(OnDayPassed != null)
+            {
+                OnDayPassed();
+            }
         }
     }
 

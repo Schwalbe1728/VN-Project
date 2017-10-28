@@ -27,6 +27,9 @@ public class DialogueScript : MonoBehaviour
     private string NextDialogueString;
 
     [SerializeField]
+    private int SecondsPerNode;
+
+    [SerializeField]
     private SpriteElement[] backgroundSprites;
     [SerializeField]
     private SpriteElement[] portraitSprites;
@@ -53,6 +56,7 @@ public class DialogueScript : MonoBehaviour
 
     private BackgroundScript BackgroundScr;
     private SoundManagerScript SoundManager;
+    private TimeManagerScript TimeManager;
 
     public void StartDialogue()
     {
@@ -109,6 +113,8 @@ public class DialogueScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        TimeManager = GameObject.Find("Time Manager").GetComponent<TimeManagerScript>();
+
         DialogueObject =
             DialoguesManagerScript.GetDialogue(SourcePath);
             //DialogueTree.DialogueSerializer.LoadDialogue( SourcePath );
@@ -194,6 +200,8 @@ public class DialogueScript : MonoBehaviour
     private void NewNodeEntered()
     {
         //TODO: wykrycie końca dialogu
+
+        TimeManager.AdvanceTime(SecondsPerNode);
 
         if (CurrentNode == null || ((CurrentNode.Options == null || CurrentNode.Options.Count == 0) && CurrentNode.ImmidiateNodeID == Dialogue.DIALOGUE_EXIT ))
         {            
