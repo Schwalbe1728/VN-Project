@@ -12,6 +12,8 @@ public delegate void SanityChanged(float sanityPercentage);
 
 public static class StatsRuleSet
 {
+    private static float healPercentPerHour = 0.02f;
+
     public static bool TestRNG(CharacterInfoScript charInfo, CharacterStat statToTest, int modificator)
     {
         int diceResult = UnityEngine.Random.Range(1, 100);
@@ -73,42 +75,58 @@ public static class StatsRuleSet
 
     public static int MaxHealthPoints(CharacterInfoScript charInfo)
     {
-        int result =
-            3 * charInfo.Physique +             
-            1 * charInfo.Agility;
+        int Mod1 = 5;
+        int Mod2 = 2;
+        float Mod3 = 10f;
 
-        return Mathf.RoundToInt(6f * result / 4 );
+        int result =
+            Mod1 * charInfo.Physique +             
+            Mod2 * charInfo.Character;
+
+        return Mathf.RoundToInt(Mod3 * result / (Mod1 + Mod2) );
     }
 
     public static int MaxHealthPoints(CharacterInfo charInfo)
     {
-        int result =
-            3 * charInfo.Stats[CharacterStat.Physique] + 
-            1 * charInfo.Stats[CharacterStat.Agility];
+        int Mod1 = 5;
+        int Mod2 = 2;
+        float Mod3 = 10f;
 
-        return Mathf.RoundToInt(6f * result / 4);
+        int result =
+            Mod1 * charInfo.Stats[CharacterStat.Physique] + 
+            Mod2 * charInfo.Stats[CharacterStat.Character];
+
+        return Mathf.RoundToInt(Mod3 * result / (Mod1 + Mod2));
     }
 
     public static int BaseDamage(CharacterInfoScript charInfo)
     {
-        int result =
-            4 * charInfo.Physique +
-            2 * charInfo.Agility +
-            1 * charInfo.Perception;
+        int Mod1 = 5;
+        int Mod2 = 3;
+        float Mod3 = 1f;
 
-        return Mathf.RoundToInt(result / 9f);
+        int result =
+            Mod1 * charInfo.Physique +
+            Mod2 * charInfo.Agility;            
+
+        return Mathf.RoundToInt( Mod3 * result / (Mod1 + Mod2) );
     }
 
     public static int BaseDamage(CharacterInfo charInfo)
     {
-        int result =
-            4 * charInfo.Stats[CharacterStat.Physique] +
-            2 * charInfo.Stats[CharacterStat.Agility] +
-            1 * charInfo.Stats[CharacterStat.Perception];
+        int Mod1 = 5;
+        int Mod2 = 3;
+        float Mod3 = 1f;
 
-        return Mathf.RoundToInt(result / 9f);
+        int result =
+            Mod1 * charInfo.Stats[CharacterStat.Physique] +
+            Mod2 * charInfo.Stats[CharacterStat.Agility];
+            
+
+        return Mathf.RoundToInt( Mod3 * result / (Mod1 + Mod2) );
     }
 
+    [Obsolete]
     public static int HealRate(CharacterInfoScript charInfo)
     {
         int result =
@@ -118,6 +136,7 @@ public static class StatsRuleSet
         return 1 + Mathf.RoundToInt(result / 30.0f);
     }
 
+    [Obsolete]
     public static int HealRate(CharacterInfo charInfo)
     {
         int result =
@@ -127,34 +146,57 @@ public static class StatsRuleSet
         return 1 + Mathf.RoundToInt(result / 30.0f);
     }
 
+    public static float VitalityHealRate(CharacterInfo charInfo)
+    {
+        return healPercentPerHour * MaxHealthPoints(charInfo);
+    }
+
+    public static float VitalityHealRate(CharacterInfoScript charInfo)
+    {
+        return healPercentPerHour * MaxHealthPoints(charInfo);
+    }
+
+    public static float SanityHealRate(CharacterInfo charInfo)
+    {
+        return healPercentPerHour * MaxSanity(charInfo);
+    }
+
+    public static float SanityHealRate(CharacterInfoScript charInfo)
+    {
+        return healPercentPerHour * MaxSanity(charInfo);
+    }
+
     public static int MaxSanity(CharacterInfo charInfo)
     {
-        int modCh = 3;
-        int modWt = 2;
+        int modCh = 2;
+        int modWt = 5;
+        float Mod3 = 10f;
 
         int result =
             modCh * charInfo.Stats[CharacterStat.Character] +
             modWt * charInfo.Stats[CharacterStat.Wits];
 
-        return Mathf.RoundToInt(6f * result / (modCh + modWt));
+        return Mathf.RoundToInt(Mod3 * result / (modCh + modWt));
     }
 
     public static int MaxSanity(CharacterInfoScript charInfo)
     {
-        int modCh = 3;
-        int modWt = 2;
+        int modCh = 2;
+        int modWt = 5;
+        float Mod3 = 10f;
 
         int result =
             modCh * charInfo.Character +
             modWt * charInfo.Wits;
 
-        return Mathf.RoundToInt(6f * result / (modCh + modWt));
+        return Mathf.RoundToInt(Mod3 * result / (modCh + modWt));
     }
 
+    [Obsolete]
     public static int MaxStressPenalty(CharacterInfoScript charInfo)
     {
         int CHMod = 5;
-        int WTMod = 3;
+        int WTMod = 3;        
 
         return
             10 + Mathf.RoundToInt(
@@ -163,6 +205,7 @@ public static class StatsRuleSet
                      * 15 / 19.0f);
     }
 
+    [Obsolete]
     public static int MaxStressPenalty(CharacterInfo charInfo)
     {
         int CHMod = 5;
@@ -308,7 +351,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return 1 - ((float)(CurrentSanity + CurrentHealth) / (MaxSanity + MaxHealthPoints) );
+            return 1 - ((float)(CurrentSanity + CurrentHealth) / (MaxSanity + MaxHealthPoints));
         }
     }
 

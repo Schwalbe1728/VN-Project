@@ -4391,7 +4391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &609261849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9468,12 +9468,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   definitions:
-  - name: No Significant Background
+  - name: Dilletante
     description: There's nothing special about you.
-    modifiedStatDeclaration: 
-    modifiedStatValues: 
+    modifiedStatDeclaration: 00000000020000000300000004000000
+    modifiedStatValues: ffffffffffffffffffffffffffffffff
     skillsGranted: 
-  - name: Thief Out Of Luck
+  - name: Private Investigator
     description: 'You were Welsh. You were a thief.
 
       You were caught and had your fingers broken.
@@ -9484,10 +9484,10 @@ MonoBehaviour:
 
 
       Oh yeah. Also you fingers were broken. (-3 AG)'
-    modifiedStatDeclaration: 000000000200000003000000
-    modifiedStatValues: fdffffff0100000001000000
+    modifiedStatDeclaration: 0000000001000000020000000300000004000000
+    modifiedStatValues: ffffffff0100000001000000ffffffff01000000
     skillsGranted: 
-  - name: Ex Soldier
+  - name: Thief
     description: 'You fought in a great war.
 
 
@@ -9498,8 +9498,92 @@ MonoBehaviour:
       WT -1
 
       PE -2'
-    modifiedStatDeclaration: 04000000020000000300000001000000
-    modifiedStatValues: 0300000001000000fffffffffeffffff
+    modifiedStatDeclaration: 00000000020000000300000004000000
+    modifiedStatValues: 04000000fdffffffffffffff01000000
+    skillsGranted: 
+  - name: War Veteran
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 00000000020000000300000004000000
+    modifiedStatValues: 01000000fcffffffffffffff05000000
+    skillsGranted: 
+  - name: Physician
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 000000000100000003000000
+    modifiedStatValues: 01000000ffffffff01000000
+    skillsGranted: 
+  - name: Scholar
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 0000000001000000020000000300000004000000
+    modifiedStatValues: fdffffffffffffff0100000005000000ffffffff
+    skillsGranted: 
+  - name: Inheritor
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 00000000020000000300000004000000
+    modifiedStatValues: 01000000ffffffffffffffff02000000
+    skillsGranted: 
+  - name: Newsman
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 00000000010000000200000004000000
+    modifiedStatValues: ffffffff0100000004000000fdffffff
+    skillsGranted: 
+  - name: Antiquarian
+    description: 'You fought in a great war.
+
+
+      PH +3
+
+      CH +1
+
+      WT -1
+
+      PE -2'
+    modifiedStatDeclaration: 00000000020000000300000004000000
+    modifiedStatValues: ffffffff0200000001000000ffffffff
     skillsGranted: 
   player: {fileID: 1884535234}
 --- !u!1 &1499628466
