@@ -24,7 +24,7 @@ public class ModuatePitchBasedOnSanity : MonoBehaviour
 
         StartCoroutine(SetCharacterInfoScript());
 
-        Debug.Log(PlayerPrefs.GetFloat("Last Session Sanity"));
+        //Debug.Log(PlayerPrefs.GetFloat("Last Session Sanity"));
     }
 	
     void Update()

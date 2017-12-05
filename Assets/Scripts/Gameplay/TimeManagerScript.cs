@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void SecondPassed();
 public delegate void MinutePassed();
 public delegate void HourPassed();
 public delegate void DayPassed();
 
 public class TimeManagerScript : MonoBehaviour
 {
+    public event SecondPassed OnSecondPassed;
     public event MinutePassed OnMinutePassed;
     public event HourPassed OnHourPassed;
     public event DayPassed OnDayPassed;
 
     [SerializeField]
-    private float RealTimeToGameSecond;
+    private float GameSecondsPerRealTimeSecond;
+    private float gameSecsPerRealSecondBackup;
 
     [SerializeField]
     private int Seconds;
@@ -29,6 +32,8 @@ public class TimeManagerScript : MonoBehaviour
 
     [SerializeField]
     private int Month;
+
+    private Coroutine TimeFlowCoroutine;
 
     public void AdvanceTime(int seconds, int minutes = 0, int hours = 0)
     {
@@ -47,78 +52,103 @@ public class TimeManagerScript : MonoBehaviour
         hours = Hours;
     }
 
+    public void AccelerateTime(float gameSecsPerRealSec)
+    {
+        StopCoroutine(TimeFlowCoroutine);
+
+        gameSecsPerRealSecondBackup = GameSecondsPerRealTimeSecond;
+        GameSecondsPerRealTimeSecond = gameSecsPerRealSec;
+
+        TimeFlowCoroutine = StartCoroutine(CountTime());
+    }
+
+    public void RestoreTimeFlow()
+    {
+        Debug.Log("Restore");
+        StopCoroutine(TimeFlowCoroutine);
+        GameSecondsPerRealTimeSecond = gameSecsPerRealSecondBackup;
+        TimeFlowCoroutine = StartCoroutine(CountTime());
+    }
+
 	// Use this for initialization
 	void Start ()
     {
-        StartCoroutine(CountTime());
+        TimeFlowCoroutine = StartCoroutine(CountTime());
         OnMinutePassed += WriteDate;
 	}
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            AdvanceTime(11, 3);
-        }
+
     }
 
     private void AddSecond(int quantity = 1)
     {
-        Seconds += quantity;
+        //Seconds += quantity;
 
-        while(Seconds > 59)
+        while(quantity > 0)
         {
-            Seconds -= 60;
-            AddMinute();
+            quantity--;
+            Seconds++;
 
-            if(OnMinutePassed != null)
+            if (OnSecondPassed != null) OnSecondPassed();
+            if(Seconds > 59)
             {
-                OnMinutePassed();
+                Seconds -= 60;
+                AddMinute();
             }
+
         }
     }
 
     private void AddMinute(int quantity = 1)
-    {
-        Minutes += quantity;
-
-        while(Minutes > 59)
+    {       
+        while(quantity > 0)
         {
-            Minutes -= 60;
-            AddHour();
+            quantity--;
+            Minutes++;
 
-            if(OnHourPassed != null)
+            if (OnMinutePassed != null) OnMinutePassed();
+
+            if(Minutes > 59)
             {
-                OnHourPassed();
+                Minutes -= 60;
+                AddHour();
             }
         }
     }
 
     private void AddHour(int quantity = 1)
     {
-        Hours += quantity;
-
-        if(Hours > 23)
+        while (quantity > 0)
         {
-            Hours -= 24;
-            AddDay();
+            quantity--;
+            Hours++;
 
-            if(OnDayPassed != null)
+            if (OnHourPassed != null) OnHourPassed();
+
+            if (Hours > 23)
             {
-                OnDayPassed();
+                Hours -= 24;
+                AddDay();
             }
         }
     }
 
     private void AddDay(int quantity = 1)
     {
-        Day += quantity;
-
-        if(Day > 30)
+        while (quantity > 0)
         {
-            Day -= 30;
+            quantity--;
             Day++;
-            AddMonth();
+
+            if (OnDayPassed != null) OnDayPassed();
+
+            if (Day > 29)
+            {
+                Day -= 29;
+                AddMonth();
+            }
         }
     }
 
@@ -128,8 +158,8 @@ public class TimeManagerScript : MonoBehaviour
 
         if(Month > 12)
         {
-            Month -= 12;
-            Month++;
+            Month -= 11;
+            //Month++;
         }
     }
     
@@ -140,10 +170,20 @@ public class TimeManagerScript : MonoBehaviour
 
     private IEnumerator CountTime()
     {
-        while(true)
-        {            
-            yield return new WaitForSeconds(RealTimeToGameSecond);
-            AddSecond();
+        float waitTime = 1;
+        float secondsAdd = 0;
+
+        while (true)
+        {
+            waitTime = Mathf.Max(1.0f / 60, 1.0f / GameSecondsPerRealTimeSecond);
+            secondsAdd += Mathf.Max(1, GameSecondsPerRealTimeSecond / 60);
+
+            yield return new WaitForSeconds(waitTime);
+
+            for (; secondsAdd >= 1; secondsAdd--)
+            {
+                AddSecond();
+            }
         }
     }
 }

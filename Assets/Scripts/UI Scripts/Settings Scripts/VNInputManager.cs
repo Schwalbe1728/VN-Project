@@ -62,7 +62,7 @@ public class VNInputManager : MonoBehaviour
 
             if (key != null && !key.Equals(""))
             {
-                Debug.Log(key);
+                //Debug.Log(key);
                 bindingsDictionary.Add
                     (bd.Name, 
                     (KeyCode)System.Enum.Parse(typeof(KeyCode), key))

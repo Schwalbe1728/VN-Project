@@ -601,7 +601,7 @@ RectTransform:
   - {fileID: 1918940154}
   - {fileID: 319531336}
   m_Father: {fileID: 2131005882}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3645,7 +3645,7 @@ RectTransform:
   - {fileID: 1649951209}
   - {fileID: 1106300720}
   m_Father: {fileID: 2131005882}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5776,7 +5776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: MaxStressPenalty
+  StatDefinition: Speed
 --- !u!114 &794555733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8716,7 +8716,7 @@ GameObject:
   - component: {fileID: 1345046509}
   - component: {fileID: 1345046511}
   m_Layer: 5
-  m_Name: MaxSP Panel
+  m_Name: Walking Speed Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8735,7 +8735,7 @@ RectTransform:
   - {fileID: 794555731}
   - {fileID: 2058839514}
   m_Father: {fileID: 2131005882}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9873,7 +9873,7 @@ RectTransform:
   - {fileID: 1219115240}
   - {fileID: 324099356}
   m_Father: {fileID: 2131005882}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11889,7 +11889,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 187.76001, y: 38.41875}
+  m_CellSize: {x: 192.51999, y: 37.23125}
   m_Spacing: {x: 0, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -13141,7 +13141,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 106.21002, y: 0}
+  m_SizeDelta: {x: 109.48251, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2045767311
 MonoBehaviour:
@@ -13374,7 +13374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'MaxSP:'
+  m_Text: 'WSpd:'
 --- !u!114 &2058839516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14006,10 +14006,10 @@ RectTransform:
   - {fileID: 1501620440}
   - {fileID: 694723220}
   - {fileID: 661798154}
+  - {fileID: 78654482}
   - {fileID: 581393897}
   - {fileID: 1562752943}
   - {fileID: 1345046508}
-  - {fileID: 78654482}
   m_Father: {fileID: 1499628467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14085,7 +14085,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 51.60501, y: 12.120999}
+  m_CellSize: {x: 53.241257, y: 11.551001}
   m_Spacing: {x: 10, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2

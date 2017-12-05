@@ -74,7 +74,7 @@ public class UpdateStatValueScript : MonoBehaviour
 
         dummy.Stats = temp;
 
-        sb.Append(StatsRuleSet.StringToStatValue(statistic, dummy));
+        sb.Append(StatsRuleSet.StringToStatValueString(statistic, dummy));
         StatText.text = sb.ToString();
     }
 }

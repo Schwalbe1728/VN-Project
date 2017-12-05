@@ -45,6 +45,9 @@ public static class StatsRuleSet
 
             case "maxstresspenalty":
                 return MaxStressPenalty(charInfo);
+
+            case "speed":
+                return WalkSpeedPerHour(charInfo);
         }
 
         throw new System.InvalidCastException();
@@ -68,6 +71,66 @@ public static class StatsRuleSet
 
             case "maxstresspenalty":
                 return MaxStressPenalty(charInfo);
+
+            case "speed":
+                return WalkSpeedPerHour(charInfo);
+        }
+
+        throw new System.InvalidCastException();
+    }
+
+    public static string StringToStatValueString(string statString, CharacterInfoScript charInfo)
+    {
+        switch (statString.ToLower())
+        {
+            case "hp":
+                return MaxHealthPoints(charInfo).ToString();
+
+            case "sanity":
+                return MaxSanity(charInfo).ToString();
+
+            case "bdmg":
+                return BaseDamage(charInfo).ToString();
+
+            case "hr":
+                return
+                    VitalityHealRate(charInfo).ToString("n1") + "/" +
+                    SanityHealRate(charInfo).ToString("n1");
+                    ;
+
+            case "maxstresspenalty":
+                return MaxStressPenalty(charInfo).ToString();
+
+            case "speed":
+                return WalkSpeedPerHour(charInfo).ToString();
+        }
+
+        throw new System.InvalidCastException();
+    }
+
+    public static string StringToStatValueString(string statString, CharacterInfo charInfo)
+    {
+        switch (statString.ToLower())
+        {
+            case "hp":
+                return MaxHealthPoints(charInfo).ToString();
+
+            case "sanity":
+                return MaxSanity(charInfo).ToString();
+
+            case "basedmg":
+                return BaseDamage(charInfo).ToString();
+
+            case "healrate":
+                return
+                    VitalityHealRate(charInfo).ToString("n1") + "/" +
+                    SanityHealRate(charInfo).ToString("n1");                
+
+            case "maxstresspenalty":
+                return MaxStressPenalty(charInfo).ToString();
+
+            case "speed":
+                return WalkSpeedPerHour(charInfo).ToString();
         }
 
         throw new System.InvalidCastException();
@@ -217,7 +280,34 @@ public static class StatsRuleSet
                         (CHMod * charInfo.Stats[CharacterStat.Character] + WTMod * charInfo.Stats[CharacterStat.Wits]) / ((float)CHMod + WTMod))
                      * 15 / 19.0f);
     }
-                  
+
+    private static int WalkingSpeedMin = 2500;
+    private static int WalkingSpeedMax = 5000;
+
+    public static int WalkSpeedPerHour(CharacterInfoScript charInfo)
+    {
+        int AGMod = 4;
+        int PHMod = 1;
+
+        float walkingAttributeValue = 
+            ((float) AGMod * (charInfo.Agility - 1 ) + PHMod * (charInfo.Physique - 1) ) / (AGMod + PHMod);
+        float value = WalkingSpeedMin + (WalkingSpeedMax - WalkingSpeedMin) * walkingAttributeValue / 19;
+
+        return Mathf.RoundToInt( value );
+    }
+
+    public static int WalkSpeedPerHour(CharacterInfo charInfo)
+    {
+        int AGMod = 4;
+        int PHMod = 1;
+
+        float walkingAttributeValue =
+            ((float)AGMod * (charInfo.Stats[CharacterStat.Agility] - 1 ) + 
+                PHMod * (charInfo.Stats[CharacterStat.Physique] - 1 )) / (AGMod + PHMod);
+        float value = WalkingSpeedMin + (WalkingSpeedMax - WalkingSpeedMin) * walkingAttributeValue / 19;
+
+        return Mathf.RoundToInt(value);
+    }
 }
 
 public class CharacterInfoScript : MonoBehaviour
@@ -232,7 +322,10 @@ public class CharacterInfoScript : MonoBehaviour
 
     private event SanityChanged OnSanityChanged;
 
-    private Sprite portrait;    
+    private Sprite portrait;
+
+    private bool Asleep;
+    private int MinutesOfSleepLeft;
 
     public void SetPlayerInfo(CharacterInfo info)
     {
@@ -337,6 +430,23 @@ public class CharacterInfoScript : MonoBehaviour
         get { return currentSanity / MaxSanity; }
     }
 
+    public bool GoToSleep(int hours)
+    {
+        if(!Asleep && MinutesOfSleepLeft <= 0)
+        {
+            Asleep = true;
+            MinutesOfSleepLeft = Mathf.RoundToInt(60 * hours * UnityEngine.Random.Range(0.95f, 1.05f));
+        }
+
+        return Asleep;
+    }
+
+    public void WakePlayerUp(int hours)
+    {
+        Asleep = false;
+        MinutesOfSleepLeft = Mathf.RoundToInt(60 * hours * UnityEngine.Random.Range(0.95f, 1.05f));
+    }
+
     private float currentHealth { get { return Mathf.Clamp(trueHealthValue, 0, MaxHealthPoints); } set { trueHealthValue = Mathf.Min(value, MaxHealthPoints); } }
     private float trueHealthValue;
 
@@ -362,7 +472,9 @@ public class CharacterInfoScript : MonoBehaviour
     #endregion
 
     #region Heal Rate
-    public int HealRate { get { return StatsRuleSet.HealRate(this); } }
+    //public int HealRate { get { return StatsRuleSet.HealRate(this); } }
+    public float HealRateVitality { get { return MaxHealthPoints * 0.02f * ((Asleep)? 3 : 1); } }
+    public float HealRateSanity { get { return MaxSanity * 0.02f * ((Asleep)? 3 : 1); } }
     #endregion
 
     void Awake()
@@ -380,14 +492,24 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
     private void HealPerMinute()
-    {
-        float healValue = HealRate / 60.0f;
-
-        ChangeHealth(healValue);
+    {        
+        ChangeHealth(HealRateVitality / 60.0f);
 
         if(UnityEngine.Random.Range(0, 100) < 66 - 2 * StressPenalty)
         {
-            ChangeSanity(healValue);
+            ChangeSanity(HealRateSanity / 60.0f);
+        }
+
+        if(MinutesOfSleepLeft > 0)
+        {
+            MinutesOfSleepLeft--;            
+        }
+        else
+        {
+            if(Asleep)
+            {
+                WakePlayerUp(10);
+            }
         }
     }
 
