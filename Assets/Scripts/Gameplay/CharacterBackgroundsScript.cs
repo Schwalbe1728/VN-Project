@@ -8,21 +8,25 @@ public class CharacterBackgroundsScript : MonoBehaviour
     private Text BackgroundTitle;
     private AttributeDescriptionScript ExplainText;
 
+    [Header("Background Definitions")]
     [SerializeField]
     private BackgroundDefinition[] definitions;
     private BackgroundDefinition chosenBackground;
     private int choice;
 
+    [Space(10)]
+    [Header("On Scene Objects")]
     [SerializeField]
     private CharacterCreationScript player;
+
+    [SerializeField]
+    private SkillsManagerScript skillsManager;
 
     public void NextBackground()
     {
         choice = (choice + 1) % definitions.Length;
 
-        SetBackgroundAndText();
-
-        chosenBackground.ApplyModificators(player);
+        SetBackgroundAndText();        
     }
 
     public void PreviousBackground()
@@ -30,9 +34,7 @@ public class CharacterBackgroundsScript : MonoBehaviour
         choice =
             (definitions.Length + choice - 1) % definitions.Length;
 
-        SetBackgroundAndText();
-
-        chosenBackground.ApplyModificators(player);
+        SetBackgroundAndText();        
     }
 
     public void SetDescriptionText()
@@ -44,8 +46,12 @@ public class CharacterBackgroundsScript : MonoBehaviour
     {
         choice = 0;
         BackgroundTitle = gameObject.GetComponent<Text>();
-        ExplainText = GameObject.Find("Explain Text").GetComponent<AttributeDescriptionScript>();
-        SetBackgroundAndText();        
+        ExplainText = GameObject.Find("Explain Text").GetComponent<AttributeDescriptionScript>();                
+    }
+
+    void Start()
+    {
+        SetBackgroundAndText();
     }
 
     private void SetBackgroundAndText()
@@ -55,39 +61,44 @@ public class CharacterBackgroundsScript : MonoBehaviour
         if(BackgroundTitle != null)
         {
             BackgroundTitle.text = chosenBackground.Name;
-        }        
-    }    
-}
+        }
 
-[System.Serializable]
-public class BackgroundDefinition
-{
-    [SerializeField]
-    private string name;
-
-    [Multiline]
-    [SerializeField]
-    private string description;
-
-    [SerializeField]
-    private CharacterStat[] modifiedStatDeclaration;
-
-    [SerializeField]
-    private int[] modifiedStatValues;
-
-    [SerializeField]
-    private CharacterSkills[] skillsGranted;
-
-    public string Name { get { return name; } }
-    public string Description { get { return description; } }
-
-    public void ApplyModificators(CharacterCreationScript player)
-    {
-        player.ApplyBackgroundModificators(modifiedStatDeclaration, modifiedStatValues);
+        StartCoroutine(PostponeApplying());
     }
+    
+    private IEnumerator PostponeApplying()
+    {
+        while(!chosenBackground.ApplyModificators(player, skillsManager))
+        {
+            yield return new WaitForEndOfFrame();
+            Debug.Log("Wait");
+        }
+    }       
 }
 
 public enum CharacterSkills
 {
+    Lockpicks,
+    Pickpocketing,
+    Melee
+}
 
+public static class CharacterSkillsExtension
+{
+    public static string ToString(this CharacterSkills skill, bool value)
+    {
+        switch(skill)
+        {
+            case CharacterSkills.Lockpicks:
+                return "Lockpicks";
+
+            case CharacterSkills.Pickpocketing:
+                return "Pickpocketing";
+
+            case CharacterSkills.Melee:
+                return "Melee";
+        }
+
+        throw new System.ArgumentOutOfRangeException();
+    }
 }

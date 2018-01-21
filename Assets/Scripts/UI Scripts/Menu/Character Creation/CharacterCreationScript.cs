@@ -9,6 +9,7 @@ public delegate void NotifyStatChange();
 public class CharacterCreationScript : MonoBehaviour
 {
     public CharacterInfo PlayerInfo { get { return playerInfo; } }
+    public List<CharacterSkills> Skills { get; set; }    
 
     private CharacterInfo playerInfo;
     private ScreenFadeInFadeOut scr;
@@ -20,6 +21,8 @@ public class CharacterCreationScript : MonoBehaviour
     private CharStatsToValueDictionary pointsSpent;
 
     public int StatPointsLeft { get { return statPointsLeft; } }
+    public int BonusStatPoints { get; set; }
+
     [SerializeField]
     private int StartingStatPoints = 5;
     private int statPointsLeft;
@@ -48,6 +51,7 @@ public class CharacterCreationScript : MonoBehaviour
             finalStats[st] = StatValue(st);
         }
 
+        playerInfo.SetSkills(Skills);
         playerInfo.Stats = finalStats;
         playerInfo.FinishCreation();
         
@@ -73,7 +77,7 @@ public class CharacterCreationScript : MonoBehaviour
         {
             //stats[stat]++;
             pointsSpent[stat]++;
-            statPointsLeft--;
+            TryDecreasingStatPoints(1);
             result = true;
 
             FireNotifyStatChange();
@@ -89,7 +93,7 @@ public class CharacterCreationScript : MonoBehaviour
         if (StatValue(stat) > MIN_STAT && pointsSpent[stat] > 0)
         {
             pointsSpent[stat]--;
-            statPointsLeft++;
+            IncreaseStatPoints(1);
             result = true;
 
             FireNotifyStatChange();
@@ -100,16 +104,47 @@ public class CharacterCreationScript : MonoBehaviour
 
     public bool ApplyBackgroundModificators(CharacterStat[] statsArray, int[] modifs)
     {
-        ResetCreation();
+        bool result = ComponentReadyToWork();
 
-        for (int i = 0; i < statsArray.Length; i++)
+        if (result)
         {
-            ApplyBackgroundModificator(statsArray[i], modifs[i]);
+            ResetCreation();
+
+            for (int i = 0; i < statsArray.Length; i++)
+            {
+                ApplyBackgroundModificator(statsArray[i], modifs[i]);
+            }
+
+            FireNotifyStatChange();
         }
 
-        FireNotifyStatChange();
-        
-        return true;
+        return result;
+    }
+
+    public bool TryDecreasingStatPoints(int value)
+    {
+        bool result = value > 0 && StatPointsLeft - value >= 0;
+
+        if(result)
+        {
+            statPointsLeft -= value;
+            FireNotifyStatChange();
+        }
+
+        return result;
+    }
+
+    public bool IncreaseStatPoints(int value)
+    {
+        bool result = value > 0 && statPointsLeft + value <= StartingStatPoints + BonusStatPoints;
+
+        if (result)
+        {
+            statPointsLeft += value;
+            FireNotifyStatChange();
+        }
+
+        return result;
     }
 
     // Use this for initialization
@@ -126,6 +161,16 @@ public class CharacterCreationScript : MonoBehaviour
 
     }    
 
+    private bool ComponentReadyToWork()
+    {
+        return
+            playerInfo != null &&
+            inputField != null &&
+            minimumStats != null &&
+            pointsSpent != null &&
+            statModifiers != null;
+    }
+
     private IEnumerator WaitForFadeOutEnd()
     {
         while(scr.FadeInProgress)
@@ -141,13 +186,18 @@ public class CharacterCreationScript : MonoBehaviour
 
     private void ResetCreation()
     {
+        int spentCharPointsOnAttributes = 0;
+
         foreach(CharacterStat stat in minimumStats.Keys)
         {
             statModifiers[stat] = 0;
+            spentCharPointsOnAttributes += pointsSpent[stat];
             pointsSpent[stat] = 0;
         }
 
-        statPointsLeft = StartingStatPoints;
+        statPointsLeft = StartingStatPoints + BonusStatPoints ;
+
+        if(Skills != null) Skills.Clear();
     }
 
     private void ApplyBackgroundModificator(CharacterStat stat, int modif)

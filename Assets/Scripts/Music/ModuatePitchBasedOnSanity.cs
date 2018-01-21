@@ -62,7 +62,8 @@ public class ModuatePitchBasedOnSanity : MonoBehaviour
         Source.pitch =
             1 -
             (MaxPitchVariance / 2) * sanityMod +
-            Mathf.PingPong(CurrentDeviation, 1) * MaxPitchVariance * sanityMod;
+            //Mathf.PingPong(CurrentDeviation, 1) * MaxPitchVariance * sanityMod;
+            (0.5f + 0.5f * Mathf.Sin(Mathf.Deg2Rad * 360 * CurrentDeviation)) * MaxPitchVariance * sanityMod;
     }
 
     private IEnumerator SetCharacterInfoScript()

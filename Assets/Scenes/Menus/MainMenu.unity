@@ -4099,11 +4099,14 @@ MonoBehaviour:
   - {fileID: 1566227970}
   - {fileID: 2022735479}
   - {fileID: 588000265}
+  Switches: []
   MenuTitleText: {fileID: 690029697}
   MenuTitlesArray:
   - Gameplay Options
   - Audio Options
   - Keyboard Bindings
+  SelectedTabColor: {r: 0, g: 0, b: 0, a: 0}
+  InactiveTabColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &747149495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6091,7 +6094,7 @@ MonoBehaviour:
   MusicVolume: 0
   SoundVolume: 0
   VoiceVolume: 0
-  DefaultMusic: {fileID: 8300000, guid: 2dda35587802ccd4d9ba95a2914ba7b4, type: 3}
+  DefaultMusic: {fileID: 8300000, guid: ab682756107598348910b33d2f5e81d5, type: 3}
   DefaultAmbience: {fileID: 8300000, guid: c2548486ba7ea9e4e97c1867edcfa1ee, type: 3}
   Music: {fileID: 826520923}
   Ambience: {fileID: 1885565614}

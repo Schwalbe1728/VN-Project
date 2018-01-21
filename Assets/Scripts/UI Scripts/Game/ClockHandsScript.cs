@@ -18,7 +18,7 @@ public class ClockHandsScript : MonoBehaviour {
 
     void Awake()
     {
-        TimeManager.OnMinutePassed += MinutePassed;
+        TimeManager.OnSecondPassed += SecondPassed;
 
         int startSeconds;
         int startMinutes;
@@ -32,7 +32,7 @@ public class ClockHandsScript : MonoBehaviour {
         UpdateHands();
     }
 
-    private void MinutesAdvance(int adv)
+    private void MinutesAdvance(float adv)
     {
         minuteRotation += adv * 360f / 60;
         hourRotation += adv * 360f / (12 * 60);
@@ -43,9 +43,9 @@ public class ClockHandsScript : MonoBehaviour {
         hourRotation += adv * 360f / 12;
     }
 
-    private void MinutePassed()
+    private void SecondPassed()
     {
-        MinutesAdvance(1);
+        MinutesAdvance(1.0f/60);
         UpdateHands();
     }
 

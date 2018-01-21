@@ -630,11 +630,36 @@ public class CharacterInfo
                 stats = value;
             }
         }
+    }
+    
+    public void SetSkills(List<CharacterSkills> skillList)
+    {
+        if(skills == null)
+        {
+            skills = new HashSet<CharacterSkills>(skillList);
+
+            foreach (CharacterSkills skill in skillList)
+            {             
+                Debug.Log("Dodaje skill: " + skill.ToString(false));
+            }
+        }
+        else
+        {
+            skills.Clear();
+            
+            foreach(CharacterSkills skill in skillList)
+            {
+                skills.Add(skill);
+                Debug.Log("Dodaje skill: " + skill.ToString(false));
+            }
+        }
     }       
 
     private string charName;
 
     private CharStatsToValueDictionary stats;   //  Final Stats    
+    private HashSet<CharacterSkills> skills;
+
     private bool CharacterCreationInProgress;            
 
     public CharacterInfo()

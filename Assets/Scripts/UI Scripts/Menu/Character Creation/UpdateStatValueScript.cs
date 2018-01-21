@@ -13,29 +13,37 @@ public class UpdateStatValueScript : MonoBehaviour
     private string StatDefinition;
 
     public void UpdatedStat()
-    {        
-        StringBuilder sb = new StringBuilder();        
-
-        try
+    {
+        if (gameObject.activeInHierarchy)
         {
-            CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
-            sb.Append(characterScript.StatValue(statistic));
-        }
-        catch(System.InvalidCastException)
-        {
-            StartCoroutine(PostponeAppend(sb, StatDefinition));
-        }
-        catch(System.NullReferenceException)
-        {
-            CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
-            StartCoroutine(PostponeAppend(sb, statistic));
+            StringBuilder sb = new StringBuilder();
 
-            return;
-        }
+            try
+            {
+                CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
+                sb.Append(characterScript.StatValue(statistic));
+            }
+            catch (System.InvalidCastException)
+            {
+                StartCoroutine(PostponeAppend(sb, StatDefinition));
+            }
+            catch (System.NullReferenceException)
+            {
+                CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
+                StartCoroutine(PostponeAppend(sb, statistic));
 
-        StatText.text = sb.ToString();
+                return;
+            }
+
+            StatText.text = sb.ToString();
+        }
     }
 	
+    void OnEnable()
+    {
+        UpdatedStat();
+    }
+
     void Awake()
     {
         StatText = gameObject.GetComponent<Text>();

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8284889d09ba842836d8384580c331, type: 3}
+  m_Name: Thief
+  m_EditorClassIdentifier: 
+  name: Thief
+  description: 
+  Agility: 4
+  Perception: 0
+  Character: -1
+  Wits: -3
+  Physique: 1
+  skillsGranted: 0000000001000000
+  bonusStatPoints: 0

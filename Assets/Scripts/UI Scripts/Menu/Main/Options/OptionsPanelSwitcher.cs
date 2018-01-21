@@ -13,28 +13,49 @@ public class OptionsPanelSwitcher : MonoBehaviour
     private GameObject[] Panels;
 
     [SerializeField]
+    private Button[] Switches;
+
+    [SerializeField]
     private Text MenuTitleText;
 
     [SerializeField]
     private string[] MenuTitlesArray;
 
+    [SerializeField]
+    private Color SelectedTabColor;
+
+    [SerializeField]
+    private Color InactiveTabColor;
+
     private int CurrentChoice = 0;
 
     public void SwitchPanel(int n)
-    {
-        if(CurrentChoice >= 0 && CurrentChoice < Panels.Length)
-        {
-            Panels[CurrentChoice].SetActive(false);            
-        }
-
+    {        
         if (n >= 0 && n < Panels.Length)
         {
+            if (CurrentChoice >= 0 && CurrentChoice < Panels.Length)
+            {
+                Panels[CurrentChoice].SetActive(false);
+            }
+
             CurrentChoice = n;
             Panels[n].SetActive(true);
 
             if(MenuTitleText != null)
             {
                 MenuTitleText.text = MenuTitlesArray[CurrentChoice];
+            }
+
+            for(int i = 0; i < Switches.Length; i++)
+            {
+                ColorBlock temp = Switches[i].colors;
+                    
+                    temp.normalColor =
+                    (i == n) ?
+                        SelectedTabColor :
+                        InactiveTabColor;
+
+                Switches[i].colors = temp;
             }
         }                
     }

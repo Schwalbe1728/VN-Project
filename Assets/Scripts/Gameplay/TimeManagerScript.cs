@@ -82,6 +82,12 @@ public class TimeManagerScript : MonoBehaviour
 
     }
 
+    void OnValidate()
+    {
+        StopAllCoroutines();
+        TimeFlowCoroutine = StartCoroutine(CountTime());
+    }
+
     private void AddSecond(int quantity = 1)
     {
         //Seconds += quantity;
