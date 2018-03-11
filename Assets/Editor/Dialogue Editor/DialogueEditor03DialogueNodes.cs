@@ -133,7 +133,8 @@ public partial class DialogueEditor
                                 {
                                     nodeToNodeToAttach.Add(-1);
                                 }
-                            }                              
+                            }
+                            GUILayout.EndHorizontal();                              
                         }
                     }
                 }
