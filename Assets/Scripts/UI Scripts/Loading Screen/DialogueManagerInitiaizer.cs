@@ -12,7 +12,7 @@ public class DialogueManagerInitiaizer : MonoBehaviour
 
     void Awake()
     {
-        DialoguesManagerScript.Initiate();
-        StartCoroutine(DialoguesManagerScript.Load(PathsFile, PathBase));
+        //DialoguesManagerScript.Initiate();
+        //StartCoroutine(DialoguesManagerScript.Load(PathsFile, PathBase));
     }
 }

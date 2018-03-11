@@ -13,12 +13,12 @@ public class LoadingManagerScript : MonoBehaviour {
     private IEnumerator WaitForInitializationOfDialogues()
     {
         yield return new WaitForSeconds(1f);
-
+        /*
         while(!DialoguesManagerScript.Ready)
         {
             yield return new WaitForEndOfFrame();
         }
-
+        */
         SceneManager.LoadSceneAsync("Game Screen");
     }
 }

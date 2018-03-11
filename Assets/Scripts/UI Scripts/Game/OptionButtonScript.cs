@@ -27,7 +27,7 @@ public class OptionButtonScript : MonoBehaviour {
 
     public void OnClick()
     {
-        LogArea.OptionHasBeenChosen(OptionRepresented);
+        //LogArea.OptionHasBeenChosen(OptionRepresented);
     }
 
     public void SetNumber(int n)

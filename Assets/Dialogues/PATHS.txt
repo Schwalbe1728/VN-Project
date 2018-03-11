@@ -1,2 +1,0 @@
-TEST/test1.dlg
-TEST/testWalka.dlg

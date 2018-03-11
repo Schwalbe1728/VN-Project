@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858873df6999844b3efb9ec26e4bab, type: 3}
+  m_Name: Testowy
+  m_EditorClassIdentifier: 
+  startID: 0
+  startType: 3
+  currentNodeID: 0
+  Options:
+  - optionID: 0
+    nextID: -1
+    nextType: 0
+    alreadyVisited: 0
+    entryCondition:
+      conditionID: 0
+      targetIDIfPassed: -1
+      targetTypeIfPassed: 0
+      targetIDIfFailed: -1
+      targetTypeIfFailed: 0
+      nextDialogueIDIfPassed: 
+      nextDialogueIDIfFailed: 
+      conditionTypeSet: 0
+      attributeCheckCondition:
+        Attribute: 0
+        ValueChecked: 0
+        InequalityType: 0
+      attributeTestCondition:
+        Attribute: 0
+        AttributeMod: 0
+        Skill: 0
+      skillPossessedCondition:
+        SkillToCheck: 0
+        IsNeeded: 0
+    entryConditionSet: 0
+    OptionText: 
+    VisitOnce: 0
+    nextDialogueID: 
+  Nodes:
+  - nodeID: 0
+    isImmediateNode: 0
+    nextID: -1
+    nextType: 0
+    NodeText: 
+    customID: 
+    optionsIndexesList: 
+    nextDialogueID: 
+    action:
+      hurtPlayerSet: 1
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 1
+      hurtPlayerSanity:
+        Damage: 0
+    actionSet: 0
+    secondsConsumed: 0
+  Conditions:
+  - conditionID: 0
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIDIfPassed: 
+    nextDialogueIDIfFailed: 
+    conditionTypeSet: 1
+    attributeCheckCondition:
+      Attribute: 2
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 5
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+  editorInfo:
+    Windows:
+    - serializedVersion: 2
+      x: 364
+      y: 24
+      width: 273
+      height: 252
+    - serializedVersion: 2
+      x: 72
+      y: 74
+      width: 202
+      height: 168
+    - serializedVersion: 2
+      x: 274
+      y: 311
+      width: 325
+      height: 180
+    WindowTypes: 010000000200000003000000
+    NodeTypesIDs: 000000000000000000000000
+    OptionsIndexes: 01000000
+    NodesIndexes: 00000000
+    ConditionsIndexes: 02000000
+    Nodes: 1
+    Options: 1
+    Conditions: 1
