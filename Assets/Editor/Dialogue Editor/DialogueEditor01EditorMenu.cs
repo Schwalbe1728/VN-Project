@@ -33,8 +33,7 @@ public partial class DialogueEditor
             
             if (GUILayout.Button("Configure"))
             {
-                //ConfigurationWindow.ShowConfigMenu(Config, this.Repaint);
-                WriteDebug("Oy vey TODO!");
+                ConfigurationWindow.ShowConfigMenu(Config, this.Repaint);                
             }
         }
         GUILayout.EndHorizontal();

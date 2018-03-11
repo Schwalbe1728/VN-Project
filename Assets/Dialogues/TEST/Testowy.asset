@@ -81,6 +81,25 @@ MonoBehaviour:
     skillPossessedCondition:
       SkillToCheck: 0
       IsNeeded: 0
+  - conditionID: 1
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIDIfPassed: 
+    nextDialogueIDIfFailed: 
+    conditionTypeSet: 0
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
   editorInfo:
     Windows:
     - serializedVersion: 2
@@ -94,15 +113,20 @@ MonoBehaviour:
       width: 202
       height: 168
     - serializedVersion: 2
-      x: 274
-      y: 311
+      x: 380
+      y: 313
       width: 325
       height: 180
-    WindowTypes: 010000000200000003000000
-    NodeTypesIDs: 000000000000000000000000
+    - serializedVersion: 2
+      x: -37
+      y: 308
+      width: 325
+      height: 180
+    WindowTypes: 01000000020000000300000003000000
+    NodeTypesIDs: 00000000000000000000000001000000
     OptionsIndexes: 01000000
     NodesIndexes: 00000000
-    ConditionsIndexes: 02000000
+    ConditionsIndexes: 0200000003000000
     Nodes: 1
     Options: 1
-    Conditions: 1
+    Conditions: 2
