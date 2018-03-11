@@ -13,7 +13,7 @@ public partial class DialogueEditor : EditorWindow
 
     private EditorConfigurationData Config;    
 
-    [MenuItem("Window/Node editor")]
+    [MenuItem("Window/Dialogue Editor")]
     static void ShowEditor()
     {
         DialogueEditor editor = EditorWindow.GetWindow<DialogueEditor>();

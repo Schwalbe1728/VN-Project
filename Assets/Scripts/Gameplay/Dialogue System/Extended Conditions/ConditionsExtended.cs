@@ -16,11 +16,19 @@ public partial class ConditionNode
     [SerializeField]
     private SkillPossessedCondition skillPossessedCondition;
 
+    [SerializeField]
+    private PlayerHasItemCondition playerHasItemCondition;
+
+    [SerializeField]
+    private StoryStateHappenedCondition storyStateHappenedCondition;
+
     public ConditionTypes ConditionType { get { return conditionTypeSet; } }
 
     public AttributeCheckCondition AttributeCheck { get { return attributeCheckCondition; } }
     public AttributeTestCondition AttributeTest { get { return attributeTestCondition; } }
     public SkillPossessedCondition SkillPossessed { get { return skillPossessedCondition; } }
+    public PlayerHasItemCondition PlayerHasItem { get { return playerHasItemCondition; } }
+    public StoryStateHappenedCondition StoryStateHappenedCondition { get { return storyStateHappenedCondition; } }
 
     public override bool ConditionTest()
     {
@@ -34,6 +42,9 @@ public partial class ConditionNode
 
             case ConditionTypes.SkillPossessed:
                 return skillPossessedCondition.ConditionTest();
+
+            case ConditionTypes.PlayerHasItem:
+                return playerHasItemCondition.ConditionTest();
 
             default:
                 Debug.Log("Wtf, ConditionTest default");
@@ -79,7 +90,31 @@ public partial class ConditionNode
         skillPossessedCondition.IsNeeded = doWeWantTheSkill;
         skillPossessedCondition.SkillToCheck = skill;
     }
+    public void SetPlayerHasItemCondition(/*EquipmentItem item, */ bool isRequired)
+    {
+        conditionTypeSet = ConditionTypes.PlayerHasItem;
 
+        if(playerHasItemCondition == null)
+        {
+            playerHasItemCondition = new PlayerHasItemCondition();
+        }
+
+        //playerHasItemCondition.Item = item;
+        playerHasItemCondition.IsRequired = isRequired;
+    }
+    public void SetStoryStateHappenedCondition(string plotName, string stateName, bool hasHappened)
+    {
+        conditionTypeSet = ConditionTypes.StoryStateHappened;
+
+        if(storyStateHappenedCondition == null)
+        {
+            storyStateHappenedCondition = new StoryStateHappenedCondition();
+        }
+
+        storyStateHappenedCondition.HasHappened = hasHappened;
+        storyStateHappenedCondition.PlotName = plotName;
+        storyStateHappenedCondition.StateName = stateName;
+    }
 }
 
 [System.Serializable]
@@ -141,5 +176,34 @@ public class SkillPossessedCondition : ConditionNodeBase
             IsNeeded ?
                 playerHasSkill :
                 !playerHasSkill;
+    }
+}
+
+//TO FINISH
+[System.Serializable]
+public class PlayerHasItemCondition : ConditionNodeBase
+{
+    //public EquipmentItem Item;
+    public bool IsRequired;
+
+    public override bool ConditionTest()
+    {
+        return base.ConditionTest();
+    }
+}
+
+//TO FINISH
+[System.Serializable]
+public class StoryStateHappenedCondition : ConditionNodeBase
+{
+    public string PlotName;
+    public string StateName;
+    public bool HasHappened;
+
+    public override bool ConditionTest()
+    {
+
+
+        return base.ConditionTest();
     }
 }

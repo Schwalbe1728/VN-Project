@@ -39,6 +39,12 @@ MonoBehaviour:
       skillPossessedCondition:
         SkillToCheck: 0
         IsNeeded: 0
+      playerHasItemCondition:
+        IsRequired: 0
+      storyStateHappenedCondition:
+        PlotName: 
+        StateName: 
+        HasHappened: 0
     entryConditionSet: 0
     OptionText: 
     VisitOnce: 0
@@ -69,7 +75,7 @@ MonoBehaviour:
     targetTypeIfFailed: 0
     nextDialogueIDIfPassed: 
     nextDialogueIDIfFailed: 
-    conditionTypeSet: 1
+    conditionTypeSet: 4
     attributeCheckCondition:
       Attribute: 2
       ValueChecked: 10
@@ -81,6 +87,12 @@ MonoBehaviour:
     skillPossessedCondition:
       SkillToCheck: 0
       IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
   - conditionID: 1
     targetIDIfPassed: -1
     targetTypeIfPassed: 0
@@ -100,6 +112,12 @@ MonoBehaviour:
     skillPossessedCondition:
       SkillToCheck: 0
       IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
   editorInfo:
     Windows:
     - serializedVersion: 2
@@ -113,8 +131,8 @@ MonoBehaviour:
       width: 202
       height: 168
     - serializedVersion: 2
-      x: 380
-      y: 313
+      x: 359
+      y: 318
       width: 325
       height: 180
     - serializedVersion: 2

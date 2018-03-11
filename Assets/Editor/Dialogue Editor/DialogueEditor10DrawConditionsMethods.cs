@@ -40,6 +40,22 @@ public partial class DialogueEditor
         return result;
     }
 
+    bool DrawGenericStringField(string prevString, int labelWidth, string labelText, out string newString)
+    {
+        bool result = false;
+
+        GUILayout.BeginHorizontal();
+        {
+            EditorGUILayout.PrefixLabel(labelText/*, GUILayout.Width(labelWidth)*/);
+            newString = EditorGUILayout.TextField(prevString);
+
+            result |= !newString.Equals(prevString);
+        }
+        GUILayout.EndHorizontal();
+
+        return result;
+    }
+
     bool DrawCharacterAttributeField(CharacterStat prevStat, int labelWidth, out CharacterStat stat)
     {
         bool result = false;
@@ -198,5 +214,57 @@ public partial class DialogueEditor
 
         return typeChangedToThis || result;
     }
-    #endregion
+    
+    //TO FINISH
+    bool DrawPlayerHasItemInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        //Item
+        bool weWantItem;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            //Item setting
+            result |= DrawGenericBoolField(currentCondition.PlayerHasItem.IsRequired, labelWidth, "Wanted?", out weWantItem);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (typeChangedToThis || result)
+        {
+            currentCondition.SetPlayerHasItemCondition(weWantItem);
+            Debug.Log("Zmiana playerHasItem");
+        }
+
+        return typeChangedToThis || result;
+    }
+
+    bool DrawStoryStateHappenedInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        string stateMachineName;
+        string stateName;
+        bool stateHappened;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            //Item setting
+            result |= DrawGenericStringField(currentCondition.StoryStateHappenedCondition.PlotName, labelWidth, "Plot Name", out stateMachineName);
+            result |= DrawGenericStringField(currentCondition.StoryStateHappenedCondition.StateName, labelWidth, "State Name", out stateName);
+            result |= DrawGenericBoolField(currentCondition.StoryStateHappenedCondition.HasHappened, labelWidth, "Happened?", out stateHappened);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (typeChangedToThis || result)
+        {
+            currentCondition.SetStoryStateHappenedCondition(stateMachineName, stateName, stateHappened);
+            Debug.Log("Zmiana story state happened");
+        }
+
+        return typeChangedToThis || result;
+    }
+    #endregion    
 }

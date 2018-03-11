@@ -34,7 +34,9 @@ public enum ConditionTypes
 {
     AttributeCheck,
     AttributeTest,
-    SkillPossessed
+    SkillPossessed,
+    PlayerHasItem,
+    StoryStateHappened
 }
 
 public enum InequalityTypes

@@ -98,6 +98,7 @@ public partial class DialogueEditor
                             save = true;
                         }
                     }
+                    GUILayout.EndHorizontal();
 
                     if (nextIsExit)
                     {
@@ -478,8 +479,13 @@ public partial class DialogueEditor
 
     bool DrawActionsFoldout(int id, int idOfType)
     {
+        if (CurrentNodes[idOfType].Action == null)
+        {
+            CurrentNodes[idOfType].SetAction(new DialogueAction());
+        }
+
         bool save = false;
-        DialogueAction currentAction = CurrentNodes[idOfType].Action;        
+        DialogueAction currentAction = CurrentNodes[idOfType].Action;                
 
         DialogueNodeActionsFoldouts[idOfType] =
             EditorGUILayout.Foldout(DialogueNodeActionsFoldouts[idOfType], "Defined Actions: ");

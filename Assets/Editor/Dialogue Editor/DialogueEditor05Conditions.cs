@@ -142,6 +142,14 @@ public partial class DialogueEditor
             case ConditionTypes.SkillPossessed:
                 save |= DrawSkillPossessedInterior(currentCondition, prevType != newType);
                 break;
+
+            case ConditionTypes.PlayerHasItem:
+                save |= DrawPlayerHasItemInterior(currentCondition, prevType != newType);
+                break;
+
+            case ConditionTypes.StoryStateHappened:
+                save |= DrawStoryStateHappenedInterior(currentCondition, prevType != newType);
+                break;
         }
 
         GUILayout.BeginHorizontal();
