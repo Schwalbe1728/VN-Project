@@ -460,7 +460,7 @@ public partial class DialogueEditor
 
     void DecrementIndexes(int id)
     {
-        for (int i = EditorInfo.NodesIndexes.FindIndex(x => x > id); i < EditorInfo.NodesIndexes.Count; i++)
+        for (int i = EditorInfo.NodesIndexes.FindIndex(x => x > id); i < EditorInfo.NodesIndexes.Count && i >= 0; i++)
         {
             EditorInfo.NodesIndexes[i]--;
         }
