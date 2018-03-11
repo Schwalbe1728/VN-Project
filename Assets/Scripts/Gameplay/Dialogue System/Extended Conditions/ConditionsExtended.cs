@@ -46,6 +46,9 @@ public partial class ConditionNode
             case ConditionTypes.PlayerHasItem:
                 return playerHasItemCondition.ConditionTest();
 
+            case ConditionTypes.StoryStateHappened:
+                return storyStateHappenedCondition.ConditionTest();
+
             default:
                 Debug.Log("Wtf, ConditionTest default");
                 return false;

@@ -52,19 +52,27 @@ MonoBehaviour:
   Nodes:
   - nodeID: 0
     isImmediateNode: 0
-    nextID: -1
-    nextType: 0
+    nextID: 1
+    nextType: 1
     NodeText: 
     customID: 
     optionsIndexesList: 
     nextDialogueID: 
     action:
-      hurtPlayerSet: 1
+      hurtPlayerSet: 0
       hurtPlayer:
         Damage: 0
       hurtPlayerSanitySet: 1
       hurtPlayerSanity:
-        Damage: 0
+        Damage: 5
+      changeMusicSet: 1
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      takeItemSet: 0
     actionSet: 0
     secondsConsumed: 0
   Conditions:
@@ -121,25 +129,25 @@ MonoBehaviour:
   editorInfo:
     Windows:
     - serializedVersion: 2
-      x: 364
-      y: 24
-      width: 273
-      height: 252
+      x: 348
+      y: 7
+      width: 265
+      height: 326
     - serializedVersion: 2
       x: 72
       y: 74
       width: 202
-      height: 168
+      height: 172
     - serializedVersion: 2
       x: 359
       y: 318
       width: 325
-      height: 180
+      height: 203
     - serializedVersion: 2
       x: -37
       y: 308
       width: 325
-      height: 180
+      height: 201
     WindowTypes: 01000000020000000300000003000000
     NodeTypesIDs: 00000000000000000000000001000000
     OptionsIndexes: 01000000

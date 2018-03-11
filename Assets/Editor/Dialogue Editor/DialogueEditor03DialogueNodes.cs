@@ -511,6 +511,39 @@ public partial class DialogueEditor
                 {
                     save |= DrawHurtPlayerSanityInterior(currentAction);
                 }
+
+                currentAction.ChangeMusicSet =
+                    EditorGUILayout.ToggleLeft("Change Music", currentAction.ChangeMusicSet);
+
+                if(currentAction.ChangeMusicSet)
+                {
+                    save |= DrawChangeMusicInterior(currentAction);
+                }
+
+                currentAction.ChangeAmbienceSet =
+                    EditorGUILayout.ToggleLeft("Change Ambience", currentAction.ChangeAmbienceSet);
+
+                if(currentAction.ChangeAmbienceSet)
+                {
+                    save |= DrawChangeAmbienceInterior(currentAction);
+                }
+
+                currentAction.GiveItemSet =
+                    EditorGUILayout.ToggleLeft("Give Item", currentAction.GiveItemSet);
+
+                if(currentAction.GiveItemSet)
+                {
+                    save |= DrawGiveItemInterior(currentAction);
+                }
+
+                currentAction.TakeItemSet =
+                    EditorGUILayout.ToggleLeft("Take Item", currentAction.TakeItemSet);
+
+                if (currentAction.TakeItemSet)
+                {
+                    save |= DrawTakeItemInterior(currentAction);
+                }
+
             }
             EditorGUILayout.EndVertical();
         }
