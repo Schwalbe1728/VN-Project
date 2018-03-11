@@ -11,6 +11,8 @@ public class DayNightCycleFilter : MonoBehaviour
     [SerializeField]
     private Color[] ColorAtMarkers;
 
+    private int[] HourMarkersInSeconds;
+
     private TimeManagerScript TimeManager;
     private Image Panel;
 
@@ -22,6 +24,13 @@ public class DayNightCycleFilter : MonoBehaviour
         TimeManager.OnMinutePassed += TimeManager_OnMinutePassed;
 
         TimeManager_OnMinutePassed();
+
+        HourMarkersInSeconds = new int[HourMarkers.Length];
+
+        for(int i = 0; i < HourMarkers.Length; i++)
+        {
+            HourMarkersInSeconds[i] = TimeManager.ToSeconds(0, HourMarkers[i], 0, 0);
+        }
     }
 
     private void TimeManager_OnMinutePassed()
@@ -32,59 +41,43 @@ public class DayNightCycleFilter : MonoBehaviour
 
         TimeManager.GetHour(out sec, out min, out hr);
 
-        Color PanelColor = BlendColor(GetSeconds(sec, min, hr));
+        Color PanelColor = BlendColor( TimeManager.ToSeconds(TimeManager.Day, hr, min, sec), TimeManager.Day );
 
         Panel.color = PanelColor;
     }
 
-    private Color BlendColor(int seconds)
+    private Color BlendColor(int currentSeconds, int days)
     {
         int startIndex = ColorAtMarkers.Length - 1;
         int finishIndex = 0;
 
-        for(int i = 0; i < HourMarkers.Length - 1; i++)
+        int day = days;
+
+        while( currentSeconds > TimeManager.ToSeconds(day, HourMarkers[finishIndex], 0, 0) )
         {
-            int startSeconds = GetSeconds(0, 0, HourMarkers[i]);
-            int finishSeconds = GetSeconds(0, 0, HourMarkers[i + 1]);
+            startIndex++;
+            finishIndex++;
 
-            if (seconds == startSeconds) return ColorAtMarkers[i];
-            if (seconds == finishSeconds) return ColorAtMarkers[i + 1];
+            startIndex %= ColorAtMarkers.Length;
+            finishIndex %= ColorAtMarkers.Length;
 
-            //Debug.Log("seconds: " + seconds + ", start: " + startSeconds + ", finish: " + finishSeconds);
-
-            if (seconds > startSeconds && seconds < finishSeconds)
-            {                
-                startIndex = i;
-                finishIndex = i + 1;
-                break;
-            }
+            if (finishIndex == 0) day++;
         }
 
-        int timeDistanceMax = 
-            Mathf.Abs(
-                GetSeconds(0, 0, HourMarkers[finishIndex]) - 
-                GetSeconds(0, 0, HourMarkers[startIndex])
-                );
+        int startSecs = TimeManager.ToSeconds(day + ((finishIndex == 0) ? -1 : 0), HourMarkers[startIndex], 0, 0);
+        int finishSecs = TimeManager.ToSeconds(day, HourMarkers[finishIndex], 0, 0);
 
-        if (seconds - GetSeconds(0, 0, HourMarkers[startIndex]) < 0)
-        {
-            seconds += GetSeconds(0, 0, 24);
-        }
+        int delta = finishSecs - startSecs;
+        float t = ((float)(currentSeconds - startSecs)) / delta;
 
-        seconds = seconds - GetSeconds(0, 0, HourMarkers[startIndex]);
-        
+        //Debug.Log("Delta: " + delta + ", t = " + t.ToString("n3"));
 
-        return BlendColor(ColorAtMarkers[startIndex], ColorAtMarkers[finishIndex], ((float)seconds)/timeDistanceMax );
+        return BlendColor(ColorAtMarkers[startIndex], ColorAtMarkers[finishIndex], t );
     }
 
     private Color BlendColor(Color Start, Color Finish, float progress)
     {
-        float r = Start.r + (Finish.r - Start.r) * progress;
-        float g = Start.g + (Finish.g - Start.g) * progress;
-        float b = Start.b + (Finish.b - Start.b) * progress;
-        float a = Start.a + (Finish.a - Start.a) * progress;
-
-        return new Color(r, g, b, a);
+        return Color.Lerp(Start, Finish, progress);
     }
 
     private int GetSeconds(int seconds, int min, int hour)

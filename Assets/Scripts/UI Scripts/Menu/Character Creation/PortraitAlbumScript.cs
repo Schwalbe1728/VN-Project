@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PortraitAlbumScript : MonoBehaviour
 {
     [SerializeField]
-    private Sprite[] PortraitArray;
+    private PlayerPortraitScript[] PortraitArray;
 
     private int PresentedIndex;
     private Image portraitDisplay;
@@ -44,7 +44,7 @@ public class PortraitAlbumScript : MonoBehaviour
     {
         if(PortraitArray != null && PortraitArray.Length > 0)
         {
-            portraitDisplay.sprite = PortraitArray[PresentedIndex];
+            portraitDisplay.sprite = PortraitArray[PresentedIndex].Portrait;
         }
     }
 }

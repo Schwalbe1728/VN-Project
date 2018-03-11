@@ -18,6 +18,7 @@ public class TimeManagerScript : MonoBehaviour
     private float GameSecondsPerRealTimeSecond;
     private float gameSecsPerRealSecondBackup;
 
+    /*
     [SerializeField]
     private int Seconds;
 
@@ -32,24 +33,41 @@ public class TimeManagerScript : MonoBehaviour
 
     [SerializeField]
     private int Month;
+    */
+
+    [SerializeField]
+    private int Seconds;
+
+    private int Minutes { get { return Seconds / 60; } }
+    private int Hours { get { return Minutes / 60; } }
+    private int Days { get { return Hours / 24; } }
+
+    public int Second { get { return Seconds % 60; } }
+    public int Minute { get { return Minutes % 60; } }
+    public int Hour { get { return Hours % 24; } }
+    public int Day { get { return Days; } }
 
     private Coroutine TimeFlowCoroutine;
 
     public void AdvanceTime(int seconds, int minutes = 0, int hours = 0)
-    {
-        int totalSeconds =
-            seconds +
-            minutes * 60 +
-            hours * 60 * 60;
-
-        AddSecond(totalSeconds);
+    {        
+        AddSecond(ToSeconds(0, hours, minutes, seconds));
     }
 
     public void GetHour(out int seconds, out int minutes, out int hours)
     {
-        seconds = Seconds;
-        minutes = Minutes;
-        hours = Hours;
+        seconds = Second;
+        minutes = Minute;
+        hours = Hour;
+    }
+
+    public int ToSeconds(int days, int hours, int minutes, int seconds)
+    {
+        return
+            seconds +
+            (minutes +
+                (hours +
+                    days * 24) * 60) * 60;
     }
 
     public void AccelerateTime(float gameSecsPerRealSec)
@@ -79,7 +97,7 @@ public class TimeManagerScript : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.P)) AdvanceTime(24, 0, 0);
     }
 
     void OnValidate()
@@ -98,80 +116,27 @@ public class TimeManagerScript : MonoBehaviour
             Seconds++;
 
             if (OnSecondPassed != null) OnSecondPassed();
-            if(Seconds > 59)
+            if(Second == 0)
             {
-                Seconds -= 60;
-                AddMinute();
+                if (OnMinutePassed != null) OnMinutePassed();
+
+                if(Minute == 0)
+                {
+                    if (OnHourPassed != null) OnHourPassed();
+
+                    if(Hour == 0)
+                    {
+                        if (OnDayPassed != null) OnDayPassed();
+                    }
+                }
             }
 
         }
-    }
-
-    private void AddMinute(int quantity = 1)
-    {       
-        while(quantity > 0)
-        {
-            quantity--;
-            Minutes++;
-
-            if (OnMinutePassed != null) OnMinutePassed();
-
-            if(Minutes > 59)
-            {
-                Minutes -= 60;
-                AddHour();
-            }
-        }
-    }
-
-    private void AddHour(int quantity = 1)
-    {
-        while (quantity > 0)
-        {
-            quantity--;
-            Hours++;
-
-            if (OnHourPassed != null) OnHourPassed();
-
-            if (Hours > 23)
-            {
-                Hours -= 24;
-                AddDay();
-            }
-        }
-    }
-
-    private void AddDay(int quantity = 1)
-    {
-        while (quantity > 0)
-        {
-            quantity--;
-            Day++;
-
-            if (OnDayPassed != null) OnDayPassed();
-
-            if (Day > 29)
-            {
-                Day -= 29;
-                AddMonth();
-            }
-        }
-    }
-
-    private void AddMonth(int quantity = 1)
-    {
-        Month += quantity;
-
-        if(Month > 12)
-        {
-            Month -= 11;
-            //Month++;
-        }
-    }
+    }    
     
     private void WriteDate()
     {
-        //Debug.Log(Day + "." + Month + ", godz. " + Hours + ":" + Minutes + ":" + Seconds);
+        //Debug.Log("Dzień " + Day + ", godz. " + Hour + ":" + Minute + ":" + Second);
     }
 
     private IEnumerator CountTime()
