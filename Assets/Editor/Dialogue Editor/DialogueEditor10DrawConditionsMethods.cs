@@ -56,6 +56,54 @@ public partial class DialogueEditor
         return result;
     }
 
+    bool DrawGenericWorldDateField(WorldDate prevDate, int labelWidth, string labelText, out WorldDate newDate, bool omitHours = false)
+    {
+        bool result = false;
+
+        bool foldout =
+            prevDate == null ||
+            prevDate.ShowInFoldout;
+
+        bool newFoldout =
+            EditorGUILayout.Foldout(foldout, (foldout) ? labelText : labelText + ": " + ((prevDate == null) ? "..." : prevDate.ToString()));
+
+        if (newFoldout)
+        {
+            EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+            {
+                bool prevIsNull = prevDate == null;
+                int days = (prevIsNull) ? 0 : prevDate.Days;
+                int hours = (prevIsNull) ? 0 : prevDate.Hours;
+                int minutes = (prevIsNull) ? 0 : prevDate.Minutes;
+                int secs = (prevIsNull) ? 0 : prevDate.Seconds;
+
+                days = (omitHours) ? 0 : EditorGUILayout.IntField("Day", days);
+                hours = EditorGUILayout.IntField("Hour", hours);
+                minutes = EditorGUILayout.IntField("Minute", minutes);
+                secs = EditorGUILayout.IntField("Seconds", secs);
+
+                days = (days >= 0) ? days : 0;
+                hours = (hours >= 0) ? hours : 0;
+                minutes = (minutes >= 0) ? minutes : 0;
+                secs = (secs >= 0) ? secs : 0;
+
+                newDate = new WorldDate(secs, minutes, hours, days);                
+
+                result = !newDate.Equals(prevDate);                
+            }
+            EditorGUILayout.EndVertical();
+        }
+        else
+        {
+            newDate = prevDate;
+        }
+
+        newDate.ShowInFoldout = newFoldout;
+        prevDate.ShowInFoldout = newFoldout;
+
+        return result;
+    }
+
     bool DrawCharacterAttributeField(CharacterStat prevStat, int labelWidth, out CharacterStat stat)
     {
         bool result = false;
@@ -252,9 +300,9 @@ public partial class DialogueEditor
         EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
         {
             //Item setting
-            result |= DrawGenericStringField(currentCondition.StoryStateHappenedCondition.PlotName, labelWidth, "Plot Name", out stateMachineName);
-            result |= DrawGenericStringField(currentCondition.StoryStateHappenedCondition.StateName, labelWidth, "State Name", out stateName);
-            result |= DrawGenericBoolField(currentCondition.StoryStateHappenedCondition.HasHappened, labelWidth, "Happened?", out stateHappened);
+            result |= DrawGenericStringField(currentCondition.StoryStateHappened.PlotName, labelWidth, "Plot Name", out stateMachineName);
+            result |= DrawGenericStringField(currentCondition.StoryStateHappened.StateName, labelWidth, "State Name", out stateName);
+            result |= DrawGenericBoolField(currentCondition.StoryStateHappened.HasHappened, labelWidth, "Happened?", out stateHappened);
         }
         EditorGUILayout.EndVertical();
 
@@ -265,6 +313,56 @@ public partial class DialogueEditor
         }
 
         return typeChangedToThis || result;
+    }
+
+    bool DrawWorldDateInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        WorldDate date;
+        InequalityTypes time;
+        
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericWorldDateField(currentCondition.WorldDate.Date, labelWidth, "Date", out date);
+            result |= DrawInequalityField(currentCondition.WorldDate.TimeOrientation, labelWidth, out time);
+        }
+        EditorGUILayout.EndVertical();
+
+        if(typeChangedToThis || result)
+        {
+            currentCondition.SetWorldDateCondition(date, time);
+            Debug.Log("Zmiana na World Date");
+        }
+
+        return result;
+    }
+
+    bool DrawWithinTimeRangeInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        WorldDate startDate;
+        WorldDate finishDate;
+        bool hoursOnly;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericWorldDateField(currentCondition.WithinTimeRange.Start, labelWidth, "Start", out startDate, currentCondition.WithinTimeRange.HoursOnly);
+            result |= DrawGenericWorldDateField(currentCondition.WithinTimeRange.Finish, labelWidth, "Finish", out finishDate, currentCondition.WithinTimeRange.HoursOnly);
+            result |= DrawGenericBoolField(currentCondition.WithinTimeRange.HoursOnly, labelWidth, "Hours Only?", out hoursOnly);
+        }
+        EditorGUILayout.EndVertical();
+
+        if(typeChangedToThis || result)
+        {
+            currentCondition.SetWithinTimeRangeCondition(startDate, finishDate, hoursOnly);
+            Debug.Log("Zmiana na Within Time Range");
+        }
+
+        return result;
     }
     #endregion    
 }

@@ -22,13 +22,21 @@ public partial class ConditionNode
     [SerializeField]
     private StoryStateHappenedCondition storyStateHappenedCondition;
 
+    [SerializeField]
+    private WorldDateCondition worldDateCondition;
+
+    [SerializeField]
+    private WithinTimeRangeCondition worldDateRangeCondition;
+
     public ConditionTypes ConditionType { get { return conditionTypeSet; } }
 
     public AttributeCheckCondition AttributeCheck { get { return attributeCheckCondition; } }
     public AttributeTestCondition AttributeTest { get { return attributeTestCondition; } }
     public SkillPossessedCondition SkillPossessed { get { return skillPossessedCondition; } }
     public PlayerHasItemCondition PlayerHasItem { get { return playerHasItemCondition; } }
-    public StoryStateHappenedCondition StoryStateHappenedCondition { get { return storyStateHappenedCondition; } }
+    public StoryStateHappenedCondition StoryStateHappened { get { return storyStateHappenedCondition; } }
+    public WorldDateCondition WorldDate { get { return worldDateCondition; } }
+    public WithinTimeRangeCondition WithinTimeRange { get { return worldDateRangeCondition; } }
 
     public override bool ConditionTest()
     {
@@ -48,6 +56,12 @@ public partial class ConditionNode
 
             case ConditionTypes.StoryStateHappened:
                 return storyStateHappenedCondition.ConditionTest();
+
+            case ConditionTypes.WithinTimeRange:
+                return WithinTimeRange.ConditionTest();
+
+            case ConditionTypes.WorldDate:
+                return WorldDate.ConditionTest();
 
             default:
                 Debug.Log("Wtf, ConditionTest default");
@@ -117,6 +131,38 @@ public partial class ConditionNode
         storyStateHappenedCondition.HasHappened = hasHappened;
         storyStateHappenedCondition.PlotName = plotName;
         storyStateHappenedCondition.StateName = stateName;
+    }
+
+    public void SetWorldDateCondition(WorldDate date, InequalityTypes beforeOrAfter)
+    {
+        conditionTypeSet = ConditionTypes.WorldDate;
+
+        if(WorldDate == null)
+        {
+            worldDateCondition = new WorldDateCondition();
+        }
+
+        worldDateCondition.Date = date;
+        worldDateCondition.TimeOrientation = beforeOrAfter;
+    }
+
+    public void SetWithinTimeRangeCondition(WorldDate startDate, WorldDate finishDate, bool hoursOnly)
+    {
+        conditionTypeSet = ConditionTypes.WithinTimeRange;
+
+        if(worldDateRangeCondition == null)
+        {
+            worldDateRangeCondition = new WithinTimeRangeCondition();
+        }
+
+        worldDateRangeCondition.Finish = finishDate;
+        worldDateRangeCondition.Start = startDate;
+        worldDateRangeCondition.HoursOnly = hoursOnly;
+
+        if(!worldDateRangeCondition.ValidateParametres(hoursOnly))
+        {
+            Debug.LogWarning("Incorrect parametres values! Start of the range should be earlier than it's finish");
+        }
     }
 }
 
@@ -208,5 +254,62 @@ public class StoryStateHappenedCondition : ConditionNodeBase
 
 
         return base.ConditionTest();
+    }
+}
+
+[System.Serializable]
+public class WorldDateCondition : ConditionNodeBase
+{
+    public WorldDate Date;
+    public InequalityTypes TimeOrientation;
+
+    public override bool ConditionTest()
+    {
+        WorldDate currentDate = TimeManagerScript.GetDate();
+
+        return Date.CompareTo(currentDate, TimeOrientation, false, false);
+    }
+}
+
+[System.Serializable]
+public class WithinTimeRangeCondition : ConditionNodeBase
+{
+    public WorldDate Start;
+    public WorldDate Finish;
+
+    public bool HoursOnly;
+
+    public override bool ConditionTest()
+    {
+        WorldDate currentDate = TimeManagerScript.GetDate();
+        bool finishIsNextDay = 
+            (HoursOnly)? Start.ToSecondsHoursOnly() > Finish.ToSecondsHoursOnly() : false;
+        bool currentIsNextDay = finishIsNextDay && Finish.ToSecondsHoursOnly() >= currentDate.ToSecondsHoursOnly();
+
+
+        return
+            (HoursOnly) ?
+                CompareHoursOnly(currentDate, currentIsNextDay, finishIsNextDay) :
+                CompareFullDates(currentDate);
+    }
+
+    private bool CompareHoursOnly(WorldDate currentDate, bool currentIsNextDay, bool finishIsNextDay)
+    {
+        return 
+            Start.ToSecondsHoursOnly() <= currentDate.ToSecondsHoursOnly(currentIsNextDay) &&
+            Finish.ToSecondsHoursOnly(finishIsNextDay) >= currentDate.ToSecondsHoursOnly();
+    }
+
+    private bool CompareFullDates(WorldDate currentDate)
+    {
+        return
+            ValidateParametres() &&
+            Start.ToSeconds() <= currentDate.ToSeconds() &&
+            Finish.ToSeconds() >= currentDate.ToSeconds();
+    }
+
+    public bool ValidateParametres(bool hoursOnly = false)
+    {
+        return hoursOnly || Start.ToSeconds() <= Finish.ToSeconds();
     }
 }

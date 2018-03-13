@@ -157,7 +157,8 @@ public class ChangeMusicAction : ChangeAudioAction
 {   
     public override void DoAction()
     {
-        base.DoAction();
+        SoundManagerScript sms = GameObject.Find("Settings").GetComponent<SoundManagerScript>();
+        sms.PlayMusic(Clip);
     }
 }
 
@@ -166,7 +167,8 @@ public class ChangeAmbienceAction : ChangeAudioAction
 {    
     public override void DoAction()
     {
-        base.DoAction();
+        SoundManagerScript sms = GameObject.Find("Settings").GetComponent<SoundManagerScript>();
+        sms.PlayAmbience(Clip);
     }
 }
 #endregion

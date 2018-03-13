@@ -18,22 +18,7 @@ public class TimeManagerScript : MonoBehaviour
     private float GameSecondsPerRealTimeSecond;
     private float gameSecsPerRealSecondBackup;
 
-    /*
-    [SerializeField]
-    private int Seconds;
-
-    [SerializeField]
-    private int Minutes;
-
-    [SerializeField]
-    private int Hours;
-
-    [SerializeField]
-    private int Day;
-
-    [SerializeField]
-    private int Month;
-    */
+    private static TimeManagerScript ManagerScriptInstance;
 
     [SerializeField]
     private int Seconds;
@@ -60,6 +45,17 @@ public class TimeManagerScript : MonoBehaviour
         minutes = Minute;
         hours = Hour;
     }
+
+    public static WorldDate GetDate()
+    {
+        return
+            new WorldDate(
+                ManagerScriptInstance.Second,
+                ManagerScriptInstance.Minute,
+                ManagerScriptInstance.Hour,
+                ManagerScriptInstance.Day
+                );
+    }    
 
     public int ToSeconds(int days, int hours, int minutes, int seconds)
     {
@@ -93,11 +89,19 @@ public class TimeManagerScript : MonoBehaviour
     {
         TimeFlowCoroutine = StartCoroutine(CountTime());
         OnMinutePassed += WriteDate;
+
+        if(ManagerScriptInstance == null)
+        {
+            ManagerScriptInstance = this;
+        }
 	}
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.P)) AdvanceTime(24, 0, 0);
+        if (Input.GetKey(KeyCode.P))
+        {
+            AdvanceTime(24, 0, 0);
+        }
     }
 
     void OnValidate()
@@ -139,6 +143,12 @@ public class TimeManagerScript : MonoBehaviour
         //Debug.Log("Dzień " + Day + ", godz. " + Hour + ":" + Minute + ":" + Second);
     }
 
+    public override string ToString()
+    {
+        return
+            GetDate().ToString();
+    }
+
     private IEnumerator CountTime()
     {
         float waitTime = 1;
@@ -157,4 +167,125 @@ public class TimeManagerScript : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class WorldDate
+{
+    private int seconds;
+    private int minutes;
+    private int hours;
+    private int days;
+
+    public int Seconds { get { return seconds; } }
+    public int Minutes { get { return minutes; } }
+    public int Hours { get { return hours; } }
+    public int Days { get { return days; } }
+
+    public bool ShowInFoldout;
+
+    public WorldDate(int _seconds, int _minutes, int _hours, int _days)
+    {
+        seconds = _seconds;
+        minutes = _minutes;
+        hours = _hours;
+        days = _days;
+
+        if(seconds >= 60)
+        {
+            minutes += seconds / 60;
+            seconds %= 60;
+        }
+
+        if(minutes >= 60)
+        {
+            hours += minutes / 60;
+            minutes %= 60;
+        }
+
+        if(hours >= 24)
+        {
+            days += hours / 24;
+            hours %= 24;
+        }
+    }
+
+    public int ToSeconds()
+    {
+        return
+            seconds +
+            (minutes +
+                (hours +
+                    days * 24) * 60) * 60;
+    }
+
+    public int ToSecondsHoursOnly(bool asNextDay = false)
+    {
+        return
+            seconds +
+            (minutes +
+                (hours +
+                    (asNextDay? 1 : 0 ) * 24) * 60) * 60;
+    }
+
+    public override string ToString()
+    {
+        return
+            "Day " + Days + ", " + 
+            string.Format("{0:00.#}", Hours) + 
+            ":" + string.Format("{0:00.#}", Minutes) + 
+            ":" + string.Format("{0:00.#}", Seconds);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        bool result = obj is WorldDate;
+
+        if(result)
+        {
+            WorldDate other = obj as WorldDate;
+            result =
+                this.ToSeconds() == other.ToSeconds();
+        }
+
+        return result;
+    }
+
+    public bool CompareTo(WorldDate otherDate, InequalityTypes inequalityTypeThanOther, bool checkHours, bool otherIsNextDay)
+    {
+        int thisToSeconds = (checkHours) ? this.ToSecondsHoursOnly(false) : this.ToSeconds();
+        int otherToSeconds = (checkHours) ? this.ToSecondsHoursOnly(otherIsNextDay) : this.ToSeconds();
+
+        bool result = false;
+
+        switch(inequalityTypeThanOther)
+        {
+            case InequalityTypes.Equal:
+                result = thisToSeconds == otherToSeconds;
+                break;
+
+            case InequalityTypes.Greater:
+                result = thisToSeconds > otherToSeconds;
+                break;
+
+            case InequalityTypes.GreaterOrEqual:
+                result = thisToSeconds >= otherToSeconds;
+                break;
+
+            case InequalityTypes.Less:
+                result = thisToSeconds < otherToSeconds;
+                break;
+
+            case InequalityTypes.LessOrEqual:
+                result = thisToSeconds <= otherToSeconds;
+                break;
+        }
+
+        return result;
+    }    
 }

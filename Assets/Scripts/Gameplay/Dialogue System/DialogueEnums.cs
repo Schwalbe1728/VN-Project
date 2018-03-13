@@ -36,7 +36,9 @@ public enum ConditionTypes
     AttributeTest,
     SkillPossessed,
     PlayerHasItem,
-    StoryStateHappened
+    StoryStateHappened,
+    WorldDate,
+    WithinTimeRange
 }
 
 public enum InequalityTypes

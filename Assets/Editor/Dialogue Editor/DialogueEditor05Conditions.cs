@@ -150,6 +150,14 @@ public partial class DialogueEditor
             case ConditionTypes.StoryStateHappened:
                 save |= DrawStoryStateHappenedInterior(currentCondition, prevType != newType);
                 break;
+
+            case ConditionTypes.WorldDate:
+                save |= DrawWorldDateInterior(currentCondition, prevType != newType);
+                break;
+
+            case ConditionTypes.WithinTimeRange:
+                save |= DrawWithinTimeRangeInterior(currentCondition, prevType != newType);
+                break;
         }
 
         GUILayout.BeginHorizontal();
