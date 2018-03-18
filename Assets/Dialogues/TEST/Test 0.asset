@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858873df6999844b3efb9ec26e4bab, type: 3}
+  m_Name: Test 0
+  m_EditorClassIdentifier: 
+  startID: 0
+  startType: 3
+  currentNodeID: 0
+  Options: []
+  Nodes: []
+  Conditions:
+  - conditionID: 0
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIfPassed: {fileID: 11400000, guid: 329454a54741b01469a8dea071fd243a,
+      type: 2}
+    nextDialogueIfFailed: {fileID: 11400000, guid: 8dfd40f5ac567ea4a8cfc44491b86cef,
+      type: 2}
+    conditionTypeSet: 0
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 4
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+  editorInfo:
+    Windows:
+    - serializedVersion: 2
+      x: 235
+      y: 47
+      width: 278
+      height: 180
+    WindowTypes: 03000000
+    NodeTypesIDs: 00000000
+    OptionsIndexes: 
+    NodesIndexes: 
+    ConditionsIndexes: 00000000
+    Nodes: 0
+    Options: 0
+    Conditions: 1

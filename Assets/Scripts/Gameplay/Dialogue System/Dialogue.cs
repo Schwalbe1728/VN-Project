@@ -20,7 +20,11 @@ public class Dialogue : ScriptableObject
 
     private static void FireOnDialogueEnded(Dialogue arg)
     {
-        if (OnDialogueEnded != null) OnDialogueEnded(arg);
+        if (OnDialogueEnded != null)
+        {
+            Debug.Log("Fire On Dialogue Ended");
+            OnDialogueEnded(arg);
+        }
     }
 
     public string Name { get { return this.name; } }
@@ -200,18 +204,20 @@ public class Dialogue : ScriptableObject
     #endregion
 
     // TODO: Dodać obiekt kontroli dialogów, który będzie mieć event OnDialogueEnded(string nextDialogue)
-    public void StartDialogue()
+    public bool StartDialogue()
     {
         int tempID = startID;
         NodeType dummy;
 
         if (StartPointType == NodeType.Condition && !CycleThroughConditions(tempID, out tempID, out dummy))
         {
-            return;
+            return false;
         }
 
         currentNodeID = tempID;
         currentDialogue = this;
+
+        return true;
     }
 
     public bool DialogueFinished { get { return currentNodeID == Dialogue.ExitDialogue; } }
@@ -241,7 +247,7 @@ public class Dialogue : ScriptableObject
     /// <summary>
     /// Sets next node, assuming that the current node is an immediate node.
     /// </summary>
-    public void Next()
+    public bool Next()
     {
         if (!CurrentNode.ImmediateNode)
         {
@@ -257,7 +263,7 @@ public class Dialogue : ScriptableObject
         {
             if(!CycleThroughConditions(targetID, out targetID, out targetType))
             {
-                return;
+                return false;
             }
         }
 
@@ -270,12 +276,15 @@ public class Dialogue : ScriptableObject
             if (targetType == NodeType.Exit)
             {
                 // Fire event that load a new dialogue
+                return false;
             }
             else
             {
                 throw new System.ArgumentException("Illegal node type");
             }
         }
+
+        return true;
     }
 
     /// <summary>
@@ -283,7 +292,7 @@ public class Dialogue : ScriptableObject
     /// dialogue options has been chosen as an answer to what has been said in the current node.
     /// </summary>
     /// <param name="chosenAnswer"></param>
-    public void Next(DialogueOption chosenAnswer)
+    public bool Next(DialogueOption chosenAnswer)
     {
         if (CurrentNode.ImmediateNode)
         {
@@ -297,18 +306,20 @@ public class Dialogue : ScriptableObject
         {
             // Wywołaj event ładujący nowy dialog
             FireOnDialogueEnded(chosenAnswer.NextDialogue);
-            return;
+            return false;
         }
 
         if (targetType == NodeType.Condition && !CycleThroughConditions(targetID, out targetID, out targetType))
         {
-            return;
+            return false;
         }
 
         if (targetType == NodeType.Node)
         {
             currentNodeID = targetID;            
-        }        
+        }
+
+        return true;
     }
 
     /// <summary>

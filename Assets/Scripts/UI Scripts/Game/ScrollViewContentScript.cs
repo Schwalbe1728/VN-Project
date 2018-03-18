@@ -35,14 +35,15 @@ public class ScrollViewContentScript : MonoBehaviour {
     private float startHeight;    
 
     public void SetDialogue(Dialogue scr)
-    {        
+    {
         //DialogueLog = new List<GameObject>();
+        Debug.Log("Set Dialogue");
+        DialogueShown = scr;
 
-        DialogueShown = scr;        
-        //DialogueScr.RegisterToDialogueEndedEvent(SelectNextDialogue);
-        DialogueShown.StartDialogue();
-
-        DrawNode();              
+        if (DialogueShown.StartDialogue())
+        {
+            DrawNode();
+        }
     }
 
     public void OptionHasBeenChosen(DialogueOption optionChosen)
@@ -57,8 +58,10 @@ public class ScrollViewContentScript : MonoBehaviour {
         optionText.GetComponent<DialogueLogElementScript>().SetDialogueText(optionChosen.OptionText);
 
         DialogueLog.Insert(0, optionText);
-        DialogueShown.Next(optionChosen);
-        DrawNode();
+        if (DialogueShown.Next(optionChosen))
+        {
+            DrawNode();
+        }
     }
    
     public void AlignLogElements()
@@ -75,35 +78,7 @@ public class ScrollViewContentScript : MonoBehaviour {
             }
         }
 
-        Canvas.ForceUpdateCanvases();
-        
-        /*
-        float sum = 0;
-
-        float prevHeight = 0;
-
-        int elInd = 0;
-
-        foreach(GameObject logElement in DialogueLog)
-        {            
-            RectTransform rekt = logElement.GetComponent<RectTransform>();
-            rekt.anchoredPosition = Vector2.zero;
-
-            float spacing = (currentOptions == null || elInd >= currentOptions.Length + 1) ? BetweenLogsSpacing : BetweenLogsSpacing / 3;
-
-            sum += spacing + prevHeight / 2 + rekt.rect.height / 2;
-            prevHeight = rekt.rect.height;
-
-            rekt.Translate(0, -sum, 0);
-
-            elInd++;
-        }
-
-        RectTransform tempLogArea = gameObject.GetComponent<RectTransform>();
-        tempLogArea.offsetMax = 
-            new Vector2(tempLogArea.offsetMax.x, -Mathf.Min(startHeight - sum - prevHeight, 0) );
-        
-        */
+        Canvas.ForceUpdateCanvases();               
         
         for(int i = 0; i < DialogueLog.Count; i++)
         {
@@ -117,6 +92,8 @@ public class ScrollViewContentScript : MonoBehaviour {
 
         PlayerInfo = GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>();
 
+        Dialogue.RegisterToOnDialogueEnded(onDialogueEnded);
+
         if (DialogueShown != null)
         {
             StartCoroutine(StartDialogue());
@@ -125,13 +102,14 @@ public class ScrollViewContentScript : MonoBehaviour {
 
     void onDialogueEnded(Dialogue next)
     {
+        this.StopAllCoroutines();
         DialogueShown = next;
         SetDialogue(DialogueShown);
     }
 
     IEnumerator StartDialogue()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
 
         gameObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
         startHeight = gameObject.GetComponent<RectTransform>().rect.height;
@@ -151,8 +129,10 @@ public class ScrollViewContentScript : MonoBehaviour {
         }
         else
         {
-            DialogueShown.Next();
-            DrawNode();
+            if (DialogueShown.Next())
+            {
+                DrawNode();
+            }
         }        
     }
 

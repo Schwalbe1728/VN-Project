@@ -11617,7 +11617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d714d099c157b4093c96f990ab22ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueShown: {fileID: 11400000, guid: 7b783ec986c7bc24cb01f2471b2efa19, type: 2}
+  DialogueShown: {fileID: 11400000, guid: 7414c278bb4ed5341bd497ba24730372, type: 2}
   LoggedMessagesMax: 0
   BetweenLogsSpacing: 0
   DialogueLogElementPrefab: {fileID: 1303110574906980, guid: cbf8fc1fbc84a004986fffc75c536111,

@@ -85,7 +85,7 @@ public partial class DialogueEditor
         {
             GUILayout.Label("Target If Success: ", GUILayout.Width(110));
 
-            DrawTargetValue(currentCondition, currentCondition.SuccessTargetType, currentCondition.SuccessTarget);
+            DrawTargetValue(currentCondition, currentCondition.SuccessTargetType, currentCondition.SuccessTarget, true);
 
             if (!AnyConditionAwaitingConnection() && GUILayout.Button("Set", GUILayout.Width(50)))
             {
@@ -104,7 +104,7 @@ public partial class DialogueEditor
         {
             GUILayout.Label("Target If Failure: ", GUILayout.Width(110));
 
-            DrawTargetValue(currentCondition, currentCondition.FailureTargetType, currentCondition.FailureTarget);
+            DrawTargetValue(currentCondition, currentCondition.FailureTargetType, currentCondition.FailureTarget, false);
 
             if (!AnyConditionAwaitingConnection() && GUILayout.Button("Set", GUILayout.Width(50)))
             {
@@ -226,11 +226,11 @@ public partial class DialogueEditor
         }
     }
 
-    void DrawTargetValue(ConditionNode currentCondition, NodeType targetType, int targetID)
+    void DrawTargetValue(ConditionNode currentCondition, NodeType targetType, int targetID, bool success)
     {
         if (targetType == NodeType.Exit)
         {
-            DrawExitField(currentCondition, true);
+            DrawExitField(currentCondition, success);
         }
         else
         {
