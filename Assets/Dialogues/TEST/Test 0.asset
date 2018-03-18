@@ -26,7 +26,7 @@ MonoBehaviour:
       type: 2}
     nextDialogueIfFailed: {fileID: 11400000, guid: 8dfd40f5ac567ea4a8cfc44491b86cef,
       type: 2}
-    conditionTypeSet: 0
+    conditionTypeSet: 2
     attributeCheckCondition:
       Attribute: 0
       ValueChecked: 10
@@ -54,6 +54,9 @@ MonoBehaviour:
       Finish:
         ShowInFoldout: 0
       HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 7998c4481abfc564baa3b578c635d041, type: 2}
+      Required: 1
   editorInfo:
     Windows:
     - serializedVersion: 2

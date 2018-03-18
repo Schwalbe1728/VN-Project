@@ -42,6 +42,12 @@ public class CharacterCreationScript : MonoBehaviour
         playerInfo.ChangeName(inputField.text);
     }
 
+    public bool SetBackground(BackgroundDefinition back)
+    {
+        playerInfo.Background = back;
+        return true;
+    }
+
     public void EndCreation()
     {
         CharStatsToValueDictionary finalStats = new CharStatsToValueDictionary();

@@ -34,6 +34,7 @@ public enum ConditionTypes
 {
     AttributeCheck,
     AttributeTest,
+    BackgroundRequired,
     SkillPossessed,
     PlayerHasItem,
     StoryStateHappened,

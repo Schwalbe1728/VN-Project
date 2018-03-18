@@ -74,6 +74,7 @@ public class BackgroundDefinition : ScriptableObject
         }
 
         return
+            player.SetBackground(this) &&
             player.ApplyBackgroundModificators(modifiedStatDeclaration, modifiedStatValues) &&
             skillManager.ApplyBackgroundSkills(skillsGranted);
 

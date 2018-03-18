@@ -184,6 +184,25 @@ public partial class DialogueEditor
         return result;
     }
 
+    private bool DrawBackgroundDefinitionField(BackgroundDefinition prevBackground, int labelWidth, string labelText, out BackgroundDefinition newBackground)
+    {
+        bool result = false;
+
+        GUILayout.BeginHorizontal();
+        {
+            newBackground =
+                (BackgroundDefinition)
+                    EditorGUILayout.ObjectField(labelText, prevBackground, typeof(BackgroundDefinition), false);
+
+            result |=
+                (prevBackground != null && !prevBackground.Equals(newBackground)) ||
+                (prevBackground != newBackground);
+        }
+        GUILayout.EndHorizontal();
+
+        return result;
+    }
+
     #endregion
     #region Conditions Drawers
     bool DrawAttributeCheckInterior(ConditionNode currentCondition, bool typeChangedToThis)
@@ -364,5 +383,29 @@ public partial class DialogueEditor
 
         return result;
     }
-    #endregion    
+
+    bool DrawBackgroundRequiredInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        BackgroundDefinition background;
+        bool isRequired;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawBackgroundDefinitionField(currentCondition.BackgroundRequired.Background, labelWidth, "Background", out background);
+            result |= DrawGenericBoolField(currentCondition.BackgroundRequired.Required, labelWidth, "Required?", out isRequired);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (typeChangedToThis || result)
+        {
+            currentCondition.SetBackgroundRequiredCondition(background, isRequired);
+            Debug.Log("Zmiana na Background Required");
+        }
+
+        return result;
+    }    
+    #endregion
 }

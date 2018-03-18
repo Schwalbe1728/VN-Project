@@ -158,6 +158,10 @@ public partial class DialogueEditor
             case ConditionTypes.WithinTimeRange:
                 save |= DrawWithinTimeRangeInterior(currentCondition, prevType != newType);
                 break;
+
+            case ConditionTypes.BackgroundRequired:
+                save |= DrawBackgroundRequiredInterior(currentCondition, prevType != newType);
+                break;
         }
 
         GUILayout.BeginHorizontal();

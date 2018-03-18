@@ -55,6 +55,9 @@ MonoBehaviour:
         Finish:
           ShowInFoldout: 0
         HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 0
     entryConditionSet: 0
     OptionText: Option 0
     VisitOnce: 0
@@ -99,6 +102,9 @@ MonoBehaviour:
         Finish:
           ShowInFoldout: 0
         HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 0
     entryConditionSet: 0
     OptionText: Option 1
     VisitOnce: 0
@@ -143,6 +149,9 @@ MonoBehaviour:
         Finish:
           ShowInFoldout: 0
         HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 0
     entryConditionSet: 0
     OptionText: Option 2
     VisitOnce: 0
@@ -259,6 +268,9 @@ MonoBehaviour:
       Finish:
         ShowInFoldout: 0
       HoursOnly: 1
+    backgroundRequiredCondition:
+      Background: {fileID: 0}
+      Required: 0
   - conditionID: 1
     targetIDIfPassed: 2
     targetTypeIfPassed: 1
@@ -266,7 +278,7 @@ MonoBehaviour:
     targetTypeIfFailed: 0
     nextDialogueIfPassed: {fileID: 0}
     nextDialogueIfFailed: {fileID: 0}
-    conditionTypeSet: 0
+    conditionTypeSet: 2
     attributeCheckCondition:
       Attribute: 0
       ValueChecked: 10
@@ -294,6 +306,9 @@ MonoBehaviour:
       Finish:
         ShowInFoldout: 0
       HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 1d461bb64798f404a9c1be5804beb952, type: 2}
+      Required: 1
   editorInfo:
     Windows:
     - serializedVersion: 2
@@ -322,8 +337,8 @@ MonoBehaviour:
       width: 265
       height: 304
     - serializedVersion: 2
-      x: 28
-      y: 336
+      x: 30
+      y: 331
       width: 278
       height: 201
     - serializedVersion: 2

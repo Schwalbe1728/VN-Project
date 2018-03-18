@@ -350,6 +350,8 @@ public class CharacterInfoScript : MonoBehaviour
         return PlayerInfo.Stats[stat];
     }
 
+    public BackgroundDefinition Background { get { return PlayerInfo.Background; } }
+
     public void RegisterToPlayerDied(PlayerDied function)
     {
         OnPlayerDied += function;
@@ -626,6 +628,7 @@ public static class CharacterStatExtension
 public class CharacterInfo
 {
     public string CharName { get { return charName; } }
+    public BackgroundDefinition Background { get { return background; } set { if (CharacterCreationInProgress) background = value; } }
 
     public CharStatsToValueDictionary Stats
     {
@@ -670,7 +673,8 @@ public class CharacterInfo
     private CharStatsToValueDictionary stats;   //  Final Stats    
     private HashSet<CharacterSkills> skills;
 
-    private bool CharacterCreationInProgress;            
+    private bool CharacterCreationInProgress;
+    private BackgroundDefinition background;
 
     public CharacterInfo()
     {

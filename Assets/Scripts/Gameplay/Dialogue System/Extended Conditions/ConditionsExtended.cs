@@ -28,6 +28,9 @@ public partial class ConditionNode
     [SerializeField]
     private WithinTimeRangeCondition worldDateRangeCondition;
 
+    [SerializeField]
+    private BackgroundRequiredCondition backgroundRequiredCondition;
+
     public ConditionTypes ConditionType { get { return conditionTypeSet; } }
 
     public AttributeCheckCondition AttributeCheck { get { return attributeCheckCondition; } }
@@ -37,6 +40,7 @@ public partial class ConditionNode
     public StoryStateHappenedCondition StoryStateHappened { get { return storyStateHappenedCondition; } }
     public WorldDateCondition WorldDate { get { return worldDateCondition; } }
     public WithinTimeRangeCondition WithinTimeRange { get { return worldDateRangeCondition; } }
+    public BackgroundRequiredCondition BackgroundRequired { get { return backgroundRequiredCondition; } }
 
     public override bool ConditionTest()
     {
@@ -62,6 +66,9 @@ public partial class ConditionNode
 
             case ConditionTypes.WorldDate:
                 return WorldDate.ConditionTest();
+
+            case ConditionTypes.BackgroundRequired:
+                return BackgroundRequired.ConditionTest();
 
             default:
                 Debug.Log("Wtf, ConditionTest default");
@@ -163,6 +170,19 @@ public partial class ConditionNode
         {
             Debug.LogWarning("Incorrect parametres values! Start of the range should be earlier than it's finish");
         }
+    }
+
+    public void SetBackgroundRequiredCondition(BackgroundDefinition background, bool isRequired)
+    {
+        conditionTypeSet = ConditionTypes.BackgroundRequired;
+
+        if(backgroundRequiredCondition == null)
+        {
+            backgroundRequiredCondition = new BackgroundRequiredCondition();
+        }
+
+        backgroundRequiredCondition.Background = background;
+        backgroundRequiredCondition.Required = isRequired;
     }
 }
 
@@ -303,5 +323,23 @@ public class WithinTimeRangeCondition : ConditionNodeBase
     public bool ValidateParametres(bool hoursOnly = false)
     {
         return hoursOnly || Start.ToSeconds() <= Finish.ToSeconds();
+    }
+}
+
+[System.Serializable]
+public class BackgroundRequiredCondition : ConditionNodeBase
+{
+    public BackgroundDefinition Background;
+    public bool Required;
+
+    public override bool ConditionTest()
+    {
+        BackgroundDefinition
+            playerBackground = GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>().Background;
+
+        return
+            (Required) ?
+                playerBackground.Name.Equals(Background.Name) :
+                !playerBackground.Name.Equals(Background.Name);
     }
 }
