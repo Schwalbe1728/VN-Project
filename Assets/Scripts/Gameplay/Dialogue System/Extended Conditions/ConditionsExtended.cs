@@ -231,7 +231,9 @@ public class SkillPossessedCondition : ConditionNodeBase
 
     public override bool ConditionTest()
     {
-        bool playerHasSkill = false;    //TODO: sprawdzamy posiadanie skilla
+        bool playerHasSkill =
+            GameObject.Find("Game Info Component").
+            GetComponent<CharacterInfoScript>().HasSkill(SkillToCheck);
 
         return
             IsNeeded ?
@@ -338,6 +340,7 @@ public class BackgroundRequiredCondition : ConditionNodeBase
             playerBackground = GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>().Background;
 
         return
+            Background != null &&
             (Required) ?
                 playerBackground.Name.Equals(Background.Name) :
                 !playerBackground.Name.Equals(Background.Name);

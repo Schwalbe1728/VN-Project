@@ -132,6 +132,8 @@ public class HurtPlayerAction : DialogueActionBase
     public override void DoAction()
     {
         // TODO: Znajdź obiekt gracza i zadaj graczowi obrażenia
+
+        GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>().ChangeHealth(-Damage);
     }
 }
 
@@ -143,6 +145,7 @@ public class HurtPlayerSanityAction : DialogueActionBase
     public override void DoAction()
     {
         // TODO: Znajdź obiekt gracza i zadaj graczowi obrażenia
+        GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>().ChangeSanity(-Damage);
     }
 }
 #region Audio Changing

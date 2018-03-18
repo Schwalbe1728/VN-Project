@@ -55,6 +55,9 @@ MonoBehaviour:
         Finish:
           ShowInFoldout: 0
         HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 0
     entryConditionSet: 0
     OptionText: Oy vey!
     VisitOnce: 0
@@ -69,9 +72,9 @@ MonoBehaviour:
     optionsIndexesList: 00000000
     nextDialogue: {fileID: 0}
     action:
-      hurtPlayerSet: 0
+      hurtPlayerSet: 1
       hurtPlayer:
-        Damage: 0
+        Damage: 20
       hurtPlayerSanitySet: 0
       hurtPlayerSanity:
         Damage: 0
@@ -89,10 +92,10 @@ MonoBehaviour:
   editorInfo:
     Windows:
     - serializedVersion: 2
-      x: 10
-      y: 10
-      width: 226
-      height: 190
+      x: 127
+      y: 47
+      width: 260
+      height: 324
     - serializedVersion: 2
       x: 493
       y: 88

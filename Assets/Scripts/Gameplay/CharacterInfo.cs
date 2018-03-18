@@ -27,7 +27,7 @@ public static class StatsRuleSet
         {
             int baseToPass = 5 * (charInfo.GetStat(statToTest) + modificator);
             int stressPenalty = charInfo.StressPenalty;
-            int skillBonus = (/* posiada skill */ false) ? 0 : 20;
+            int skillBonus = (charInfo.HasSkill(skill)) ? 20 : 0;
 
             result = diceResult <= (baseToPass + skillBonus - stressPenalty);
         }
@@ -348,6 +348,11 @@ public class CharacterInfoScript : MonoBehaviour
     public int GetStat(CharacterStat stat)
     {
         return PlayerInfo.Stats[stat];
+    }
+
+    public bool HasSkill(CharacterSkills skill)
+    {
+        return PlayerInfo.HasSkill(skill);
     }
 
     public BackgroundDefinition Background { get { return PlayerInfo.Background; } }
@@ -695,5 +700,10 @@ public class CharacterInfo
         }
 
         return CharacterCreationInProgress;
-    }    
+    }
+    
+    public bool HasSkill(CharacterSkills skill)
+    {
+        return skills.Contains(skill);
+    }
 }

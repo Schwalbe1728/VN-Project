@@ -216,6 +216,7 @@ public class Dialogue : ScriptableObject
 
         currentNodeID = tempID;
         currentDialogue = this;
+        CurrentNode.Visit();
 
         return true;
     }
@@ -255,8 +256,8 @@ public class Dialogue : ScriptableObject
         }
 
         NodeType targetType;
-        int targetID;        
-
+        int targetID;
+        
         CurrentNode.GetTarget(out targetID, out targetType);
 
         if(targetType == NodeType.Condition)
@@ -270,6 +271,7 @@ public class Dialogue : ScriptableObject
         if (targetType == NodeType.Node)
         {
             currentNodeID = targetID;
+            CurrentNode.Visit();
         }
         else
         {
@@ -299,6 +301,8 @@ public class Dialogue : ScriptableObject
             throw new System.ArgumentException("Node is an immediate node - operation illegal!");
         }
 
+        chosenAnswer.Visit();
+
         int targetID = chosenAnswer.NextID;
         NodeType targetType = chosenAnswer.NextType;
 
@@ -316,7 +320,8 @@ public class Dialogue : ScriptableObject
 
         if (targetType == NodeType.Node)
         {
-            currentNodeID = targetID;            
+            currentNodeID = targetID;
+            CurrentNode.Visit();            
         }
 
         return true;
