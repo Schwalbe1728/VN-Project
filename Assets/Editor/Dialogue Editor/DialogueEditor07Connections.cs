@@ -263,7 +263,11 @@ public partial class DialogueEditor
         {
             if (nodeToNodeToAttach.Count == 2)
             {
-                MakeImmediateNodeConnection(nodeToNodeToAttach[0], nodeToNodeToAttach[1], NodeType.Node);
+                MakeImmediateNodeConnection(
+                    nodeToNodeToAttach[0], 
+                    nodeToNodeToAttach[1], 
+                    (nodeToNodeToAttach[1] == Dialogue.ExitDialogue)? 
+                        NodeType.Exit : NodeType.Node);
                 save = true;
             }
         }
@@ -320,7 +324,7 @@ public partial class DialogueEditor
                 MakeImmediateNodeConnection(
                     nodeToConditionToAttach[0], 
                     nodeToConditionToAttach[1], 
-                    NodeType.Condition
+                    (nodeToConditionToAttach[1] == Dialogue.ExitDialogue)? NodeType.Exit : NodeType.Condition
                     );
 
                 save = true;

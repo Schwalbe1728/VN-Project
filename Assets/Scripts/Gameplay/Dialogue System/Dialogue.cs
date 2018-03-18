@@ -2,12 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void DialogueReachedEnd(Dialogue next);
+
 [CreateAssetMenu(menuName = "Dialogue")]
 public class Dialogue : ScriptableObject
 {
     public const int ExitDialogue = -1;
 
     private static Dialogue currentDialogue;
+    private static event DialogueReachedEnd OnDialogueEnded;
+
+    public static void RegisterToOnDialogueEnded(DialogueReachedEnd onDialogueEnded)
+    {
+        OnDialogueEnded -= onDialogueEnded;
+        OnDialogueEnded += onDialogueEnded;
+    }
+
+    private static void FireOnDialogueEnded(Dialogue arg)
+    {
+        if (OnDialogueEnded != null) OnDialogueEnded(arg);
+    }
 
     public string Name { get { return this.name; } }
 
@@ -46,8 +60,6 @@ public class Dialogue : ScriptableObject
     {
         return StartPointId == sID && StartPointType == sType;
     }
-
-
 
     #region Options
     public DialogueOption[] GetAllOptions()
@@ -191,17 +203,11 @@ public class Dialogue : ScriptableObject
     public void StartDialogue()
     {
         int tempID = startID;
+        NodeType dummy;
 
-        if (StartPointType == NodeType.Condition)
+        if (StartPointType == NodeType.Condition && !CycleThroughConditions(tempID, out tempID, out dummy))
         {
-            // oblicz pierwszy wyświetlony Node            
-            NodeType nxtType;
-
-            do
-            {
-                Conditions[tempID].ConditionTest(out tempID, out nxtType);
-            }
-            while (nxtType == NodeType.Condition);
+            return;
         }
 
         currentNodeID = tempID;
@@ -217,11 +223,14 @@ public class Dialogue : ScriptableObject
         {
             List<DialogueOption> result = new List<DialogueOption>();
 
-            foreach (int optIndex in CurrentNode.OptionsAttached)
+            if (!CurrentNode.ImmediateNode)
             {
-                if (Options[optIndex].CanDisplay)
+                foreach (int optIndex in CurrentNode.OptionsAttached)
                 {
-                    result.Add(Options[optIndex]);
+                    if (Options[optIndex].CanDisplay)
+                    {
+                        result.Add(Options[optIndex]);
+                    }
                 }
             }
 
@@ -240,19 +249,15 @@ public class Dialogue : ScriptableObject
         }
 
         NodeType targetType;
-        int targetID;
+        int targetID;        
 
         CurrentNode.GetTarget(out targetID, out targetType);
 
-        while (targetType == NodeType.Condition)
+        if(targetType == NodeType.Condition)
         {
-            if (Conditions[targetID].ConditionTest(out targetID, out targetType))
+            if(!CycleThroughConditions(targetID, out targetID, out targetType))
             {
-                //  test success event
-            }
-            else
-            {
-                //  test failure event
+                return;
             }
         }
 
@@ -288,28 +293,57 @@ public class Dialogue : ScriptableObject
         int targetID = chosenAnswer.NextID;
         NodeType targetType = chosenAnswer.NextType;
 
-        while (targetType == NodeType.Condition)
+        if (targetType == NodeType.Exit)
         {
-            if (Conditions[targetID].ConditionTest(out targetID, out targetType))
-            {
-                // test success event
-            }
-            else
-            {
-                // test failure event
-            }
+            // Wywołaj event ładujący nowy dialog
+            FireOnDialogueEnded(chosenAnswer.NextDialogue);
+            return;
+        }
+
+        if (targetType == NodeType.Condition && !CycleThroughConditions(targetID, out targetID, out targetType))
+        {
+            return;
         }
 
         if (targetType == NodeType.Node)
         {
-            currentNodeID = targetID;
-        }
-        else
+            currentNodeID = targetID;            
+        }        
+    }
+
+    /// <summary>
+    /// Returns true if the dialogue did not reach an end
+    /// </summary>
+    /// <param name="startId"></param>
+    /// <param name="targetID"></param>
+    /// <param name="targetType"></param>
+    /// <returns></returns>
+    private bool CycleThroughConditions(int startId, out int targetID, out NodeType targetType)
+    {
+        int prevID = startID;
+        bool res = false;
+
+        do
         {
-            if (targetType == NodeType.Exit)
+            res = Conditions[prevID].ConditionTest(out targetID, out targetType);
+
+            if (targetType != NodeType.Exit)
             {
-                // Wywołaj event ładujący nowy dialog
+                prevID = targetID;
+            }
+            else
+            {
+                FireOnDialogueEnded(
+                    (res) ?
+                        Conditions[prevID].NextDialogueIfPassed :
+                        Conditions[prevID].NextDialogueIfFailed
+                    );
+
+                return false;
             }
         }
+        while (targetType == NodeType.Condition);
+
+        return true;
     }
 }

@@ -22,8 +22,11 @@ public class DialogueNode : DialogueElement
     [SerializeField]
     private List<int> optionsIndexesList;
 
+    //[SerializeField]
+    //private string nextDialogueID;
+
     [SerializeField]
-    private string nextDialogueID;
+    private Dialogue nextDialogue;
 
     [SerializeField]
     private DialogueAction action;
@@ -33,7 +36,8 @@ public class DialogueNode : DialogueElement
     [SerializeField]
     private int secondsConsumed;
 
-    public string NextDialogueID { get { return nextDialogueID; } set { nextDialogueID = value; } }
+    //public string NextDialogueID { get { return nextDialogueID; } set { nextDialogueID = value; } }
+    public Dialogue NextDialogue { get { return nextDialogue; } set { nextDialogue = value; } }
 
     public int NodeID { get { return nodeID; } set { if (value >= 0) nodeID = value; } }
     //public string Text { get { return nodeText; } set { nodeText = value; } }

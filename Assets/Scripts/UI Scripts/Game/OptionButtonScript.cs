@@ -20,20 +20,25 @@ public class OptionButtonScript : MonoBehaviour {
 
     [SerializeField]
     private Text OptionText;
-    
-    private int OptionRepresented;
+        
     private string KeyID;
     private ScrollViewContentScript LogArea;
 
+    private DialogueOption Option;
+
     public void OnClick()
     {
-        //LogArea.OptionHasBeenChosen(OptionRepresented);
+        LogArea.OptionHasBeenChosen(Option);
+    }
+
+    public void SetOption(DialogueOption option)
+    {
+        Option = option;
     }
 
     public void SetNumber(int n)
     {
         NumberText.text = n.ToString() + ":";
-        OptionRepresented = n - 1;
         KeyID = "Option " + n.ToString();
     }
 

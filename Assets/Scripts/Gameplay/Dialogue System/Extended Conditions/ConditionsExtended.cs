@@ -175,7 +175,10 @@ public class AttributeCheckCondition : ConditionNodeBase
 
     public override bool ConditionTest()
     {
-        int attributeValue = -1;    //TODO: znajdź obiekt gracza i pobierz potrzebną wartość daną AttributeName
+        int attributeValue =
+            GameObject.Find("Game Info Component").
+            GetComponent<CharacterInfoScript>().
+            GetStat(Attribute);
 
         return InequalityType.Value(attributeValue, ValueChecked);
     }
@@ -190,24 +193,13 @@ public class AttributeTestCondition : ConditionNodeBase
 
     public override bool ConditionTest()
     {
-        int attributeValue = -1;    //TODO: znajdź obiekt gracza i pobierz potrzebną wartość daną AttributeName
-        int stressPenalty = 0;      //TODO: znajdź obiekt gracza i pobierz wartość kary od stresu
-        bool playerHasSkill = false;    //TODO: sprawdź czy gracz posiada umiejętność                       
+        CharacterInfoScript characterInfo = GameObject.Find("Game Info Component").GetComponent<CharacterInfoScript>();
 
-        int randValue = Random.Range(0, 101);
-        int valueToCheck =
-            5 * (attributeValue + AttributeMod) + 
-            (playerHasSkill ? 20 : 0) +
-            stressPenalty
-            ;
+        bool result =
+            StatsRuleSet.TestRNG(characterInfo, Attribute, AttributeMod, Skill);        
 
         return
-            InequalityTypes.Less.Value(randValue, 5) ?
-                true :
-                    (InequalityTypes.Greater.Value(randValue, 95) ?
-                        false : 
-                        InequalityTypes.LessOrEqual.Value(randValue, valueToCheck)
-                    );
+            result;
     }
 }
 

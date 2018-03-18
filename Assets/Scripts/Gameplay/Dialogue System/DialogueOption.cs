@@ -30,8 +30,10 @@ public class DialogueOption : DialogueElement
     public NodeType NextType { get { return nextType; } }
 
     [SerializeField]
-    private string nextDialogueID;
-    public string NextDialogueID { get { return nextDialogueID; } set { nextDialogueID = value; } }
+    //private string nextDialogueID;
+    //public string NextDialogueID { get { return nextDialogueID; } set { nextDialogueID = value; } }
+    private Dialogue nextDialogue;
+    public Dialogue NextDialogue { get { return nextDialogue; } set { nextDialogue = value; } }
 
     public bool CanDisplay
     {

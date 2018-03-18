@@ -34,12 +34,17 @@ public partial class ConditionNode : ConditionNodeBase
     public NodeType FailureTargetType { get { return targetTypeIfFailed; } }
 
     [SerializeField]
-    private string nextDialogueIDIfPassed;
-    public string NextDialogueIDIfPassed { get { return nextDialogueIDIfPassed; } set { nextDialogueIDIfPassed = value; } }
+    //private string nextDialogueIDIfPassed;
+    //public string NextDialogueIDIfPassed { get { return nextDialogueIDIfPassed; } set { nextDialogueIDIfPassed = value; } }
+    private Dialogue nextDialogueIfPassed;
+    public Dialogue NextDialogueIfPassed { get { return nextDialogueIfPassed; } set { nextDialogueIfPassed = value; } }
 
     [SerializeField]
-    private string nextDialogueIDIfFailed;
-    public string NextDialogueIDIfFailed { get { return nextDialogueIDIfFailed; } set { nextDialogueIDIfFailed = value; } }
+    //private string nextDialogueIDIfFailed;
+    //public string NextDialogueIDIfFailed { get { return nextDialogueIDIfFailed; } set { nextDialogueIDIfFailed = value; } }
+    private Dialogue nextDialogueIfFailed;
+    public Dialogue NextDialogueIfFailed { get { return nextDialogueIfFailed; } set { nextDialogueIfFailed = value; } }
+
 
     public bool ConditionChainElementTest(out int nextConditionID)
     {

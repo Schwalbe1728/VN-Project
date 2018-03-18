@@ -78,11 +78,16 @@ public partial class DialogueEditor
     {
         EditorGUILayout.BeginHorizontal();
         {
+            /*
             node.NextDialogueID =
                 EditorGUILayout.TextField(
                     (node.NextDialogueID == null) ?
                         "" : node.NextDialogueID
                     );
+              */
+
+            node.NextDialogue =
+                (Dialogue) EditorGUILayout.ObjectField("", node.NextDialogue, typeof(Dialogue), false, GUILayout.Width(100));
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -91,11 +96,16 @@ public partial class DialogueEditor
     {
         EditorGUILayout.BeginHorizontal();
         {
+            /*
             option.NextDialogueID =
                 EditorGUILayout.TextField(
                     (option.NextDialogueID == null) ?
                         "" : option.NextDialogueID
                     );
+            */
+
+            option.NextDialogue =
+                (Dialogue)EditorGUILayout.ObjectField("", option.NextDialogue, typeof(Dialogue), false, GUILayout.Width(100));
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -103,24 +113,29 @@ public partial class DialogueEditor
     void DrawExitField(ConditionNode condition, bool isSuccess)
     {
         EditorGUILayout.BeginHorizontal();
-        {
-            GUILayout.Label("Next Dialogue: ");
-
+        {            
             if (isSuccess)
             {
+                /*
                 condition.NextDialogueIDIfPassed =
                   EditorGUILayout.TextField(
                       (condition.NextDialogueIDIfPassed == null) ?
                           "" : condition.NextDialogueIDIfPassed
-                      );
+                      );*/
+
+                condition.NextDialogueIfPassed =
+                    (Dialogue)EditorGUILayout.ObjectField("", condition.NextDialogueIfPassed, typeof(Dialogue), false, GUILayout.Width(100));
             }
             else
-            {
+            {/*
                 condition.NextDialogueIDIfFailed =
                   EditorGUILayout.TextField(
                       (condition.NextDialogueIDIfFailed == null) ?
                           "" : condition.NextDialogueIDIfFailed
-                      );
+                      );*/
+              condition.NextDialogueIfFailed =
+                    (Dialogue)EditorGUILayout.ObjectField("", condition.NextDialogueIfFailed, typeof(Dialogue), false, GUILayout.Width(100));
+
             }
         }
         EditorGUILayout.EndHorizontal();
@@ -139,9 +154,7 @@ public partial class DialogueEditor
         if (targetType == NodeType.Exit)
         {
             GUILayout.BeginHorizontal();
-            {
-                GUILayout.Label("[EXIT] to ");
-
+            {                
                 if (current is DialogueNode)
                 {
                     DrawExitField(current as DialogueNode);

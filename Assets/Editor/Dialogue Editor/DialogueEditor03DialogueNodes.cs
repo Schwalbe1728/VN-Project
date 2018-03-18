@@ -69,8 +69,6 @@ public partial class DialogueEditor
                 }
                 else
                 {
-                    bool nextIsExit = false;
-
                     GUILayout.BeginHorizontal();
                     {
                         GUILayout.Label("Next Node:");
@@ -79,17 +77,7 @@ public partial class DialogueEditor
                         NodeType nxtType;
                         currentNode.GetTarget(out nxt, out nxtType);
 
-                        nextIsExit = nxt == Dialogue.ExitDialogue;
-                        string nextString = (nextIsExit) ? "[EXIT]" : nxt.ToString();
-
-                        GUILayout.Label(nextString);
-
-                        if (!nextIsExit)
-                        {
-                            Rect focus =
-                                EditorInfo.Windows[RetrieveWindowIndex(nxtType, nxt)];
-                            DrawJumpToButton("Go To", focus, GUILayout.Width(50));
-                        }
+                        DrawTargetValue(currentNode, nxtType, nxt);
 
                         if (GUILayout.Button("Clear"))
                         {
@@ -99,11 +87,6 @@ public partial class DialogueEditor
                         }
                     }
                     GUILayout.EndHorizontal();
-
-                    if (nextIsExit)
-                    {
-                        DrawExitField(currentNode);
-                    }
                 }
             }
             else
@@ -131,7 +114,7 @@ public partial class DialogueEditor
 
                                 if (GUILayout.Button("Exits Dialogue"))
                                 {
-                                    nodeToNodeToAttach.Add(-1);
+                                    nodeToNodeToAttach.Add(Dialogue.ExitDialogue);
                                 }
                             }
                             GUILayout.EndHorizontal();                              

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ScrollViewContentScript : MonoBehaviour {
 
+    [SerializeField]
     private Dialogue DialogueShown;
     private DialogueOption[] currentOptions;
 
@@ -39,7 +40,25 @@ public class ScrollViewContentScript : MonoBehaviour {
 
         DialogueShown = scr;        
         //DialogueScr.RegisterToDialogueEndedEvent(SelectNextDialogue);
-        DialogueShown.StartDialogue();                
+        DialogueShown.StartDialogue();
+
+        DrawNode();              
+    }
+
+    public void OptionHasBeenChosen(DialogueOption optionChosen)
+    {
+        for(int i = 0; i < currentOptions.Length + 2; i++)
+        {
+            RemoveLogElement(1);
+        }
+
+        GameObject optionText = Instantiate(DialogueLogElementPrefab, this.transform);
+        optionText.GetComponent<DialogueLogElementScript>().SetCharName("Player:");
+        optionText.GetComponent<DialogueLogElementScript>().SetDialogueText(optionChosen.OptionText);
+
+        DialogueLog.Insert(0, optionText);
+        DialogueShown.Next(optionChosen);
+        DrawNode();
     }
    
     public void AlignLogElements()
@@ -52,13 +71,13 @@ public class ScrollViewContentScript : MonoBehaviour {
 
             while(DialogueLog.Count > temp)
             {
-                Destroy(DialogueLog[DialogueLog.Count - 1]);
-                DialogueLog.RemoveAt(DialogueLog.Count - 1);
+                RemoveLogElement(DialogueLog.Count - 1);
             }
         }
 
         Canvas.ForceUpdateCanvases();
-
+        
+        /*
         float sum = 0;
 
         float prevHeight = 0;
@@ -82,7 +101,14 @@ public class ScrollViewContentScript : MonoBehaviour {
 
         RectTransform tempLogArea = gameObject.GetComponent<RectTransform>();
         tempLogArea.offsetMax = 
-            new Vector2(tempLogArea.offsetMax.x, -Mathf.Min(startHeight - sum - prevHeight, 0) );        
+            new Vector2(tempLogArea.offsetMax.x, -Mathf.Min(startHeight - sum - prevHeight, 0) );
+        
+        */
+        
+        for(int i = 0; i < DialogueLog.Count; i++)
+        {
+            DialogueLog[i].transform.SetSiblingIndex(i);
+        }
     }
 
     void Awake()
@@ -93,8 +119,14 @@ public class ScrollViewContentScript : MonoBehaviour {
 
         if (DialogueShown != null)
         {
-            StartCoroutine("StartDialogue");
+            StartCoroutine(StartDialogue());
         }
+    }
+
+    void onDialogueEnded(Dialogue next)
+    {
+        DialogueShown = next;
+        SetDialogue(DialogueShown);
     }
 
     IEnumerator StartDialogue()
@@ -107,10 +139,70 @@ public class ScrollViewContentScript : MonoBehaviour {
         SetDialogue(DialogueShown);       
     }
 
-    private void AddSeparator()
+    private void DrawNode()
+    {
+        AddCurrentNodeText();
+
+        if (!DialogueShown.CurrentNode.ImmediateNode)
+        {
+            AddOptionsFromCurrentNode();
+            AddSeparator();
+            AlignLogElements();
+        }
+        else
+        {
+            DialogueShown.Next();
+            DrawNode();
+        }        
+    }
+
+    private void AddOptionsFromCurrentNode()
+    {
+        currentOptions = DialogueShown.CurrentNodeOptions;
+        int indexer = 0;
+
+        List<GameObject> options = new List<GameObject>();
+
+        foreach(DialogueOption option in currentOptions)
+        {
+            GameObject prefabCreated = Instantiate(OptionButtonPrefab, this.transform);
+            OptionButtonScript obs = prefabCreated.GetComponent<OptionButtonScript>();
+
+            obs.SetNumber(++indexer);
+
+            if(option.NextType == NodeType.Condition)
+            {
+                // opisać testy
+            }
+
+            obs.SetText(option.OptionText);
+            obs.SetOption(option);
+            options.Add(prefabCreated);
+
+            DialogueLog.Insert(indexer, prefabCreated);
+        }
+
+        AddSeparator(indexer + 1);
+    }
+
+    private void AddCurrentNodeText()
+    {
+        GameObject prefabCreated = Instantiate(DialogueLogElementPrefab, this.transform);
+        DialogueLogElementScript dles = prefabCreated.GetComponent<DialogueLogElementScript>();
+
+        dles.SetDialogueText(DialogueShown.CurrentNode.NodeText);
+        DialogueLog.Insert(0, prefabCreated);
+    }
+
+    private void AddSeparator(int atIndex = 1)
     {
         GameObject separatorObject = Instantiate(DialogueSeparatorPrefab, this.transform);
-        //DialogueLog.Insert(0, separatorObject);
-        DialogueLog.Add(separatorObject);
-    }              
+        DialogueLog.Insert(atIndex, separatorObject);
+    }           
+    
+    private void RemoveLogElement(int index)
+    {
+        Destroy(DialogueLog[index], 0f);
+        DialogueLog.RemoveAt(index);
+    }   
 }

@@ -14,17 +14,27 @@ public static class StatsRuleSet
 {
     private static float healPercentPerHour = 0.02f;
 
-    public static bool TestRNG(CharacterInfoScript charInfo, CharacterStat statToTest, int modificator)
+    public static bool TestRNG(CharacterInfoScript charInfo, CharacterStat statToTest, int modificator, CharacterSkills skill)
     {
         int diceResult = UnityEngine.Random.Range(1, 100);
+        bool result = false;
+        bool crit = false;
 
-        if (diceResult <= 5) return true;
-        if (diceResult >= 95) return false;
+        if (diceResult <= 5) { result = true; crit = true; }
+        if (diceResult >= 95) { result = false; crit = true; }
 
-        int baseToPass = 5 * (charInfo.GetStat(statToTest) + modificator);        
-        int stressPenalty = charInfo.StressPenalty;
+        if (!crit)
+        {
+            int baseToPass = 5 * (charInfo.GetStat(statToTest) + modificator);
+            int stressPenalty = charInfo.StressPenalty;
+            int skillBonus = (/* posiada skill */ false) ? 0 : 20;
 
-        return diceResult <= (baseToPass - stressPenalty);
+            result = diceResult <= (baseToPass + skillBonus - stressPenalty);
+        }
+
+        Debug.Log("Rand Value: " + diceResult + ", result: " + result);
+
+        return result;
     }
 
     public static int StringToStatValue(string statString, CharacterInfoScript charInfo)
