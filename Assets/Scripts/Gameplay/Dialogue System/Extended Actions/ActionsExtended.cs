@@ -59,6 +59,15 @@ public partial class DialogueAction
     public TakeItemAction TakeItem { get { return takeItem; } }
     #endregion
 
+    #region Use Item
+    [SerializeField]
+    private bool useItemSet;
+    [SerializeField]
+    private UseItemAction useItem;
+    public bool UseItemSet { get { return useItemSet; } set { useItemSet = value; } }
+    public UseItemAction UseItem { get { return useItem; } }
+    #endregion
+
     public override void DoAction()
     {
         if (hurtPlayerSet) hurtPlayer.DoAction();
@@ -67,6 +76,7 @@ public partial class DialogueAction
         if (changeAmbienceSet) changeAmbience.DoAction();
         if (giveItemSet) giveItem.DoAction();
         if (takeItemSet) takeItem.DoAction();
+        if (useItemSet) useItem.DoAction();
     }
 
     public void SetHurtPlayerAction(int damage)
@@ -105,23 +115,34 @@ public partial class DialogueAction
 
     public void ClearChangeAmbienceAction() { changeAmbienceSet = false; }
 
-    public void SetGiveItemAction(/*EquipmentItem item*/)
+    public void SetGiveItemAction(ItemScript item, int quantity)
     {
         giveItem = new GiveItemAction();
-        //giveItem.Item = item;
+        giveItem.Item = item;
+        giveItem.Quantity = quantity;
         giveItemSet = true;
     }
 
     public void ClearGiveItemAction() { GiveItemSet = false; }
 
-    public void SetTakeItemAction(/*EquipmentItem item*/)
+    public void SetTakeItemAction(ItemScript item, int quantity)
     {
         takeItem = new TakeItemAction();
-        //TakeItem.Item = item;
+        takeItem.Item = item;
+        takeItem.Quantity = quantity;
         takeItemSet = true;
     }
 
     public void ClearTakeItemAction() { TakeItemSet = false; }
+
+    public void SetUseItemAction(ItemScript item)
+    {
+        useItem = new UseItemAction();
+        useItem.Item = item;
+        useItemSet = true;
+    }
+
+    public void ClearUseItemAction() { UseItemSet = false; }
 }
 
 [System.Serializable]
@@ -179,12 +200,14 @@ public class ChangeAmbienceAction : ChangeAudioAction
 #region Equipment Changes
 public abstract class EquipmentChangeAction : DialogueActionBase
 {
-    //public EquipmentItem Item;
+    public ItemScript Item;
 }
 
 [System.Serializable]
 public class GiveItemAction : EquipmentChangeAction
 {
+    public int Quantity;
+
     public override void DoAction()
     {
         base.DoAction();
@@ -194,9 +217,20 @@ public class GiveItemAction : EquipmentChangeAction
 [System.Serializable]
 public class TakeItemAction : EquipmentChangeAction
 {
+    public int Quantity;
+
     public override void DoAction()
     {
         base.DoAction();
+    }
+}
+
+[System.Serializable]
+public class UseItemAction : EquipmentChangeAction
+{
+    public override void DoAction()
+    {
+        Item.Use();
     }
 }
 

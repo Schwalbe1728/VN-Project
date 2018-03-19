@@ -22,6 +22,11 @@ public class ItemCustomInspector : UnityEditor.Editor
             save |= DrawPropertiesOfWeapon();
         }
 
+        if(selected.IsUsable)
+        {
+            save |= DrawPropertiesOfUsable(selected);
+        }
+
         if(selected.IsEdible)
         {
             save |= DrawPropertiesOfEdible();
@@ -102,10 +107,20 @@ public class ItemCustomInspector : UnityEditor.Editor
     {
         bool result = false;
 
-        result |= SerializedIntProperty("timeConsumed", "Consumption Time", true);
         result |= SerializedIntProperty("vitalityHealed", "Vitality Heal", false);
         result |= SerializedIntProperty("sanityHealed", "Sanity Heal", false);
 
+        return result;
+    }
+
+    private bool DrawPropertiesOfUsable(ItemScript item)
+    {
+        bool result = false;
+
+        result |= SerializedIntProperty("timeConsumed", "Consumption Time", true);
+
+        EditorGUILayout.LabelField("Min Time Consumed", item.TimeConsumedMin.ToString() + " seconds");
+        EditorGUILayout.LabelField("Max Time Consumed", item.TimeConsumedMax.ToString() + " seconds" );
 
         return result;
     }

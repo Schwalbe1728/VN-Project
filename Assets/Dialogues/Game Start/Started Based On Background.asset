@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858873df6999844b3efb9ec26e4bab, type: 3}
+  m_Name: Started Based On Background
+  m_EditorClassIdentifier: 
+  startID: 0
+  startType: 3
+  currentNodeID: 0
+  Options: []
+  Nodes: []
+  Conditions:
+  - conditionID: 0
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 1
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: ea5de3775686eed44b3dd20c0ab4a676, type: 2}
+      Required: 1
+  - conditionID: 1
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 2
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: ecca980dae3d0a24580d452e2663a3ed, type: 2}
+      Required: 1
+  - conditionID: 2
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 3
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 1d461bb64798f404a9c1be5804beb952, type: 2}
+      Required: 1
+  - conditionID: 3
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 4
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 00ed8ebb6279b314c95573d6f298799a, type: 2}
+      Required: 1
+  - conditionID: 4
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 5
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 4b152d822fa2e6044a819e35138e391a, type: 2}
+      Required: 1
+  - conditionID: 5
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 6
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 090560f1969236147be07a9c41802ef4, type: 2}
+      Required: 1
+  - conditionID: 6
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 7
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 711620362e30f6f42a7b3dede496c432, type: 2}
+      Required: 1
+  - conditionID: 7
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: 8
+    targetTypeIfFailed: 3
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 339d8bde75c0f6446bb5f77a2505a917, type: 2}
+      Required: 1
+  - conditionID: 8
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 2
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 0
+    playerHasItemCondition:
+      IsRequired: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 11400000, guid: 7998c4481abfc564baa3b578c635d041, type: 2}
+      Required: 1
+  editorInfo:
+    Windows:
+    - serializedVersion: 2
+      x: 65
+      y: 52
+      width: 300
+      height: 183
+    - serializedVersion: 2
+      x: 89
+      y: 266
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 176
+      y: 534
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 322
+      y: 795
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 453
+      y: 1073
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 593
+      y: 1333
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 773
+      y: 1641
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 914
+      y: 1909
+      width: 300
+      height: 197
+    - serializedVersion: 2
+      x: 1035
+      y: 2173
+      width: 278
+      height: 197
+    WindowTypes: 030000000300000003000000030000000300000003000000030000000300000003000000
+    NodeTypesIDs: 000000000100000002000000030000000400000005000000060000000700000008000000
+    OptionsIndexes: 
+    NodesIndexes: 
+    ConditionsIndexes: 000000000100000002000000030000000400000005000000060000000700000008000000
+    Nodes: 0
+    Options: 0
+    Conditions: 9

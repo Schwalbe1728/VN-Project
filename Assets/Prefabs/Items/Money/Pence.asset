@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd7de8aeaf424c04a829aa76ea8764d2, type: 3}
-  m_Name: New Item
+  m_Name: Pence
   m_EditorClassIdentifier: 
-  name: Deed To The Mansion
-  value: 15000
-  type: 5
+  name: Pence
+  value: 4
+  type: 4
   bonusDamageMin: 0
   bonusDamageMax: 0
-  timeConsumed: 0
   vitalityHealed: 0
   sanityHealed: 0
+  timeConsumed: 0

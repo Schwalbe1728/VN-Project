@@ -527,6 +527,14 @@ public partial class DialogueEditor
                     save |= DrawTakeItemInterior(currentAction);
                 }
 
+                currentAction.UseItemSet =
+                    EditorGUILayout.ToggleLeft("Use Item", currentAction.UseItemSet);
+
+                if(currentAction.UseItemSet)
+                {
+                    save |= DrawUseItemInterior(currentAction);
+                }
+
             }
             EditorGUILayout.EndVertical();
         }

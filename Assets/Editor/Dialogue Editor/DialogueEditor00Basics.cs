@@ -106,15 +106,23 @@ public partial class DialogueEditor : EditorWindow
             Config = new EditorConfigurationData();
         }
 
-        GUILayout.BeginArea(new Rect(5, 5, position.width - 10, 20));
+        int margins = 5;
+        int editorMenuHeight = 40;
+        int debugAreaHeight = 25;
+
+        GUILayout.BeginArea(new Rect(margins, margins, position.width - 2 * margins, editorMenuHeight));
         {
             DrawEditorMenu();
         }
         GUILayout.EndArea();
 
-        DrawDebug();
+        DrawDebug(debugAreaHeight, margins);
 
-        GUILayout.BeginArea(new Rect(5, 30, position.width - 10, position.height - 35 - 20), Config.EditorAreaBackgroundStyle);
+        GUILayout.BeginArea(
+            new Rect(
+                margins, editorMenuHeight + 2 * margins, 
+                position.width - 2 * margins, position.height - (debugAreaHeight + 2 * margins) - editorMenuHeight), 
+            Config.EditorAreaBackgroundStyle);
         {
             DrawEditorArea();
         }

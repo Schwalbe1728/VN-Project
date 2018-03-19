@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Equipment Item")]
 public class ItemScript : ScriptableObject
-{
+{    
     [SerializeField]
     private new string name;
     [SerializeField]    
@@ -37,20 +37,37 @@ public class ItemScript : ScriptableObject
         get { return IsWeapon ? Random.Range(bonusDamageMin, bonusDamageMax + 1) : 0; }
     }
 
+    public int MinDamage { get { return IsWeapon ? bonusDamageMin : 0; } }
+    public int MaxDamage { get { return IsWeapon ? bonusDamageMax : 0; } }
+
     #endregion
 
     #region Edibles Specific
-    public bool IsEdible { get { return EqType == EquipmentType.Consumables; } }
-
-    [SerializeField]
-    private int timeConsumed;
+    public bool IsEdible { get { return EqType == EquipmentType.Consumables; } }    
 
     [SerializeField]
     private int vitalityHealed;
 
     [SerializeField]
-    private int sanityHealed;
+    private int sanityHealed;    
+    
     #endregion
+    
+    private static float useTimeVariance = 0.2f;
+    [SerializeField]
+    private int timeConsumed;
+
+    public bool IsUsable { get { return IsEdible || IsWeapon; } }
+
+    public int TimeConsumedMin { get { return IsUsable ? Mathf.RoundToInt(timeConsumed * (1.0f - useTimeVariance)) : 0; } }
+    public int TimeConsumedMax { get { return IsUsable ? Mathf.RoundToInt(timeConsumed * (1.0f + useTimeVariance)) : 0; } }
+    private int TimeConsumed { get { return Random.Range(TimeConsumedMin, TimeConsumedMax + 1); } }
+
+    public void Use()
+    {
+        TimeManagerScript.AdvanceTime(TimeConsumed);
+
+    }
 }
 
 public enum EquipmentType

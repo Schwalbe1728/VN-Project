@@ -110,17 +110,21 @@ public partial class DialogueEditor
     {
         bool result = false;
 
-        //EquipmentItem item;
+        ItemScript item;
+        int quantity;
 
         EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
         {
-            GUILayout.Label("TODO: EquipmentItem : ScriptableObject");
+            //GUILayout.Label("TODO: EquipmentItem : ScriptableObject");
+            result |= DrawGenericAssetField<ItemScript>(currentAction.GiveItem.Item, 90, "Item To Give", out item);
+            result |= DrawGenericIntField(currentAction.GiveItem.Quantity, 90, "Quantity", out quantity);
+
         }
         EditorGUILayout.EndVertical();
 
         if (result || currentAction.GiveItem == null)
         {
-            currentAction.SetGiveItemAction();
+            currentAction.SetGiveItemAction(item, quantity);
             Debug.Log("Set Give Item");
         }
 
@@ -131,18 +135,42 @@ public partial class DialogueEditor
     {
         bool result = false;
 
-        //EquipmentItem item;
+        ItemScript item;
+        int quantity;
 
         EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
         {
-            GUILayout.Label("TODO: EquipmentItem : ScriptableObject");
+            //GUILayout.Label("TODO: EquipmentItem : ScriptableObject");
+            result |= DrawGenericAssetField<ItemScript>(currentAction.TakeItem.Item, 90, "Item To Take", out item);
+            result |= DrawGenericIntField(currentAction.GiveItem.Quantity, 90, "Quantity", out quantity);
         }
         EditorGUILayout.EndVertical();
 
         if (result || currentAction.TakeItem == null)
         {
-            currentAction.SetTakeItemAction();
+            currentAction.SetTakeItemAction(item, quantity);
             Debug.Log("Set Take Item");
+        }
+
+        return result;
+    }
+
+    bool DrawUseItemInterior(DialogueAction currentAction)
+    {
+        bool result = false;
+
+        ItemScript item;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericAssetField<ItemScript>(currentAction.UseItem.Item, 90, "Item To Use", out item);
+        }
+        EditorGUILayout.EndVertical();
+
+        if(result || currentAction.UseItem == null)
+        {
+            currentAction.SetUseItemAction(item);
+            Debug.Log("Set Use Item");
         }
 
         return result;

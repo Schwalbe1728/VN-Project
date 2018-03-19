@@ -104,6 +104,24 @@ public partial class DialogueEditor
         return result;
     }
 
+    bool DrawGenericAssetField<T>(T prevObject, int labelWidth, string labelText, out T newObject) where T: UnityEngine.Object
+    {
+        bool result = false;
+
+        GUILayout.BeginHorizontal();
+        {
+            newObject =
+                (T)EditorGUILayout.ObjectField(labelText, prevObject, typeof(T), false);
+
+            result |=
+                (prevObject != null && !prevObject.Equals(newObject)) ||
+                (newObject != null && !newObject.Equals(prevObject));
+        }
+        GUILayout.EndHorizontal();
+
+        return result;
+    }
+
     bool DrawCharacterAttributeField(CharacterStat prevStat, int labelWidth, out CharacterStat stat)
     {
         bool result = false;

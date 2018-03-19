@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public partial class DialogueEditor
 {
     void DrawEditorMenu()
     {
+        EditorGUILayout.LabelField("Dialogue File: ", EditedDialogue.Name);
+
         GUILayout.BeginHorizontal();
         {
             if (GUILayout.Button("Create Dialogue Node"))

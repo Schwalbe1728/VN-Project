@@ -29,7 +29,7 @@ public class DayNightCycleFilter : MonoBehaviour
 
         for(int i = 0; i < HourMarkers.Length; i++)
         {
-            HourMarkersInSeconds[i] = TimeManager.ToSeconds(0, HourMarkers[i], 0, 0);
+            HourMarkersInSeconds[i] = TimeManagerScript.ToSeconds(0, HourMarkers[i], 0, 0);
         }
     }
 
@@ -41,7 +41,7 @@ public class DayNightCycleFilter : MonoBehaviour
 
         TimeManager.GetHour(out sec, out min, out hr);
 
-        Color PanelColor = BlendColor( TimeManager.ToSeconds(TimeManager.Day, hr, min, sec), TimeManager.Day );
+        Color PanelColor = BlendColor( TimeManagerScript.ToSeconds(TimeManager.Day, hr, min, sec), TimeManager.Day );
 
         Panel.color = PanelColor;
     }
@@ -53,7 +53,7 @@ public class DayNightCycleFilter : MonoBehaviour
 
         int day = days;
 
-        while( currentSeconds > TimeManager.ToSeconds(day, HourMarkers[finishIndex], 0, 0) )
+        while( currentSeconds > TimeManagerScript.ToSeconds(day, HourMarkers[finishIndex], 0, 0) )
         {
             startIndex++;
             finishIndex++;
@@ -64,8 +64,8 @@ public class DayNightCycleFilter : MonoBehaviour
             if (finishIndex == 0) day++;
         }
 
-        int startSecs = TimeManager.ToSeconds(day + ((finishIndex == 0) ? -1 : 0), HourMarkers[startIndex], 0, 0);
-        int finishSecs = TimeManager.ToSeconds(day, HourMarkers[finishIndex], 0, 0);
+        int startSecs = TimeManagerScript.ToSeconds(day + ((finishIndex == 0) ? -1 : 0), HourMarkers[startIndex], 0, 0);
+        int finishSecs = TimeManagerScript.ToSeconds(day, HourMarkers[finishIndex], 0, 0);
 
         int delta = finishSecs - startSecs;
         float t = ((float)(currentSeconds - startSecs)) / delta;

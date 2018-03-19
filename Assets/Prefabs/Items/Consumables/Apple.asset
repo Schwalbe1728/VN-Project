@@ -16,6 +16,6 @@ MonoBehaviour:
   type: 3
   bonusDamageMin: 0
   bonusDamageMax: 0
-  timeConsumed: 30
   vitalityHealed: 3
   sanityHealed: 0
+  timeConsumed: 30

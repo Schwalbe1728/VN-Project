@@ -18,7 +18,7 @@ public class TimeManagerScript : MonoBehaviour
     private float GameSecondsPerRealTimeSecond;
     private float gameSecsPerRealSecondBackup;
 
-    private static TimeManagerScript ManagerScriptInstance;
+    private static TimeManagerScript ManagerScriptInstance;    
 
     [SerializeField]
     private int Seconds;
@@ -34,9 +34,12 @@ public class TimeManagerScript : MonoBehaviour
 
     private Coroutine TimeFlowCoroutine;
 
-    public void AdvanceTime(int seconds, int minutes = 0, int hours = 0)
+    private bool correctInstance = false;
+    public bool CorrectInstance { get { return correctInstance; } }
+
+    public static void AdvanceTime(int seconds, int minutes = 0, int hours = 0)
     {        
-        AddSecond(ToSeconds(0, hours, minutes, seconds));
+        ManagerScriptInstance.AddSecond(ToSeconds(0, hours, minutes, seconds));
     }
 
     public void GetHour(out int seconds, out int minutes, out int hours)
@@ -57,7 +60,7 @@ public class TimeManagerScript : MonoBehaviour
                 );
     }    
 
-    public int ToSeconds(int days, int hours, int minutes, int seconds)
+    public static int ToSeconds(int days, int hours, int minutes, int seconds)
     {
         return
             seconds +
@@ -87,6 +90,8 @@ public class TimeManagerScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        this.correctInstance = true;
+
         TimeFlowCoroutine = StartCoroutine(CountTime());
         OnMinutePassed += WriteDate;
 

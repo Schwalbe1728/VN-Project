@@ -630,6 +630,7 @@ public static class CharacterStatExtension
     }
 }
 
+[Serializable]
 public class CharacterInfo
 {
     public string CharName { get { return charName; } }
@@ -673,6 +674,7 @@ public class CharacterInfo
         }
     }       
 
+    [SerializeField]
     private string charName;
 
     private CharStatsToValueDictionary stats;   //  Final Stats    
