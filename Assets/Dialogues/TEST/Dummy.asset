@@ -9,64 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76858873df6999844b3efb9ec26e4bab, type: 3}
-  m_Name: Test Success
+  m_Name: Dummy
   m_EditorClassIdentifier: 
   startID: 0
-  startType: 1
+  startType: 0
   currentNodeID: 0
   Options:
   - optionID: 0
-    nextID: 0
-    nextType: 3
-    alreadyVisited: 0
-    entryCondition:
-      conditionID: 0
-      targetIDIfPassed: -1
-      targetTypeIfPassed: 0
-      targetIDIfFailed: -1
-      targetTypeIfFailed: 0
-      nextDialogueIfPassed: {fileID: 0}
-      nextDialogueIfFailed: {fileID: 0}
-      conditionTypeSet: 0
-      attributeCheckCondition:
-        Attribute: 0
-        ValueChecked: 0
-        InequalityType: 0
-      attributeTestCondition:
-        Attribute: 0
-        AttributeMod: 0
-        Skill: 0
-      skillPossessedCondition:
-        SkillToCheck: 0
-        IsNeeded: 0
-      playerHasItemCondition:
-        Item: {fileID: 0}
-        Quantity: 0
-        IsRequired: 0
-      playerHasMoneyCondition:
-        AbstractValue: 0
-      storyStateHappenedCondition:
-        PlotName: 
-        StateName: 
-        HasHappened: 0
-      worldDateCondition:
-        Date:
-          ShowInFoldout: 0
-        TimeOrientation: 0
-      worldDateRangeCondition:
-        Start:
-          ShowInFoldout: 0
-        Finish:
-          ShowInFoldout: 0
-        HoursOnly: 0
-      backgroundRequiredCondition:
-        Background: {fileID: 0}
-        Required: 0
-    entryConditionSet: 0
-    OptionText: Juhuu!
-    VisitOnce: 0
-    nextDialogue: {fileID: 0}
-  - optionID: 1
     nextID: -1
     nextType: 0
     alreadyVisited: 0
@@ -89,11 +38,11 @@ MonoBehaviour:
         Skill: 0
       skillPossessedCondition:
         SkillToCheck: 0
-        IsNeeded: 0
+        IsNeeded: 1
       playerHasItemCondition:
         Item: {fileID: 0}
         Quantity: 0
-        IsRequired: 0
+        IsRequired: 1
       playerHasMoneyCondition:
         AbstractValue: 0
       storyStateHappenedCondition:
@@ -112,9 +61,9 @@ MonoBehaviour:
         HoursOnly: 0
       backgroundRequiredCondition:
         Background: {fileID: 0}
-        Required: 0
+        Required: 1
     entryConditionSet: 0
-    OptionText: '[shrugs]'
+    OptionText: "Przyk\u0142adowa Opcja"
     VisitOnce: 0
     nextDialogue: {fileID: 0}
   Nodes:
@@ -122,9 +71,9 @@ MonoBehaviour:
     isImmediateNode: 0
     nextID: -1
     nextType: 0
-    NodeText: Test Zdany!
+    NodeText: 
     customID: 
-    optionsIndexesList: 0000000001000000
+    optionsIndexesList: 00000000
     nextDialogue: {fileID: 0}
     action:
       hurtPlayerSet: 0
@@ -150,22 +99,21 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
-    actionSet: 0
+    actionSet: 1
     secondsConsumed: 0
   Conditions:
   - conditionID: 0
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
-    targetIDIfFailed: 0
-    targetTypeIfFailed: 1
-    nextDialogueIfPassed: {fileID: 11400000, guid: 8dfd40f5ac567ea4a8cfc44491b86cef,
-      type: 2}
+    targetIDIfPassed: 1
+    targetTypeIfPassed: 3
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIfPassed: {fileID: 0}
     nextDialogueIfFailed: {fileID: 0}
-    conditionTypeSet: 0
+    conditionTypeSet: 5
     attributeCheckCondition:
       Attribute: 0
       ValueChecked: 10
-      InequalityType: 3
+      InequalityType: 2
     attributeTestCondition:
       Attribute: 0
       AttributeMod: 0
@@ -196,33 +144,75 @@ MonoBehaviour:
     backgroundRequiredCondition:
       Background: {fileID: 0}
       Required: 0
+  - conditionID: 1
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 0
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 1
+    playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
+      IsRequired: 1
+    playerHasMoneyCondition:
+      AbstractValue: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 0}
+      Required: 1
   editorInfo:
     Windows:
     - serializedVersion: 2
-      x: 70
-      y: 16
-      width: 226
-      height: 208
-    - serializedVersion: 2
-      x: 135
-      y: 287
-      width: 276
-      height: 172
-    - serializedVersion: 2
-      x: 618
-      y: 2
-      width: 276
-      height: 172
-    - serializedVersion: 2
-      x: 494
-      y: 277
+      x: 84
+      y: 306
       width: 300
-      height: 201
-    WindowTypes: 01000000020000000200000003000000
-    NodeTypesIDs: 00000000000000000100000000000000
-    OptionsIndexes: 0100000002000000
-    NodesIndexes: 00000000
-    ConditionsIndexes: 03000000
+      height: 238
+    - serializedVersion: 2
+      x: 353
+      y: 38
+      width: 276
+      height: 172
+    - serializedVersion: 2
+      x: 17
+      y: 16
+      width: 228
+      height: 256
+    - serializedVersion: 2
+      x: 450
+      y: 305
+      width: 300
+      height: 218
+    WindowTypes: 03000000020000000100000003000000
+    NodeTypesIDs: 00000000000000000000000001000000
+    OptionsIndexes: 01000000
+    NodesIndexes: 02000000
+    ConditionsIndexes: 0000000003000000
     Nodes: 1
-    Options: 2
-    Conditions: 1
+    Options: 1
+    Conditions: 2

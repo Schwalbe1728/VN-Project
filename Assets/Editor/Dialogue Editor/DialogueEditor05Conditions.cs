@@ -81,6 +81,8 @@ public partial class DialogueEditor
         DrawConnectToConditionButtons(typeID);
         DrawSetStartingPointButton(id);
 
+        EditorGUILayout.LabelField("Entry Condition Legal?", (ValidateConditionChain(typeID)) ? "Yes" : "Prohibited", EditorStyles.boldLabel);
+
         GUILayout.BeginHorizontal();
         {
             GUILayout.Label("Target If Success: ", GUILayout.Width(110));
@@ -131,7 +133,7 @@ public partial class DialogueEditor
 
         switch (newType)
         {
-            case ConditionTypes.AttributeCheck:                
+            case ConditionTypes.AttributeCheck:
                 save |= DrawAttributeCheckInterior(currentCondition, prevType != newType);
                 break;
 
@@ -145,6 +147,10 @@ public partial class DialogueEditor
 
             case ConditionTypes.PlayerHasItem:
                 save |= DrawPlayerHasItemInterior(currentCondition, prevType != newType);
+                break;
+
+            case ConditionTypes.PlayerHasMoney:
+                save |= DrawPlayerHasMoneyInterior(currentCondition, prevType != newType);
                 break;
 
             case ConditionTypes.StoryStateHappened:

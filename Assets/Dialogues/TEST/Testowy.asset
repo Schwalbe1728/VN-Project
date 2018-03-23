@@ -179,7 +179,16 @@ MonoBehaviour:
       changeAmbience:
         Clip: {fileID: 0}
       giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
       takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
     actionSet: 0
     secondsConsumed: 0
   - nodeID: 1
@@ -204,7 +213,16 @@ MonoBehaviour:
       changeAmbience:
         Clip: {fileID: 0}
       giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
       takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   - nodeID: 2
@@ -229,7 +247,16 @@ MonoBehaviour:
       changeAmbience:
         Clip: {fileID: 0}
       giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
       takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   Conditions:

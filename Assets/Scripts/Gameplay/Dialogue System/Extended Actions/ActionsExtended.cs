@@ -210,7 +210,10 @@ public class GiveItemAction : EquipmentChangeAction
 
     public override void DoAction()
     {
-        base.DoAction();
+        PlayerEquipmentScript equipment = 
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        equipment.AddItems(Item, Quantity);
     }
 }
 
@@ -221,7 +224,10 @@ public class TakeItemAction : EquipmentChangeAction
 
     public override void DoAction()
     {
-        base.DoAction();
+        PlayerEquipmentScript equipment =
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        equipment.TakeItem(Item, Quantity, true);
     }
 }
 
@@ -230,7 +236,10 @@ public class UseItemAction : EquipmentChangeAction
 {
     public override void DoAction()
     {
-        Item.Use();
+        PlayerEquipmentScript equipment =
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        equipment.UseItem(Item);
     }
 }
 

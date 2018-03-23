@@ -27,7 +27,7 @@ public class ItemCustomInspector : UnityEditor.Editor
             save |= DrawPropertiesOfUsable(selected);
         }
 
-        if(selected.IsEdible)
+        if(selected.IsConsumable)
         {
             save |= DrawPropertiesOfEdible();
         }

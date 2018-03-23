@@ -24,16 +24,34 @@ public partial class DialogueEditor
         return result;
     }
 
-    bool DrawGenericIntField(int prevInt, int labelWidth, string labelText, out int newInt)
+    bool DrawGenericIntField(int prevInt, int labelWidth, string labelText, out int newInt, int minimum = int.MinValue)
     {
         bool result = false;
 
         GUILayout.BeginHorizontal();
         {
-            EditorGUILayout.PrefixLabel(labelText/*, GUILayout.Width(labelWidth)*/);
-            newInt = EditorGUILayout.IntField(prevInt);
+            //EditorGUILayout.PrefixLabel(labelText/*, GUILayout.Width(labelWidth)*/);
+            newInt = EditorGUILayout.IntField(labelText, prevInt);
+            if (newInt < minimum) newInt = minimum;
 
             result |= prevInt != newInt;
+        }
+        GUILayout.EndHorizontal();
+
+        return result;
+    }
+
+    bool DrawGenericFloatField(float prevFloat, int labelWidth, string labelText, out float newFloat, float minimum = float.MinValue)
+    {
+        bool result = false;
+
+        GUILayout.BeginHorizontal();
+        {
+            //EditorGUILayout.PrefixLabel(labelText/*, GUILayout.Width(labelWidth)*/);
+            newFloat = EditorGUILayout.FloatField(labelText, prevFloat);
+            if (newFloat < minimum) newFloat = minimum;
+
+            result |= prevFloat != newFloat;
         }
         GUILayout.EndHorizontal();
 
@@ -230,7 +248,7 @@ public partial class DialogueEditor
 
         CharacterStat stat;
         int value;
-        InequalityTypes inequality;
+        InequalityTypes inequality;        
 
         EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
         {
@@ -306,23 +324,62 @@ public partial class DialogueEditor
         bool result = false;
         int labelWidth = 90;
 
-        //Item
+        ItemScript item;
+        int quantity;
         bool weWantItem;
 
         EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
         {
-            //Item setting
+            result |= DrawGenericAssetField<ItemScript>(currentCondition.PlayerHasItem.Item, labelWidth, "Item", out item);
+            result |= DrawGenericIntField(currentCondition.PlayerHasItem.Quantity, labelWidth, "Quantity", out quantity, 0);
             result |= DrawGenericBoolField(currentCondition.PlayerHasItem.IsRequired, labelWidth, "Wanted?", out weWantItem);
         }
         EditorGUILayout.EndVertical();
 
         if (typeChangedToThis || result)
         {
-            currentCondition.SetPlayerHasItemCondition(weWantItem);
+            currentCondition.SetPlayerHasItemCondition(item, quantity, weWantItem);
             Debug.Log("Zmiana playerHasItem");
         }
 
         return typeChangedToThis || result;
+    }
+
+    bool DrawPlayerHasMoneyInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        int abstractValue;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericIntField(currentCondition.PlayerHasMoney.AbstractValue, labelWidth, "Abstract Value", out abstractValue, 0);
+
+            EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+            {
+                int pounds;
+                int shillings;
+                float pences;
+
+                ItemExtension.ToCoins(abstractValue, out pounds, out shillings, out pences);
+
+                result |= DrawGenericIntField(pounds, labelWidth, "Pounds", out pounds, 0);
+                result |= DrawGenericIntField(shillings, labelWidth, "Shillings", out shillings, 0);
+                result |= DrawGenericFloatField(pences, labelWidth, "Pences", out pences, 0);
+
+                abstractValue = ItemExtension.FromCoins(pounds, shillings, pences);
+            }
+            EditorGUILayout.EndVertical();
+        }
+        EditorGUILayout.EndVertical();
+
+        if(result || typeChangedToThis)
+        {
+            currentCondition.SetPlayerHasMoneyCondition(abstractValue);
+        }
+
+        return result;
     }
 
     bool DrawStoryStateHappenedInterior(ConditionNode currentCondition, bool typeChangedToThis)

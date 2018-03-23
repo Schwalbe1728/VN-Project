@@ -20,6 +20,9 @@ public partial class ConditionNode
     private PlayerHasItemCondition playerHasItemCondition;
 
     [SerializeField]
+    private PlayerHasMoneyCondition playerHasMoneyCondition;
+
+    [SerializeField]
     private StoryStateHappenedCondition storyStateHappenedCondition;
 
     [SerializeField]
@@ -33,14 +36,15 @@ public partial class ConditionNode
 
     public ConditionTypes ConditionType { get { return conditionTypeSet; } }
 
-    public AttributeCheckCondition AttributeCheck { get { return attributeCheckCondition; } }
-    public AttributeTestCondition AttributeTest { get { return attributeTestCondition; } }
-    public SkillPossessedCondition SkillPossessed { get { return skillPossessedCondition; } }
-    public PlayerHasItemCondition PlayerHasItem { get { return playerHasItemCondition; } }
-    public StoryStateHappenedCondition StoryStateHappened { get { return storyStateHappenedCondition; } }
-    public WorldDateCondition WorldDate { get { return worldDateCondition; } }
-    public WithinTimeRangeCondition WithinTimeRange { get { return worldDateRangeCondition; } }
-    public BackgroundRequiredCondition BackgroundRequired { get { return backgroundRequiredCondition; } }
+    public AttributeCheckCondition AttributeCheck { get { return (attributeCheckCondition != null)? attributeCheckCondition : new AttributeCheckCondition(); } }
+    public AttributeTestCondition AttributeTest { get { return (attributeTestCondition != null)? attributeTestCondition : new AttributeTestCondition(); } }
+    public SkillPossessedCondition SkillPossessed { get { return (skillPossessedCondition != null)? skillPossessedCondition : new SkillPossessedCondition(); } }
+    public PlayerHasItemCondition PlayerHasItem { get { return (playerHasItemCondition != null) ? playerHasItemCondition : new PlayerHasItemCondition() ; } }
+    public PlayerHasMoneyCondition PlayerHasMoney { get { return (playerHasMoneyCondition != null) ? playerHasMoneyCondition : new PlayerHasMoneyCondition(); } }
+    public StoryStateHappenedCondition StoryStateHappened { get { return (storyStateHappenedCondition != null)? storyStateHappenedCondition : new StoryStateHappenedCondition(); } }
+    public WorldDateCondition WorldDate { get { return (worldDateCondition != null)? worldDateCondition : new WorldDateCondition(); } }
+    public WithinTimeRangeCondition WithinTimeRange { get { return (worldDateRangeCondition != null) ? worldDateRangeCondition : new WithinTimeRangeCondition(); } }
+    public BackgroundRequiredCondition BackgroundRequired { get { return (backgroundRequiredCondition != null)? backgroundRequiredCondition : new BackgroundRequiredCondition(); } }
 
     public override bool ConditionTest()
     {
@@ -69,6 +73,9 @@ public partial class ConditionNode
 
             case ConditionTypes.BackgroundRequired:
                 return BackgroundRequired.ConditionTest();
+
+            case ConditionTypes.PlayerHasMoney:
+                return PlayerHasMoney.ConditionTest();
 
             default:
                 Debug.Log("Wtf, ConditionTest default");
@@ -114,7 +121,7 @@ public partial class ConditionNode
         skillPossessedCondition.IsNeeded = doWeWantTheSkill;
         skillPossessedCondition.SkillToCheck = skill;
     }
-    public void SetPlayerHasItemCondition(/*EquipmentItem item, */ bool isRequired)
+    public void SetPlayerHasItemCondition(ItemScript item, int quantity, bool isRequired)
     {
         conditionTypeSet = ConditionTypes.PlayerHasItem;
 
@@ -123,9 +130,23 @@ public partial class ConditionNode
             playerHasItemCondition = new PlayerHasItemCondition();
         }
 
-        //playerHasItemCondition.Item = item;
+        playerHasItemCondition.Item = item;
+        playerHasItemCondition.Quantity = quantity;
         playerHasItemCondition.IsRequired = isRequired;
     }
+
+    public void SetPlayerHasMoneyCondition(int abstractValueRequired)
+    {
+        conditionTypeSet = ConditionTypes.PlayerHasMoney;
+
+        if(playerHasMoneyCondition == null)
+        {
+            playerHasMoneyCondition = new PlayerHasMoneyCondition();
+        }
+
+        playerHasMoneyCondition.AbstractValue = abstractValueRequired;
+    }
+
     public void SetStoryStateHappenedCondition(string plotName, string stateName, bool hasHappened)
     {
         conditionTypeSet = ConditionTypes.StoryStateHappened;
@@ -227,7 +248,7 @@ public class AttributeTestCondition : ConditionNodeBase
 public class SkillPossessedCondition : ConditionNodeBase
 {
     public CharacterSkills SkillToCheck;
-    public bool IsNeeded;
+    public bool IsNeeded = true;
 
     public override bool ConditionTest()
     {
@@ -242,16 +263,37 @@ public class SkillPossessedCondition : ConditionNodeBase
     }
 }
 
-//TO FINISH
 [System.Serializable]
 public class PlayerHasItemCondition : ConditionNodeBase
 {
-    //public EquipmentItem Item;
-    public bool IsRequired;
+    public ItemScript Item;
+    public int Quantity;
+    public bool IsRequired = true;
 
     public override bool ConditionTest()
     {
-        return base.ConditionTest();
+        PlayerEquipmentScript equipment =
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        bool containsItems = equipment.HasItem(Item, Quantity);
+
+        return
+            (IsRequired) ?
+                containsItems : !containsItems;
+    }
+}
+
+[System.Serializable]
+public class PlayerHasMoneyCondition : ConditionNodeBase
+{
+    public int AbstractValue;
+
+    public override bool ConditionTest()
+    {
+        PlayerEquipmentScript equipment =
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        return equipment.AbstractMoneyValue >= AbstractValue;
     }
 }
 
@@ -332,7 +374,7 @@ public class WithinTimeRangeCondition : ConditionNodeBase
 public class BackgroundRequiredCondition : ConditionNodeBase
 {
     public BackgroundDefinition Background;
-    public bool Required;
+    public bool Required = true;
 
     public override bool ConditionTest()
     {

@@ -37,6 +37,7 @@ public enum ConditionTypes
     BackgroundRequired,
     SkillPossessed,
     PlayerHasItem,
+    PlayerHasMoney,
     StoryStateHappened,
     WorldDate,
     WithinTimeRange

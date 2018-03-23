@@ -189,6 +189,25 @@ public class Dialogue : ScriptableObject
         return result;
     }
 
+    public bool ConditionChainValidation(int startId)
+    {        
+        NodeType targetFailureType = Conditions[startId].FailureTargetType;
+        NodeType targetSuccessType = Conditions[startId].SuccessTargetType;
+
+        bool resultSuccess =
+            targetSuccessType == NodeType.Exit ||
+            (targetSuccessType == NodeType.Condition && 
+                ConditionChainValidation(Conditions[startId].SuccessTarget) )
+            ;
+        bool resultFailure = 
+            targetFailureType == NodeType.Exit ||
+            (targetFailureType == NodeType.Condition &&
+                ConditionChainValidation(Conditions[startId].FailureTarget))
+            ;
+
+        return resultSuccess && resultFailure;
+    }
+
     public void DeleteCondition(int nr)
     {
         if (Conditions != null && Conditions.Count < nr && Conditions.Count >= 0)

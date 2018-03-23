@@ -165,3 +165,76 @@ public class PossibleStateTransitionDictionary : SerializableDictionary<string, 
         }
     }
 }
+
+
+[Serializable]
+public class EquipmentItemToQuantity : SerializableDictionary<string, int>
+{
+    public static string ItemToDictionaryKey(ItemScript item) { return item.Name.ToLower(); }
+
+    public new int this[string key]
+    {
+        get
+        {
+            string lower = key.ToLower();
+
+            return
+                ContainsKey(lower) ?
+                    base[lower] : 0;
+        }
+
+        set
+        {
+            string lower = key.ToLower();
+
+            if(ContainsKey(lower))
+            {
+                if (value >= 0)
+                {
+                    base[lower] = value;
+                }
+                else
+                {
+                    base[lower] = 0;
+                }
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+    public int this[ItemScript key]
+    {
+        get
+        {
+            string lower = ItemToDictionaryKey(key);
+
+            return
+                ContainsKey(lower) ?
+                    base[lower] : 0;
+        }
+
+        set
+        {
+            string lower = ItemToDictionaryKey(key);
+
+            if (ContainsKey(lower))
+            {
+                if (value >= 0)
+                {
+                    base[lower] = value;
+                }
+                else
+                {
+                    base[lower] = 0;
+                }
+            }
+            else
+            {
+
+            }
+        }
+    }
+}

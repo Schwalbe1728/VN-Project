@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -462,8 +463,17 @@ public partial class DialogueEditor
         {
             if (conditionToEntryOption.Count == 2)
             {
-                MakeConditionNodeConnection(conditionToEntryOption[0], conditionToEntryOption[1], NodeType.Option, false);
-                save = true;
+                int to = conditionToEntryOption[0];
+
+                if (ValidateConditionChain(to))
+                {
+                    MakeConditionNodeConnection(conditionToEntryOption[0], conditionToEntryOption[1], NodeType.Option, false);
+                    save = true;
+                }
+                else
+                {
+                    conditionToEntryOption.Clear();
+                }
             }
         }
 
@@ -583,5 +593,14 @@ public partial class DialogueEditor
         {
             SaveChanges("Update Curves");
         }
+    }
+
+    private bool ValidateConditionChain(int conditionIndex)
+    {
+        bool result = EditedDialogue.ConditionChainValidation(conditionIndex);
+
+        if (!result) WriteDebug("WARNING! Attempted illegal connection!: Entry Conditions must lead to Exit or another Condition.");
+
+        return result;
     }
 }

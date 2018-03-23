@@ -43,21 +43,25 @@ public class ItemScript : ScriptableObject
     #endregion
 
     #region Edibles Specific
-    public bool IsEdible { get { return EqType == EquipmentType.Consumables; } }    
+    public bool IsConsumable { get { return EqType == EquipmentType.Consumables; } }    
 
     [SerializeField]
     private int vitalityHealed;
 
     [SerializeField]
-    private int sanityHealed;    
-    
+    private int sanityHealed;
+
     #endregion
-    
+
+    public bool IsQuestItem { get { return EqType == EquipmentType.Quest; } }
+    public bool IsMoney { get { return EqType == EquipmentType.Money; } }
+
+    #region Usables
     private static float useTimeVariance = 0.2f;
     [SerializeField]
     private int timeConsumed;
 
-    public bool IsUsable { get { return IsEdible || IsWeapon; } }
+    public bool IsUsable { get { return IsConsumable || IsWeapon; } }
 
     public int TimeConsumedMin { get { return IsUsable ? Mathf.RoundToInt(timeConsumed * (1.0f - useTimeVariance)) : 0; } }
     public int TimeConsumedMax { get { return IsUsable ? Mathf.RoundToInt(timeConsumed * (1.0f + useTimeVariance)) : 0; } }
@@ -68,6 +72,7 @@ public class ItemScript : ScriptableObject
         TimeManagerScript.AdvanceTime(TimeConsumed);
 
     }
+    #endregion
 }
 
 public enum EquipmentType
@@ -171,6 +176,18 @@ public static class ItemExtension
         value -= shillings * PenceToShilling * AbstractToPence;
 
         pences = ToPence(value);
+    }
+
+    public static int FromCoins(int pounds, int shillings, float pences)
+    {
+        return
+            Mathf.RoundToInt(
+                AbstractToPence * 
+                    (pences + PenceToShilling *
+                            (shillings + ShillingToPound * pounds)
+                        )
+
+                );
     }
 
     private static float ToPence(float val)

@@ -358,7 +358,7 @@ public partial class DialogueEditor
             }
             else
             {
-                if (dialNode.OptionsAttached != null)
+                if (deletedType == NodeType.Option && dialNode.OptionsAttached != null)
                 {
                     List<int> optionsAttached = new List<int>(dialNode.OptionsAttached);
                     optionsAttached.Remove(idOfType);
