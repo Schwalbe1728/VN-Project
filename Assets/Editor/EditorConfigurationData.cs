@@ -36,6 +36,9 @@ public class EditorConfigurationData
     public GUIStyle FoldoutInteriorStyle = null;
     public GUIStyle WrappedLabelStyle = null;
 
+    public GUIStyle InteriorLighterBackgroundStyle = null;
+    public GUIStyle InteriorDarkerBackgroundStyle = null;
+
     public GUIStyle ConditionNodeStyle = null;
     public GUIStyle DialogueNodeStyle = null;
     public GUIStyle DialogueOptionStyle = null;
@@ -229,7 +232,7 @@ public class EditorConfigurationData
     }
 
     public void InitStyles(bool forced = false)
-    {
+    {        
         if (forced || BoundingBoxStyle == null)
         {
             BoundingBoxStyle = new GUIStyle();
@@ -257,13 +260,29 @@ public class EditorConfigurationData
             FoldoutInteriorStyle.stretchWidth = false;
         }
 
-        if (forced || WrappedLabelStyle == null)
+        if(forced || InteriorLighterBackgroundStyle == null)
         {
-            WrappedLabelStyle = new GUIStyle();
+            InteriorLighterBackgroundStyle = new GUIStyle();
+            InteriorLighterBackgroundStyle.normal.background = MakeTex(1, 1, new Color(1, 1, 1, 0.25f));
+            InteriorLighterBackgroundStyle.clipping = TextClipping.Clip;
+            InteriorLighterBackgroundStyle.stretchWidth = false;
+        }
+
+        if (forced || InteriorDarkerBackgroundStyle == null)
+        {
+            InteriorDarkerBackgroundStyle = new GUIStyle();
+            InteriorDarkerBackgroundStyle.normal.background = MakeTex(1, 1, new Color(0, 0, 0, 0.25f));
+            InteriorDarkerBackgroundStyle.clipping = TextClipping.Clip;
+            InteriorDarkerBackgroundStyle.stretchWidth = false;
+        }
+
+        if (forced || WrappedLabelStyle == null)
+        {            
+            WrappedLabelStyle = new GUIStyle(EditorStyles.label);
             WrappedLabelStyle.wordWrap = true;
             WrappedLabelStyle.clipping = TextClipping.Clip;
             WrappedLabelStyle.fontStyle = FontStyle.Italic;
-            WrappedLabelStyle.stretchWidth = false;
+            WrappedLabelStyle.stretchWidth = false;            
         }
 
         if(forced || ConditionNodeStyle == null)

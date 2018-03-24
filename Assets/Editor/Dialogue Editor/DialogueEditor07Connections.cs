@@ -472,6 +472,7 @@ public partial class DialogueEditor
                 }
                 else
                 {
+                    WriteDebug("WARNING! Attempted illegal connection!: Entry Conditions must lead to Exit or another Condition.");
                     conditionToEntryOption.Clear();
                 }
             }
@@ -597,9 +598,7 @@ public partial class DialogueEditor
 
     private bool ValidateConditionChain(int conditionIndex)
     {
-        bool result = EditedDialogue.ConditionChainValidation(conditionIndex);
-
-        if (!result) WriteDebug("WARNING! Attempted illegal connection!: Entry Conditions must lead to Exit or another Condition.");
+        bool result = EditedDialogue.ConditionChainValidation(conditionIndex);        
 
         return result;
     }

@@ -8,6 +8,7 @@ using UnityEngine;
 public partial class DialogueEditor
 {
     private List<bool> DialogueNodeActionsFoldouts = new List<bool>();
+    private List<bool> DialogueNodeOptionsFoldouts = new List<bool>();
 
     void CreateDialogueNode()
     {
@@ -21,6 +22,7 @@ public partial class DialogueEditor
         EditorInfo.NodesIndexes.Add(EditorInfo.Windows.Count - 1);
 
         DialogueNodeActionsFoldouts.Add(false);
+        DialogueNodeOptionsFoldouts.Add(false);
 
         WriteDebug("Adding node");
 
@@ -145,107 +147,13 @@ public partial class DialogueEditor
 
         DrawTextArea(ref currentNode.NodeText, id);
 
-        save = save || (currentNode.NodeText != null && !currentNode.NodeText.Equals(prevText));
+        save |= (currentNode.NodeText != null && !currentNode.NodeText.Equals(prevText));
 
         #region Opcje Dialogowe
 
         if (!currentNode.ImmediateNode)
         {
-            bool restoreFoldout = !EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid);
-
-            foreach (int optionIndex in currentNode.OptionsAttached)
-            {
-                if (restoreFoldout)
-                {
-                    EditorInfo.RestoreFoldouts(CurrentNodes.ToArray());
-                    break;
-                }
-
-                restoreFoldout |= !EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex);
-            }
-
-            foreach (int optionIndex in currentNode.OptionsAttached)
-            {
-                if (!EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid) || !EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex))
-                {
-                    Debug.Log("Zawiera type id " + typeid + ": " + EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid));
-                    Debug.Log("Zawiera option id " + optionIndex + ": " + EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex));
-                }
-
-                EditorInfo.NodesOptionsFoldouts[typeid][optionIndex] =
-                    EditorGUILayout.Foldout(
-                        EditorInfo.NodesOptionsFoldouts[typeid][optionIndex],
-                        "Option: " + optionIndex, true
-                        );
-
-                if (EditorInfo.NodesOptionsFoldouts[typeid][optionIndex])
-                {
-                    Rect foldoutRect = EditorGUILayout.BeginHorizontal(Config.FoldoutInteriorStyle);
-                    {
-                        DialogueOption currentOption = CurrentOptions[optionIndex];
-
-                        GUILayout.BeginVertical();
-                        {
-                            GUILayout.BeginHorizontal();
-                            {
-                                GUILayout.Label("Option: ", GUILayout.Width(75));
-                                GUILayout.Label(optionIndex.ToString());
-                                GUILayout.FlexibleSpace();
-                                DrawJumpToButton("Go To", EditorInfo.Windows[EditorInfo.OptionsIndexes[optionIndex]], GUILayout.Width(50));
-                            }
-                            GUILayout.EndHorizontal();
-
-                            GUILayout.BeginHorizontal();
-                            {
-                                GUILayout.Label("Destination: ", GUILayout.Width(75));
-                                if (currentOption.NextType == NodeType.Node)
-                                {
-                                    int to = currentOption.NextID; //optionToNodeAttached[optionIndex];
-                                    GUILayout.Label(to.ToString());
-                                    GUILayout.FlexibleSpace();
-                                    DrawJumpToButton("Go To", EditorInfo.Windows[EditorInfo.NodesIndexes[to]], GUILayout.Width(50));
-                                }
-                                else
-                                {
-                                    GUILayout.Label("[EXIT]");
-                                    GUILayout.FlexibleSpace();
-                                }
-                            }
-                            GUILayout.EndHorizontal();
-
-                            GUILayout.BeginHorizontal();
-                            {
-                                GUILayout.Label("Text: ", GUILayout.Width(75));
-                                StringBuilder textToShow = new StringBuilder(currentOption.OptionText);
-
-                                if (textToShow.Length > Config.MaxQuotasLength)
-                                {
-                                    textToShow.Length = Config.MaxQuotasLength - 3;
-                                    textToShow.Append("...");
-                                }
-
-                                GUILayout.Label("\"" + textToShow + "\"", Config.WrappedLabelStyle);
-                            }
-                            GUILayout.EndHorizontal();
-                        }
-                        GUILayout.EndVertical();
-
-                        if (GUILayout.Button("x", GUILayout.Width(20)))
-                        {
-                            List<int> optionsAttachedWithout =
-                                new List<int>(currentNode.OptionsAttached);
-
-                            optionsAttachedWithout.Remove(optionIndex);
-                            currentNode.OptionsAttached = optionsAttachedWithout.ToArray();
-
-                            EditorInfo.NodesOptionsFoldouts[typeid].Remove(optionIndex);
-
-                            save = true;
-                        }
-                    }
-                    GUILayout.EndHorizontal();
-                }
-            }
+            save |= DrawNodesOptions(id, typeid, currentNode);
         }
 
         DrawActionsFoldout(id, typeid);
@@ -277,7 +185,7 @@ public partial class DialogueEditor
             SaveChanges("Draw Node Window");
         }
     }
-
+   
     void EntityDeleted(int id)
     {
         EditorInfo.Windows.RemoveAt(id);
@@ -293,6 +201,7 @@ public partial class DialogueEditor
         EditorInfo.Nodes--;
 
         DialogueNodeActionsFoldouts.RemoveAt(idOfType);
+        DialogueNodeOptionsFoldouts.RemoveAt(idOfType);
 
         CurrentNodes.RemoveAt(idOfType);
         ClearAllConnectionsPending();        
@@ -361,7 +270,7 @@ public partial class DialogueEditor
                 if (deletedType == NodeType.Option && dialNode.OptionsAttached != null)
                 {
                     List<int> optionsAttached = new List<int>(dialNode.OptionsAttached);
-                    optionsAttached.Remove(idOfType);
+                    optionsAttached.Remove(idOfType);                    
 
                     for (int i = 0; i < optionsAttached.Count; i++)
                     {
@@ -472,7 +381,7 @@ public partial class DialogueEditor
         DialogueAction currentAction = CurrentNodes[idOfType].Action;                
 
         DialogueNodeActionsFoldouts[idOfType] =
-            EditorGUILayout.Foldout(DialogueNodeActionsFoldouts[idOfType], "Defined Actions: ");
+            EditorGUILayout.Foldout(DialogueNodeActionsFoldouts[idOfType], currentAction.ToString());
 
         if(DialogueNodeActionsFoldouts[idOfType])
         {
@@ -540,5 +449,103 @@ public partial class DialogueEditor
         }
 
         return save;
-    }    
+    }
+
+    bool DrawNodesOptions(int id, int typeid, DialogueNode currentNode)
+    {
+        bool result = false;
+
+        DialogueNodeOptionsFoldouts[typeid] =
+            EditorGUILayout.Foldout(DialogueNodeOptionsFoldouts[typeid], "Options: " + currentNode.OptionsAttached.Length);
+
+        if (DialogueNodeOptionsFoldouts[typeid])
+        {
+            bool restoreFoldout = !EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid);
+
+            foreach (int optionIndex in currentNode.OptionsAttached)
+            {
+                if (restoreFoldout)
+                {
+                    EditorInfo.RestoreFoldouts(CurrentNodes.ToArray());
+                    break;
+                }
+
+                restoreFoldout |= !EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex);
+            }
+
+            EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+            {
+                foreach (int optionIndex in currentNode.OptionsAttached)
+                {
+                    if (!EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid) || !EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex))
+                    {
+                        Debug.Log("Zawiera type id " + typeid + ": " + EditorInfo.NodesOptionsFoldouts.ContainsKey(typeid));
+                        Debug.Log("Zawiera option id " + optionIndex + ": " + EditorInfo.NodesOptionsFoldouts[typeid].ContainsKey(optionIndex));
+                    }
+
+                    DialogueOption currentOption = CurrentOptions[optionIndex];
+                    StringBuilder textToShow = new StringBuilder(currentOption.OptionText);
+
+                    if (textToShow.Length > Config.MaxQuotasLength)
+                    {
+                        textToShow.Length = Config.MaxQuotasLength - 3;
+                        textToShow.Append("...");
+                    }
+
+                    string titleQuote = (textToShow.Length > 0) ?
+                        textToShow.ToString(0, (textToShow.Length >= 20) ? 20 : textToShow.Length) : "";
+
+                    EditorInfo.NodesOptionsFoldouts[typeid][optionIndex] =
+                        EditorGUILayout.Foldout(
+                            EditorInfo.NodesOptionsFoldouts[typeid][optionIndex],
+                            "Option " + optionIndex + ": " + titleQuote, true
+                            );
+
+                    if (EditorInfo.NodesOptionsFoldouts[typeid][optionIndex])
+                    {
+                        Rect foldoutRect = EditorGUILayout.BeginHorizontal(Config.FoldoutInteriorStyle);
+                        {                            
+                            EditorGUILayout.BeginVertical(Config.InteriorLighterBackgroundStyle);
+                            {                                
+                                //GUILayout.Label("\"" + textToShow + "\"", Config.WrappedLabelStyle);
+                                float tempWid = EditorGUIUtility.labelWidth;
+                                EditorGUIUtility.labelWidth = 105f;
+                                EditorGUILayout.LabelField("Text: ", "\"" + textToShow + "\"", Config.WrappedLabelStyle);
+
+                                if (currentOption.VisitOnce) EditorGUILayout.LabelField("Visit Once", "Yes", EditorStyles.boldLabel);
+                                if (currentOption.EntryConditionSet) EditorGUILayout.LabelField("Entry Condition", "Set", EditorStyles.boldLabel);
+
+                                EditorGUIUtility.labelWidth = tempWid;
+
+                                GUILayout.BeginHorizontal();
+                                {
+                                    DrawJumpToButton("Go To", EditorInfo.Windows[EditorInfo.OptionsIndexes[optionIndex]], GUILayout.Width(50));
+                                }
+                                GUILayout.EndHorizontal();
+                            }
+                            EditorGUILayout.EndVertical();
+
+                            if (GUILayout.Button("x", GUILayout.Width(20)))
+                            {
+                                List<int> optionsAttachedWithout =
+                                    new List<int>(currentNode.OptionsAttached);
+
+                                optionsAttachedWithout.Remove(optionIndex);
+                                currentNode.OptionsAttached = optionsAttachedWithout.ToArray();
+
+                                EditorInfo.NodesOptionsFoldouts[typeid].Remove(optionIndex);
+
+                                result |= true;
+                            }
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                }
+            }
+            EditorGUILayout.EndVertical();
+        }
+
+        return result;
+    }
+
 }

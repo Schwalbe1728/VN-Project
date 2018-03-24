@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Name: Dummy
   m_EditorClassIdentifier: 
   startID: 0
-  startType: 0
+  startType: 1
   currentNodeID: 0
   Options:
   - optionID: 0
-    nextID: -1
-    nextType: 0
+    nextID: 0
+    nextType: 3
     alreadyVisited: 0
     entryCondition:
       conditionID: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
         Background: {fileID: 0}
         Required: 1
     entryConditionSet: 0
-    OptionText: "Przyk\u0142adowa Opcja"
+    OptionText: "Chodz\u0105 s\u0142uchy, \u017Ce znajdzie si\u0119 u Ciebie robota."
     VisitOnce: 0
     nextDialogue: {fileID: 0}
   Nodes:
@@ -71,9 +71,116 @@ MonoBehaviour:
     isImmediateNode: 0
     nextID: -1
     nextType: 0
-    NodeText: 
+    NodeText: Czego?
     customID: 
     optionsIndexesList: 00000000
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 1
+    isImmediateNode: 0
+    nextID: -1
+    nextType: 0
+    NodeText: "Nie zrozum mnie \u017Ale, kole\u015B, ale jeste\u015B za cwany na to,
+      bym ci da\u0142 robot\u0119, w kt\xF3rej potrzebuje by kto\u015B zrobi\u0142
+      DOK\u0141ADNIE co mu si\u0119 m\xF3wi."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 2
+    isImmediateNode: 0
+    nextID: -1
+    nextType: 0
+    NodeText: "Znalaz\u0142aby si\u0119, ale jeste\u015B za cienki w uszach na ni\u0105
+      - sp\u0142ywaj."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 3
+    isImmediateNode: 0
+    nextID: -1
+    nextType: 0
+    NodeText: "Mog\u0119 mie\u0107, owszem. I nawet wygl\u0105dasz mi na takiego co
+      by si\u0119 nadawa\u0142.\n\nOczywi\u015Bcie, zak\u0142adaj\u0105c, \u017Ce
+      nie masz nic przeciwko... brudnej robocie."
+    customID: 
+    optionsIndexesList: 
     nextDialogue: {fileID: 0}
     action:
       hurtPlayerSet: 0
@@ -105,26 +212,26 @@ MonoBehaviour:
   - conditionID: 0
     targetIDIfPassed: 1
     targetTypeIfPassed: 3
-    targetIDIfFailed: -1
-    targetTypeIfFailed: 0
+    targetIDIfFailed: 2
+    targetTypeIfFailed: 1
     nextDialogueIfPassed: {fileID: 0}
     nextDialogueIfFailed: {fileID: 0}
-    conditionTypeSet: 5
+    conditionTypeSet: 0
     attributeCheckCondition:
-      Attribute: 0
+      Attribute: 4
       ValueChecked: 10
-      InequalityType: 2
+      InequalityType: 4
     attributeTestCondition:
       Attribute: 0
       AttributeMod: 0
       Skill: 0
     skillPossessedCondition:
       SkillToCheck: 0
-      IsNeeded: 0
+      IsNeeded: 1
     playerHasItemCondition:
       Item: {fileID: 0}
       Quantity: 0
-      IsRequired: 0
+      IsRequired: 1
     playerHasMoneyCondition:
       AbstractValue: 0
     storyStateHappenedCondition:
@@ -143,19 +250,19 @@ MonoBehaviour:
       HoursOnly: 0
     backgroundRequiredCondition:
       Background: {fileID: 0}
-      Required: 0
+      Required: 1
   - conditionID: 1
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
-    targetIDIfFailed: -1
-    targetTypeIfFailed: 0
+    targetIDIfPassed: 3
+    targetTypeIfPassed: 1
+    targetIDIfFailed: 1
+    targetTypeIfFailed: 1
     nextDialogueIfPassed: {fileID: 0}
     nextDialogueIfFailed: {fileID: 0}
     conditionTypeSet: 0
     attributeCheckCondition:
-      Attribute: 0
-      ValueChecked: 10
-      InequalityType: 2
+      Attribute: 3
+      ValueChecked: 6
+      InequalityType: 1
     attributeTestCondition:
       Attribute: 0
       AttributeMod: 0
@@ -189,30 +296,45 @@ MonoBehaviour:
   editorInfo:
     Windows:
     - serializedVersion: 2
-      x: 84
-      y: 306
-      width: 300
-      height: 238
+      x: 48
+      y: 17
+      width: 228
+      height: 239
     - serializedVersion: 2
-      x: 353
+      x: 321
       y: 38
       width: 276
       height: 172
     - serializedVersion: 2
-      x: 17
-      y: 16
-      width: 228
-      height: 256
+      x: 907
+      y: 330
+      width: 230
+      height: 205
     - serializedVersion: 2
-      x: 450
-      y: 305
+      x: 260
+      y: 279
       width: 300
-      height: 218
-    WindowTypes: 03000000020000000100000003000000
-    NodeTypesIDs: 00000000000000000000000001000000
+      height: 220
+    - serializedVersion: 2
+      x: 683
+      y: 71
+      width: 300
+      height: 220
+    - serializedVersion: 2
+      x: 629
+      y: 402
+      width: 228
+      height: 189
+    - serializedVersion: 2
+      x: 1064
+      y: 31
+      width: 232
+      height: 225
+    WindowTypes: 01000000020000000100000003000000030000000100000001000000
+    NodeTypesIDs: 00000000000000000100000000000000010000000200000003000000
     OptionsIndexes: 01000000
-    NodesIndexes: 02000000
-    ConditionsIndexes: 0000000003000000
-    Nodes: 1
+    NodesIndexes: 00000000020000000500000006000000
+    ConditionsIndexes: 0300000004000000
+    Nodes: 4
     Options: 1
     Conditions: 2

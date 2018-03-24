@@ -17,6 +17,7 @@ public partial class DialogueEditor : EditorWindow
     static void ShowEditor()
     {
         DialogueEditor editor = EditorWindow.GetWindow<DialogueEditor>();
+
         editor.wantsMouseMove = true;
         //InitStyles();
         Selection.selectionChanged -= editor.OnEditorSelectionChanged;
@@ -75,6 +76,7 @@ public partial class DialogueEditor : EditorWindow
             }
 
             DialogueNodeActionsFoldouts = null;
+            DialogueNodeOptionsFoldouts = null;
 
             Repaint();
         }
@@ -98,6 +100,15 @@ public partial class DialogueEditor : EditorWindow
             foreach(DialogueNode node in CurrentNodes)
             {
                 DialogueNodeActionsFoldouts.Add(false);
+            }
+        }
+
+        if (DialogueNodeOptionsFoldouts == null)
+        {
+            DialogueNodeOptionsFoldouts = new List<bool>();
+            foreach (DialogueNode node in CurrentNodes)
+            {
+                DialogueNodeOptionsFoldouts.Add(false);
             }
         }
 

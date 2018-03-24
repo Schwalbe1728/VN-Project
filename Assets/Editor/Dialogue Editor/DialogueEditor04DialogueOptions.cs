@@ -168,17 +168,16 @@ public partial class DialogueEditor
         EditorInfo.OptionsIndexes.RemoveAt(idOfType);
         EditorInfo.Options--;
 
-        CurrentOptions.RemoveAt(idOfType);
+        CurrentOptions.RemoveAt(idOfType);        
 
         ClearAllConnectionsPending();
-
-        DecrementIndexes(id);
-        UpdateTargetAfterDeletion(id, idOfType, NodeType.Option);        
 
         int[] keys = new int[EditorInfo.NodesOptionsFoldouts.Count];
         EditorInfo.NodesOptionsFoldouts.Keys.CopyTo(keys, 0);
         for (int i = 0; i < keys.Length; i++)
         {
+            EditorInfo.NodesOptionsFoldouts[keys[i]].Remove(idOfType);
+
             int[] optionsKeys = new int[EditorInfo.NodesOptionsFoldouts[keys[i]].Count];
             EditorInfo.NodesOptionsFoldouts[keys[i]].Keys.CopyTo(optionsKeys, 0);
 
@@ -192,9 +191,12 @@ public partial class DialogueEditor
                     EditorInfo.NodesOptionsFoldouts[keys[i]].Remove(key);
                     key--;
                     EditorInfo.NodesOptionsFoldouts[keys[i]].Add(key, value);
-                }
+                }                
             }
         }
+
+        DecrementIndexes(id);
+        UpdateTargetAfterDeletion(id, idOfType, NodeType.Option);                
 
         WriteDebug("Deleting option " + idOfType + " and it's associations.");
     }

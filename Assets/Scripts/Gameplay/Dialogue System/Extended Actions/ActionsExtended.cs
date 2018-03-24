@@ -143,6 +143,21 @@ public partial class DialogueAction
     }
 
     public void ClearUseItemAction() { UseItemSet = false; }
+
+    public override string ToString()
+    {
+        int set = 0;
+
+        if (ChangeAmbienceSet) set++;
+        if (ChangeMusicSet) set++;
+        if (GiveItemSet) set++;
+        if (HurtPlayerSanitySet) set++;
+        if (HurtPlayerSet) set++;
+        if (TakeItemSet) set++;
+        if (UseItemSet) set++;
+
+        return "Defined Actions: " + set.ToString();
+    }
 }
 
 [System.Serializable]
