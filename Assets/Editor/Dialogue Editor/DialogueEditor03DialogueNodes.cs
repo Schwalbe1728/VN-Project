@@ -89,6 +89,12 @@ public partial class DialogueEditor
                         }
                     }
                     GUILayout.EndHorizontal();
+
+                    bool prevCont = currentNode.AddContinue;
+                    currentNode.AddContinue =
+                        EditorGUILayout.Toggle("Add Continue", currentNode.AddContinue);
+
+                    save |= prevCont != currentNode.AddContinue;
                 }
             }
             else

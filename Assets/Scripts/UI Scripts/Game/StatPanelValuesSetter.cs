@@ -30,7 +30,7 @@ public class StatPanelValuesSetter : MonoBehaviour
 
     private void UpdateStressText(float percent)
     {
-        SPText.text = CharInfo.StressPenalty.ToString();
+        SPText.text = StatsRuleSet.StressPenalty(CharInfo).ToString(); //CharInfo.StressPenalty.ToString();
     }
 
     private void UpdateTexts()

@@ -291,6 +291,45 @@ public static class StatsRuleSet
                      * 15 / 19.0f);
     }
 
+    private static int[] StressThresholds = 
+        new int[] { 3, 6, 10, 16, 23, 31, 40, 50, 61, 73, 86, 95, 100  };
+    private static int[] StressPenalties = 
+        new int[] { 5, 3, 0, -5, -10, -16, -23, -30, -38, -47, -57, -64, -68 };
+
+    public static int StressPenalty(CharacterInfoScript charInfo)
+    {
+        float currentStress = 100 * Stress(charInfo);
+        int result = 0;        
+
+        for(int i = 0; i < StressThresholds.Length; i++)
+        {
+            if(StressThresholds[i] > currentStress)
+            {
+                result = StressPenalties[i];
+                break;
+            }            
+        }
+
+        return result;
+    }
+
+    public static float Stress(CharacterInfoScript charInfo)
+    {
+        return StressM2(charInfo);
+    }
+
+    private static float StressM1(CharacterInfoScript charInfo)
+    {
+        return
+            (1 - ((float)(charInfo.CurrentHealth + charInfo.CurrentSanity)) / (charInfo.MaxHealthPoints + charInfo.MaxSanity));
+    }
+
+    private static float StressM2(CharacterInfoScript charInfo)
+    {
+        return
+            1 - (charInfo.HealthPercentage + charInfo.SanityPercentage)/2;
+    }
+
     private static int WalkingSpeedMin = 2500;
     private static int WalkingSpeedMax = 5000;
 
@@ -426,12 +465,13 @@ public class CharacterInfoScript : MonoBehaviour
             OnSanityChanged(SanityPercentage);
         }
     }
-
+    
     public int StressPenalty
     {
         get
         {
-            return Mathf.RoundToInt(StatsRuleSet.MaxStressPenalty(this) * StressModificator );
+            return //Mathf.RoundToInt(StatsRuleSet.MaxStressPenalty(this) * StressModificator );
+                StatsRuleSet.StressPenalty(this);
         }
     }
 

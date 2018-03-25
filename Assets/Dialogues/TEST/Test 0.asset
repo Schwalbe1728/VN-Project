@@ -39,7 +39,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 

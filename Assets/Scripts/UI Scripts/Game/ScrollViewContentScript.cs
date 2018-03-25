@@ -54,14 +54,24 @@ public class ScrollViewContentScript : MonoBehaviour {
             RemoveLogElement(1);
         }
 
-        GameObject optionText = Instantiate(DialogueLogElementPrefab, this.transform);
-        optionText.GetComponent<DialogueLogElementScript>().SetCharName("Player:");
-        optionText.GetComponent<DialogueLogElementScript>().SetDialogueText(optionChosen.OptionText);
-
-        DialogueLog.Insert(0, optionText);
-        if (DialogueShown.Next(optionChosen))
+        if (optionChosen.OptionID != int.MaxValue)
         {
-            DrawNode();
+            GameObject optionText = Instantiate(DialogueLogElementPrefab, this.transform);
+            optionText.GetComponent<DialogueLogElementScript>().SetCharName("Player:");
+            optionText.GetComponent<DialogueLogElementScript>().SetDialogueText(optionChosen.OptionText);
+
+            DialogueLog.Insert(0, optionText);
+            if (DialogueShown.Next(optionChosen))
+            {
+                DrawNode();
+            }
+        }
+        else
+        {
+            if(DialogueShown.Next())
+            {
+                DrawNode();
+            }
         }
     }
    
@@ -130,11 +140,36 @@ public class ScrollViewContentScript : MonoBehaviour {
         }
         else
         {
-            /*if (DialogueShown.Next())
+            if(DialogueShown.CurrentNode.AddContinue)
             {
-                DrawNode();
-            }*/
+                AddContinueButton();
+                AddSeparator();
+                AlignLogElements();
+            }
         }        
+    }
+
+    private void AddContinueButton(int indexer = 0)
+    {
+        int nxt = DialogueShown.CurrentNode.TargetID;
+        NodeType nxtType = DialogueShown.CurrentNode.TargetType;
+
+        DialogueOption continueOption = new DialogueOption();
+        continueOption.OptionText = "[Continue]";
+        continueOption.OptionID = int.MaxValue;
+        continueOption.SetNext(nxt, nxtType);
+
+        GameObject prefabCreated = Instantiate(OptionButtonPrefab, this.transform);
+        OptionButtonScript obs = prefabCreated.GetComponent<OptionButtonScript>();
+
+        obs.SetNumber(++indexer);        
+
+        obs.SetText(continueOption.OptionText);
+        obs.SetOption(continueOption);        
+
+        DialogueLog.Insert(indexer, prefabCreated);
+
+        AddSeparator(indexer + 1);
     }
 
     private void AddOptionsFromCurrentNode()
@@ -174,9 +209,9 @@ public class ScrollViewContentScript : MonoBehaviour {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine(DialogueShown.CurrentNode.NodeText);
 
-        while(DialogueShown.CurrentNode.ImmediateNode)
+        while(DialogueShown.CurrentNode.ImmediateNode && !DialogueShown.CurrentNode.AddContinue)
         {
-            if (DialogueShown.Next())
+            if (DialogueShown.Next() && !DialogueShown.CurrentNode.NodeText.Equals(""))
             {
                 sb.AppendLine(DialogueShown.CurrentNode.NodeText);
             }

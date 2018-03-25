@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startID: 0
   startType: 1
-  currentNodeID: 0
+  currentNodeID: 2
   Options:
   - optionID: 0
     nextID: 0
     nextType: 3
-    alreadyVisited: 0
+    alreadyVisited: 1
     entryCondition:
       conditionID: 0
       targetIDIfPassed: -1
@@ -69,7 +69,7 @@ MonoBehaviour:
   - optionID: 1
     nextID: -1
     nextType: 0
-    alreadyVisited: 0
+    alreadyVisited: 1
     entryCondition:
       conditionID: 0
       targetIDIfPassed: -1
@@ -120,6 +120,7 @@ MonoBehaviour:
   Nodes:
   - nodeID: 0
     isImmediateNode: 0
+    addContinue: 0
     nextID: -1
     nextType: 0
     NodeText: Test Zdany!
@@ -152,10 +153,80 @@ MonoBehaviour:
         Item: {fileID: 0}
     actionSet: 0
     secondsConsumed: 0
+  - nodeID: 1
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 2
+    nextType: 1
+    NodeText: Negro
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 2
+    isImmediateNode: 0
+    addContinue: 0
+    nextID: -1
+    nextType: 0
+    NodeText: Swaaaaaaaaaag
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
   Conditions:
   - conditionID: 0
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
+    targetIDIfPassed: 1
+    targetTypeIfPassed: 1
     targetIDIfFailed: 0
     targetTypeIfFailed: 1
     nextDialogueIfPassed: {fileID: 11400000, guid: 8dfd40f5ac567ea4a8cfc44491b86cef,
@@ -201,11 +272,11 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 70
       y: 16
-      width: 226
+      width: 228
       height: 208
     - serializedVersion: 2
-      x: 135
-      y: 287
+      x: 36
+      y: 289
       width: 276
       height: 172
     - serializedVersion: 2
@@ -214,15 +285,25 @@ MonoBehaviour:
       width: 276
       height: 172
     - serializedVersion: 2
-      x: 494
-      y: 277
+      x: 378
+      y: 264
       width: 300
-      height: 201
-    WindowTypes: 01000000020000000200000003000000
-    NodeTypesIDs: 00000000000000000100000000000000
+      height: 220
+    - serializedVersion: 2
+      x: 352
+      y: 523
+      width: 228
+      height: 188
+    - serializedVersion: 2
+      x: 659
+      y: 502
+      width: 200
+      height: 188
+    WindowTypes: 010000000200000002000000030000000100000001000000
+    NodeTypesIDs: 000000000000000001000000000000000100000002000000
     OptionsIndexes: 0100000002000000
-    NodesIndexes: 00000000
+    NodesIndexes: 000000000400000005000000
     ConditionsIndexes: 03000000
-    Nodes: 1
+    Nodes: 3
     Options: 2
     Conditions: 1

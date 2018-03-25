@@ -7,8 +7,12 @@ public class DialogueNode : DialogueElement
 {
     [SerializeField]
     private int nodeID;
+
     [SerializeField]
     private bool isImmediateNode;
+    [SerializeField]
+    private bool addContinue;
+
     [SerializeField]
     private int nextID = Dialogue.ExitDialogue;
     [SerializeField]
@@ -122,6 +126,8 @@ public class DialogueNode : DialogueElement
     {
         isImmediateNode = true;
     }
+
+    public bool AddContinue { get { return addContinue; } set { addContinue = value; } }
 
     public void SetImmediateNodeTarget(int nID, NodeType nType)
     {
