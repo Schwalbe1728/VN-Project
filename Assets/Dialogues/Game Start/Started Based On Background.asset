@@ -15,11 +15,472 @@ MonoBehaviour:
   startType: 3
   currentNodeID: 0
   Options: []
-  Nodes: []
+  Nodes:
+  - nodeID: 0
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 1
+    nextType: 1
+    NodeText: 'Although the profession of the antiquarian deals with objects of the
+      past, it does, nevertheless, pay to stay aware of current events as well. Rumors,
+      even vague, sometimes turn into invaluable leads that can show the path to significant
+      profit. This time however, you did not have to strain your ears too hard to
+      hear them. '
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 0
+    secondsConsumed: 0
+  - nodeID: 1
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 2
+    nextType: 1
+    NodeText: "In fact, you have been directly contacted by one of your most high-profile
+      clients, a book collector of considerable wealth, who has received a tip concerning
+      an extremely rare tome, \u201CThe Unseen Dimensions\u201D. Only three copies
+      are known to exist, all of them in the possession of prominent collectors outside
+      of Britain, and each of them worth an exorbitant amount of money."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 2
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 11
+    nextType: 1
+    NodeText: It seems, however, that a fourth one may be possible, and if the tip-off
+      was correct, it belongs to a less-known aristocrat living in a quaint little
+      village in rural England. The man is, to your knowledge, not a collector, and
+      there is a possibility he does not even realize the true value of the book.
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 3
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 4
+    nextType: 1
+    NodeText: "Although places of higher learning aren\u2019t usually considered to
+      have anything to do with the word \u201Cexcitement\u201D, your University has
+      nonetheless been abuzz with hushed, fevered conversations for the past few days.
+      As a reasonably influential member of the faculty you are privy to some of the
+      goings-on and the rumors have reached your ears as well."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 4
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 5
+    nextType: 1
+    NodeText: "Apparently, mentions of a valuable medieval tome on mathematics, \u201CThe
+      Unseen Dimensions\u201D have appeared. The book is well known by reputation
+      in scientific circles, especially the more fringe ones, for its supposedly revolutionary
+      ideas on geometry. It is hard to verify this reputation, however, given that
+      most of the copies have been burned after the church deemed the contents \u201Cvile
+      and blasphemous\u201D, and the only remaining three are in possession of extremely
+      private individuals."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 5
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 6
+    nextType: 1
+    NodeText: But, if the rumours are true, then a fourth copy exists, and its owner
+      lives mere miles from the University! Such an opportunity has been deemed impossible
+      to pass up, and a hastily assembled committee has proposed that given your knowledge
+      on the topic, you would be the perfect candidate to contact the owner and ask
+      him to share the tome, or perhaps even persuade him to donate it to the University.
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 6
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: -1
+    nextType: 0
+    NodeText: Accepting without hesitation and quickly packing enough luggage to last
+      you a few days, you have within hours found yourself on your way.
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 7
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 8
+    nextType: 1
+    NodeText: "Nimble fingers and a sharp mind are the tools of your trade. Ever since
+      you were little you have learned that it is much easier to gain wealth by taking
+      it from people already wealthy, rather than through the toil and misery of work
+      some people deem \u201Chonest\u201D."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 0
+    secondsConsumed: 0
+  - nodeID: 8
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 9
+    nextType: 1
+    NodeText: "Through the years of your life you have become quite a professional,
+      and have even gained something of a reputation among the less respectable parts
+      of society - you\u2019re not known well enough for it to land you in jail, but
+      you have received some offers of collaboration on bigger jobs. So far though,
+      you have stuck it out alone, preferring not to put your fate in hands other
+      than yours."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 0
+    secondsConsumed: 0
+  - nodeID: 9
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: 10
+    nextType: 1
+    NodeText: "Yesterday, however, you have received a different offer. A reputable
+      man, a high-born man from polite society has offered you a substantial amount
+      of money for the, as he put it, \u201Crequisition\u201D of a certain rare book.
+      Enough money for you not to worry about at least the next few years. Apparently
+      the man has run out of legitimate ways of acquiring the book, and decided that
+      its owner must be parted with it regardless of whether he wants to or not."
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 10
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: -1
+    nextType: 0
+    NodeText: "You are given an address, a train ticket, and a bit of money to start
+      out, and you set out on your way.\r"
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 0
+    secondsConsumed: 0
+  - nodeID: 11
+    isImmediateNode: 1
+    addContinue: 1
+    nextID: -1
+    nextType: 0
+    NodeText: "Your client has a very generous reward in mind if you manage to obtain
+      the tome. You set out as soon as possible.\r"
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
   Conditions:
   - conditionID: 0
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
+    targetIDIfPassed: 0
+    targetTypeIfPassed: 1
     targetIDIfFailed: 1
     targetTypeIfFailed: 3
     nextDialogueIfPassed: {fileID: 0}
@@ -37,7 +498,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -75,7 +540,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -113,7 +582,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -151,7 +624,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -189,7 +666,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -227,7 +708,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -246,8 +731,8 @@ MonoBehaviour:
       Background: {fileID: 11400000, guid: 090560f1969236147be07a9c41802ef4, type: 2}
       Required: 1
   - conditionID: 6
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
+    targetIDIfPassed: 3
+    targetTypeIfPassed: 1
     targetIDIfFailed: 7
     targetTypeIfFailed: 3
     nextDialogueIfPassed: {fileID: 0}
@@ -265,7 +750,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -284,8 +773,8 @@ MonoBehaviour:
       Background: {fileID: 11400000, guid: 711620362e30f6f42a7b3dede496c432, type: 2}
       Required: 1
   - conditionID: 7
-    targetIDIfPassed: -1
-    targetTypeIfPassed: 0
+    targetIDIfPassed: 7
+    targetTypeIfPassed: 1
     targetIDIfFailed: 8
     targetTypeIfFailed: 3
     nextDialogueIfPassed: {fileID: 0}
@@ -303,7 +792,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -341,7 +834,11 @@ MonoBehaviour:
       SkillToCheck: 0
       IsNeeded: 0
     playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
       IsRequired: 0
+    playerHasMoneyCondition:
+      AbstractValue: 0
     storyStateHappenedCondition:
       PlotName: 
       StateName: 
@@ -365,52 +862,112 @@ MonoBehaviour:
       x: 65
       y: 52
       width: 300
-      height: 183
+      height: 204
     - serializedVersion: 2
-      x: 89
-      y: 266
+      x: 64
+      y: 295
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 176
-      y: 534
+      x: 66
+      y: 529
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 322
-      y: 795
+      x: 66
+      y: 790
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 453
-      y: 1073
+      x: 71
+      y: 1061
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 593
-      y: 1333
+      x: 72
+      y: 1350
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 773
-      y: 1641
+      x: 72
+      y: 1597
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 914
-      y: 1909
+      x: 76
+      y: 1894
       width: 300
-      height: 197
+      height: 202
     - serializedVersion: 2
-      x: 1035
-      y: 2173
+      x: 90
+      y: 2160
       width: 278
-      height: 197
-    WindowTypes: 030000000300000003000000030000000300000003000000030000000300000003000000
-    NodeTypesIDs: 000000000100000002000000030000000400000005000000060000000700000008000000
+      height: 202
+    - serializedVersion: 2
+      x: 427
+      y: 35
+      width: 244
+      height: 242
+    - serializedVersion: 2
+      x: 706
+      y: 34
+      width: 262
+      height: 257
+    - serializedVersion: 2
+      x: 1005
+      y: 32
+      width: 245
+      height: 233
+    - serializedVersion: 2
+      x: 434
+      y: 1577.2603
+      width: 266
+      height: 264
+    - serializedVersion: 2
+      x: 735
+      y: 1576.4548
+      width: 300
+      height: 295
+    - serializedVersion: 2
+      x: 1071
+      y: 1582.4548
+      width: 250
+      height: 288
+    - serializedVersion: 2
+      x: 1367
+      y: 1581.8708
+      width: 239
+      height: 198
+    - serializedVersion: 2
+      x: 436
+      y: 1898
+      width: 248
+      height: 236
+    - serializedVersion: 2
+      x: 731
+      y: 1903
+      width: 276
+      height: 262
+    - serializedVersion: 2
+      x: 1048
+      y: 1902
+      width: 273
+      height: 286
+    - serializedVersion: 2
+      x: 1370
+      y: 1903
+      width: 229
+      height: 189
+    - serializedVersion: 2
+      x: 1287
+      y: 33
+      width: 237
+      height: 196
+    WindowTypes: 030000000300000003000000030000000300000003000000030000000300000003000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+    NodeTypesIDs: 000000000100000002000000030000000400000005000000060000000700000008000000000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
     OptionsIndexes: 
-    NodesIndexes: 
+    NodesIndexes: 090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000
     ConditionsIndexes: 000000000100000002000000030000000400000005000000060000000700000008000000
-    Nodes: 0
+    Nodes: 12
     Options: 0
     Conditions: 9
