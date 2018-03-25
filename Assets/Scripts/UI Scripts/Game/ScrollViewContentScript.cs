@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -129,10 +130,10 @@ public class ScrollViewContentScript : MonoBehaviour {
         }
         else
         {
-            if (DialogueShown.Next())
+            /*if (DialogueShown.Next())
             {
                 DrawNode();
-            }
+            }*/
         }        
     }
 
@@ -170,7 +171,18 @@ public class ScrollViewContentScript : MonoBehaviour {
         GameObject prefabCreated = Instantiate(DialogueLogElementPrefab, this.transform);
         DialogueLogElementScript dles = prefabCreated.GetComponent<DialogueLogElementScript>();
 
-        dles.SetDialogueText(DialogueShown.CurrentNode.NodeText);
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(DialogueShown.CurrentNode.NodeText);
+
+        while(DialogueShown.CurrentNode.ImmediateNode)
+        {
+            if (DialogueShown.Next())
+            {
+                sb.AppendLine(DialogueShown.CurrentNode.NodeText);
+            }
+        }
+
+        dles.SetDialogueText(sb.ToString());
         DialogueLog.Insert(0, prefabCreated);
     }
 

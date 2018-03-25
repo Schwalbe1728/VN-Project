@@ -66,6 +66,108 @@ MonoBehaviour:
     OptionText: "Chodz\u0105 s\u0142uchy, \u017Ce znajdzie si\u0119 u Ciebie robota."
     VisitOnce: 0
     nextDialogue: {fileID: 0}
+  - optionID: 1
+    nextID: -1
+    nextType: 0
+    alreadyVisited: 0
+    entryCondition:
+      conditionID: 2
+      targetIDIfPassed: -1
+      targetTypeIfPassed: 0
+      targetIDIfFailed: -1
+      targetTypeIfFailed: 0
+      nextDialogueIfPassed: {fileID: 0}
+      nextDialogueIfFailed: {fileID: 0}
+      conditionTypeSet: 0
+      attributeCheckCondition:
+        Attribute: 0
+        ValueChecked: 10
+        InequalityType: 2
+      attributeTestCondition:
+        Attribute: 0
+        AttributeMod: 0
+        Skill: 0
+      skillPossessedCondition:
+        SkillToCheck: 0
+        IsNeeded: 1
+      playerHasItemCondition:
+        Item: {fileID: 0}
+        Quantity: 0
+        IsRequired: 1
+      playerHasMoneyCondition:
+        AbstractValue: 0
+      storyStateHappenedCondition:
+        PlotName: 
+        StateName: 
+        HasHappened: 0
+      worldDateCondition:
+        Date:
+          ShowInFoldout: 0
+        TimeOrientation: 0
+      worldDateRangeCondition:
+        Start:
+          ShowInFoldout: 0
+        Finish:
+          ShowInFoldout: 0
+        HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 1
+    entryConditionSet: 1
+    OptionText: 
+    VisitOnce: 0
+    nextDialogue: {fileID: 0}
+  - optionID: 2
+    nextID: -1
+    nextType: 0
+    alreadyVisited: 0
+    entryCondition:
+      conditionID: 0
+      targetIDIfPassed: -1
+      targetTypeIfPassed: 0
+      targetIDIfFailed: -1
+      targetTypeIfFailed: 0
+      nextDialogueIfPassed: {fileID: 0}
+      nextDialogueIfFailed: {fileID: 0}
+      conditionTypeSet: 0
+      attributeCheckCondition:
+        Attribute: 0
+        ValueChecked: 0
+        InequalityType: 0
+      attributeTestCondition:
+        Attribute: 0
+        AttributeMod: 0
+        Skill: 0
+      skillPossessedCondition:
+        SkillToCheck: 0
+        IsNeeded: 1
+      playerHasItemCondition:
+        Item: {fileID: 0}
+        Quantity: 0
+        IsRequired: 1
+      playerHasMoneyCondition:
+        AbstractValue: 0
+      storyStateHappenedCondition:
+        PlotName: 
+        StateName: 
+        HasHappened: 0
+      worldDateCondition:
+        Date:
+          ShowInFoldout: 0
+        TimeOrientation: 0
+      worldDateRangeCondition:
+        Start:
+          ShowInFoldout: 0
+        Finish:
+          ShowInFoldout: 0
+        HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 1
+    entryConditionSet: 0
+    OptionText: 
+    VisitOnce: 0
+    nextDialogue: {fileID: 0}
   Nodes:
   - nodeID: 0
     isImmediateNode: 0
@@ -293,6 +395,48 @@ MonoBehaviour:
     backgroundRequiredCondition:
       Background: {fileID: 0}
       Required: 1
+  - conditionID: 2
+    targetIDIfPassed: -1
+    targetTypeIfPassed: 0
+    targetIDIfFailed: -1
+    targetTypeIfFailed: 0
+    nextDialogueIfPassed: {fileID: 0}
+    nextDialogueIfFailed: {fileID: 0}
+    conditionTypeSet: 0
+    attributeCheckCondition:
+      Attribute: 0
+      ValueChecked: 10
+      InequalityType: 2
+    attributeTestCondition:
+      Attribute: 0
+      AttributeMod: 0
+      Skill: 0
+    skillPossessedCondition:
+      SkillToCheck: 0
+      IsNeeded: 1
+    playerHasItemCondition:
+      Item: {fileID: 0}
+      Quantity: 0
+      IsRequired: 1
+    playerHasMoneyCondition:
+      AbstractValue: 0
+    storyStateHappenedCondition:
+      PlotName: 
+      StateName: 
+      HasHappened: 0
+    worldDateCondition:
+      Date:
+        ShowInFoldout: 0
+      TimeOrientation: 0
+    worldDateRangeCondition:
+      Start:
+        ShowInFoldout: 0
+      Finish:
+        ShowInFoldout: 0
+      HoursOnly: 0
+    backgroundRequiredCondition:
+      Background: {fileID: 0}
+      Required: 1
   editorInfo:
     Windows:
     - serializedVersion: 2
@@ -330,11 +474,26 @@ MonoBehaviour:
       y: 31
       width: 232
       height: 225
-    WindowTypes: 01000000020000000100000003000000030000000100000001000000
-    NodeTypesIDs: 00000000000000000100000000000000010000000200000003000000
-    OptionsIndexes: 01000000
+    - serializedVersion: 2
+      x: 199
+      y: 707
+      width: 300
+      height: 218
+    - serializedVersion: 2
+      x: 561.8756
+      y: 716
+      width: 200
+      height: 155
+    - serializedVersion: 2
+      x: 271.87564
+      y: 987
+      width: 200
+      height: 155
+    WindowTypes: 01000000020000000100000003000000030000000100000001000000030000000200000002000000
+    NodeTypesIDs: 00000000000000000100000000000000010000000200000003000000020000000100000002000000
+    OptionsIndexes: 010000000800000009000000
     NodesIndexes: 00000000020000000500000006000000
-    ConditionsIndexes: 0300000004000000
+    ConditionsIndexes: 030000000400000007000000
     Nodes: 4
-    Options: 1
-    Conditions: 2
+    Options: 3
+    Conditions: 3
