@@ -49,7 +49,7 @@ public class ScrollViewContentScript : MonoBehaviour {
 
     public void OptionHasBeenChosen(DialogueOption optionChosen)
     {
-        for(int i = 0; i < currentOptions.Length + 2; i++)
+        for(int i = 0; i < (currentOptions != null? currentOptions.Length : 0) + 2; i++)
         {
             RemoveLogElement(1);
         }
