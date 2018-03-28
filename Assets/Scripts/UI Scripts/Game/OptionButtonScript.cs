@@ -42,7 +42,7 @@ public class OptionButtonScript : MonoBehaviour {
         KeyID = "Option " + n.ToString();
     }
 
-    public void SetTest(string definition, int percentage, int modifier = 0)
+    public void SetTest(CharacterAttribute definition, int percentage, int modifier = 0)
     {
         TestPanel.SetActive(true);
 
@@ -61,7 +61,7 @@ public class OptionButtonScript : MonoBehaviour {
         Color testColor = 
             GameObject.Find("Settings").
                         GetComponent<ColorCodedAttributes>().
-                        GetColor(CharacterStatExtension.FromString(definition));
+                        GetColor(definition);
 
         TestDefinitionText.color = testColor;
         TestPercentageText.color = testColor;

@@ -10,31 +10,50 @@ public class UpdateStatValueScript : MonoBehaviour
     private CharacterCreationScript characterScript;   
 
     [SerializeField]
-    private string StatDefinition;
+    private CharacterAttribute AttrDefinition;
+
+    [SerializeField]
+    private CharacterStatistic StatDefinition;
+
+    [SerializeField]
+    private bool IsAttribute;
 
     public void UpdatedStat()
     {
         if (gameObject.activeInHierarchy)
         {
             StringBuilder sb = new StringBuilder();
-
+            
+            if(IsAttribute)
+            {
+                //sb.Append(characterScript.StatValue(AttrDefinition));
+                StartCoroutine(PostponeAppend(sb, AttrDefinition));
+            }
+            else
+            {
+                StartCoroutine(PostponeAppend(sb, StatDefinition));
+            }
+            
+            /*
             try
             {
-                CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
+                CharacterAttribute statistic = CharacterStatExtension.FromString(StatDefinition);
                 sb.Append(characterScript.StatValue(statistic));
             }
             catch (System.InvalidCastException)
             {
-                StartCoroutine(PostponeAppend(sb, StatDefinition));
+                //StartCoroutine(PostponeAppend(sb, StatDefinition));
+                CharacterStatistic statistic = CharacterStatExtension.FromString(StatDefinition);
+                sb.Append(characterScript.StatValue(statistic));
             }
             catch (System.NullReferenceException)
             {
-                CharacterStat statistic = CharacterStatExtension.FromString(StatDefinition);
+                CharacterAttribute statistic = CharacterStatExtension.FromString(StatDefinition);
                 StartCoroutine(PostponeAppend(sb, statistic));
 
                 return;
             }
-
+            */
             StatText.text = sb.ToString();
         }
     }
@@ -54,7 +73,7 @@ public class UpdateStatValueScript : MonoBehaviour
         UpdatedStat();        
     }
 
-    private IEnumerator PostponeAppend(StringBuilder sb, CharacterStat statistic)
+    private IEnumerator PostponeAppend(StringBuilder sb, CharacterAttribute statistic)
     {
         while( characterScript.PlayerInfo == null || characterScript.PlayerInfo.Stats == null)
         {
@@ -65,7 +84,7 @@ public class UpdateStatValueScript : MonoBehaviour
         StatText.text = sb.ToString();
     }
 
-    private IEnumerator PostponeAppend(StringBuilder sb, string statistic)
+    private IEnumerator PostponeAppend(StringBuilder sb, CharacterStatistic statistic)
     {        
         while (characterScript.PlayerInfo == null || characterScript.PlayerInfo.Stats == null)
         {
@@ -75,14 +94,15 @@ public class UpdateStatValueScript : MonoBehaviour
         CharacterInfo dummy = new CharacterInfo();
         CharStatsToValueDictionary temp = new CharStatsToValueDictionary();
 
-        foreach(CharacterStat st in temp.Keys)
+        foreach(CharacterAttribute st in temp.Keys)
         {
             temp[st] = characterScript.StatValue(st);          
         }
 
         dummy.Stats = temp;
 
-        sb.Append(StatsRuleSet.StringToStatValueString(statistic, dummy));
+        //sb.Append(StatsRuleSet.StringToStatValueString(statistic, dummy));
+        sb.Append(StatsRuleSet.GetStatValueString(dummy, statistic));
         StatText.text = sb.ToString();
     }
 }

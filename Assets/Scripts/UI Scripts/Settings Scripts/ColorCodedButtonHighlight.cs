@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ColorCodedButtonHighlight : MonoBehaviour
 {
     [SerializeField]
-    private CharacterStat Stat;
+    private CharacterAttribute Stat;
 
     private Button tempButton;
     private Button abbrButton;

@@ -19,23 +19,23 @@ public class ColorCodedAttributes : MonoBehaviour {
     [SerializeField]
     private Color Physique;    
 
-    public Color GetColor(CharacterStat stat)
+    public Color GetColor(CharacterAttribute stat)
     {
         switch(stat)
         {
-            case CharacterStat.Agility:
+            case CharacterAttribute.Agility:
                 return Agility;
 
-            case CharacterStat.Character:
+            case CharacterAttribute.Character:
                 return Character;
 
-            case CharacterStat.Perception:
+            case CharacterAttribute.Perception:
                 return Perception;
 
-            case CharacterStat.Physique:
+            case CharacterAttribute.Physique:
                 return Physique;
 
-            case CharacterStat.Wits:
+            case CharacterAttribute.Wits:
                 return Wits;
         }
 

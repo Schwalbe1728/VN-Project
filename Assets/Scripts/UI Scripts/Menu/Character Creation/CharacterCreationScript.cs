@@ -52,7 +52,7 @@ public class CharacterCreationScript : MonoBehaviour
     {
         CharStatsToValueDictionary finalStats = new CharStatsToValueDictionary();
 
-        foreach(CharacterStat st in minimumStats.Keys)
+        foreach(CharacterAttribute st in minimumStats.Keys)
         {
             finalStats[st] = StatValue(st);
         }
@@ -67,7 +67,7 @@ public class CharacterCreationScript : MonoBehaviour
         StartCoroutine(WaitForFadeOutEnd());
     }
 
-    public int StatValue(CharacterStat stat)
+    public int StatValue(CharacterAttribute stat)
     {
         return
             minimumStats[stat] +
@@ -75,40 +75,52 @@ public class CharacterCreationScript : MonoBehaviour
             pointsSpent[stat];
     }
 
-    public bool IncreaseStat(CharacterStat stat)
+    public bool IncreaseStat(CharacterAttribute stat, out bool notEnoughPoints)
     {
         bool result = false;
 
-        if (statPointsLeft > 0 && StatValue(stat) < MAX_STAT)
+        if (StatValue(stat) < MAX_STAT)
         {
             //stats[stat]++;
-            pointsSpent[stat]++;
-            TryDecreasingStatPoints(1);
-            result = true;
+            if (TryDecreasingStatPoints(1, out notEnoughPoints))
+            {
+                pointsSpent[stat]++;
+                result = true;
 
-            FireNotifyStatChange();
+                FireNotifyStatChange();
+            }
+        }
+        else
+        {
+            notEnoughPoints = false;
         }
 
         return result;
     }
 
-    public bool DecreaseStat(CharacterStat stat)
+    public bool DecreaseStat(CharacterAttribute stat, out bool wouldGiveTooMuchPoints)
     {
         bool result = false;
 
         if (StatValue(stat) > MIN_STAT && pointsSpent[stat] > 0)
         {
-            pointsSpent[stat]--;
-            IncreaseStatPoints(1);
-            result = true;
+            if (IncreaseStatPoints(1, out wouldGiveTooMuchPoints))
+            {
+                pointsSpent[stat]--;
+                result = true;
 
-            FireNotifyStatChange();
+                FireNotifyStatChange();
+            }
+        }
+        else
+        {
+            wouldGiveTooMuchPoints = false;
         }
 
         return result;
     }
 
-    public bool ApplyBackgroundModificators(CharacterStat[] statsArray, int[] modifs)
+    public bool ApplyBackgroundModificators(CharacterAttribute[] statsArray, int[] modifs)
     {
         bool result = ComponentReadyToWork();
 
@@ -127,6 +139,7 @@ public class CharacterCreationScript : MonoBehaviour
         return result;
     }
 
+    [System.Obsolete]
     public bool TryDecreasingStatPoints(int value)
     {
         bool result = value > 0 && StatPointsLeft - value >= 0;
@@ -140,9 +153,42 @@ public class CharacterCreationScript : MonoBehaviour
         return result;
     }
 
+    public bool TryDecreasingStatPoints(int value, out bool notEnoughPoints)
+    {
+        bool resultA = value > 0;
+        notEnoughPoints = StatPointsLeft - value < 0;
+
+        bool result = resultA && !notEnoughPoints;
+
+        if(result)
+        {
+            statPointsLeft -= value;
+            FireNotifyStatChange();
+        }
+
+        return result;
+    }
+
+    [System.Obsolete]
     public bool IncreaseStatPoints(int value)
     {
         bool result = value > 0 && statPointsLeft + value <= StartingStatPoints + BonusStatPoints;
+
+        if (result)
+        {
+            statPointsLeft += value;
+            FireNotifyStatChange();
+        }
+
+        return result;
+    }
+
+    public bool IncreaseStatPoints(int value, out bool wouldGiveTooMuchPoints)
+    {
+        bool resultA = value > 0;
+        wouldGiveTooMuchPoints = statPointsLeft + value > StartingStatPoints + BonusStatPoints;
+
+        bool result = resultA && !wouldGiveTooMuchPoints;
 
         if (result)
         {
@@ -194,7 +240,7 @@ public class CharacterCreationScript : MonoBehaviour
     {
         int spentCharPointsOnAttributes = 0;
 
-        foreach(CharacterStat stat in minimumStats.Keys)
+        foreach(CharacterAttribute stat in minimumStats.Keys)
         {
             statModifiers[stat] = 0;
             spentCharPointsOnAttributes += pointsSpent[stat];
@@ -206,7 +252,7 @@ public class CharacterCreationScript : MonoBehaviour
         if(Skills != null) Skills.Clear();
     }
 
-    private void ApplyBackgroundModificator(CharacterStat stat, int modif)
+    private void ApplyBackgroundModificator(CharacterAttribute stat, int modif)
     {        
         statModifiers[stat] = modif;        
     }

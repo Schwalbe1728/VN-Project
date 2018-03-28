@@ -16,7 +16,7 @@ public partial class DialogueEditor
         EditorInfo.NodeTypesIDs.Add(EditorInfo.Conditions++);
         EditorInfo.ConditionsIndexes.Add(EditorInfo.Windows.Count - 1);
 
-        newCondition.SetAttributeCheckCondition(CharacterStat.Agility, 10, InequalityTypes.Equal);
+        newCondition.SetAttributeCheckCondition(CharacterAttribute.Agility, 10, InequalityTypes.Equal);
 
         SaveChanges("Create Condition Node");
     }

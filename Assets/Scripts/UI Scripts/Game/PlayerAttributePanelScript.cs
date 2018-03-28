@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerAttributePanelScript : MonoBehaviour
 {
     [SerializeField]
-    private CharacterStat Attribute;
+    private CharacterAttribute Attribute;
 
     [SerializeField]
     private Text AttributeName;

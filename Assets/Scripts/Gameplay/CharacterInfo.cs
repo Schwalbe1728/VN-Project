@@ -14,7 +14,7 @@ public static class StatsRuleSet
 {
     private static float healPercentPerHour = 0.02f;
 
-    public static bool TestRNG(CharacterInfoScript charInfo, CharacterStat statToTest, int modificator, CharacterSkills skill)
+    public static bool TestRNG(CharacterInfoScript charInfo, CharacterAttribute statToTest, int modificator, CharacterSkills skill)
     {
         int diceResult = UnityEngine.Random.Range(1, 100);
         bool result = false;
@@ -36,7 +36,7 @@ public static class StatsRuleSet
 
         return result;
     }
-
+    /*
     public static int StringToStatValue(string statString, CharacterInfoScript charInfo)
     {
         switch(statString.ToLower())
@@ -88,7 +88,8 @@ public static class StatsRuleSet
 
         throw new System.InvalidCastException();
     }
-
+    */
+    /*
     public static string StringToStatValueString(string statString, CharacterInfoScript charInfo)
     {
         switch (statString.ToLower())
@@ -145,6 +146,131 @@ public static class StatsRuleSet
 
         throw new System.InvalidCastException();
     }
+    */
+
+    public static float GetStatValue(CharacterInfo charInfo, CharacterStatistic stat)
+    {
+        switch (stat)
+        {
+            case CharacterStatistic.BaseDamage:
+                return BaseDamage(charInfo);
+
+            case CharacterStatistic.HealRateSanity:
+                return SanityHealRate(charInfo);
+
+            case CharacterStatistic.HealRateVitality:
+                return VitalityHealRate(charInfo);
+
+            case CharacterStatistic.Sanity:
+                return MaxSanity(charInfo);
+
+            case CharacterStatistic.Vitality:
+                return MaxHealthPoints(charInfo);
+
+            case CharacterStatistic.WalkingSpeed:
+                return WalkSpeedPerHour(charInfo);
+        }
+
+        throw new NotImplementedException();
+    }
+
+    public static string GetStatValueString(CharacterInfo charInfo, CharacterStatistic stat)
+    {
+        string result = "";
+
+        try
+        {
+            float value = GetStatValue(charInfo, stat);
+
+            switch (stat)
+            {
+                case CharacterStatistic.BaseDamage:
+                    result = (value - 1).ToString("n0") + " - " + (value + 1).ToString("n0");
+                    break;
+
+                case CharacterStatistic.WalkingSpeed:
+                    result = (value / 1000).ToString("n1");
+                    break;
+
+                default:
+                    result = value.ToString("n0");
+                    break;
+            }
+        }
+        catch (NotImplementedException e)
+        {
+            switch (stat)
+            {
+                case CharacterStatistic.HealRatesCombined:
+                    return VitalityHealRate(charInfo).ToString("n1") + "/" +
+                    SanityHealRate(charInfo).ToString("n1");
+            }
+        }
+
+        return result;
+    }
+
+    public static string GetStatValueString(CharacterInfoScript charInfo, CharacterStatistic stat)
+    {
+        string result = "";
+
+        try
+        {
+            float value = GetStatValue(charInfo, stat);            
+
+            switch(stat)
+            {
+                case CharacterStatistic.BaseDamage:
+                    result = (value - 1).ToString("n0") + " - " + (value + 1).ToString("n0");
+                    break;
+
+                case CharacterStatistic.WalkingSpeed:
+                    result = (value / 1000).ToString("n1");
+                    break;
+
+                default:
+                    result = value.ToString("n0");
+                    break;
+            }
+        }
+        catch( NotImplementedException e )
+        {
+            switch(stat)
+            {                
+                case CharacterStatistic.HealRatesCombined:
+                    return VitalityHealRate(charInfo).ToString("n1") + "/" +
+                    SanityHealRate(charInfo).ToString("n1");
+            }
+        }
+
+        return result;
+    }
+
+    public static float GetStatValue(CharacterInfoScript charInfo, CharacterStatistic stat)
+    {
+        switch(stat)
+        {
+            case CharacterStatistic.BaseDamage:
+                return BaseDamage(charInfo);
+
+            case CharacterStatistic.HealRateSanity:
+                return SanityHealRate(charInfo);
+
+            case CharacterStatistic.HealRateVitality:
+                return VitalityHealRate(charInfo);
+
+            case CharacterStatistic.Sanity:
+                return MaxSanity(charInfo);
+
+            case CharacterStatistic.Vitality:
+                return MaxHealthPoints(charInfo);
+
+            case CharacterStatistic.WalkingSpeed:
+                return WalkSpeedPerHour(charInfo);
+        }
+
+        throw new NotImplementedException();
+    }
 
     public static int MaxHealthPoints(CharacterInfoScript charInfo)
     {
@@ -166,8 +292,8 @@ public static class StatsRuleSet
         float Mod3 = 10f;
 
         int result =
-            Mod1 * charInfo.Stats[CharacterStat.Physique] + 
-            Mod2 * charInfo.Stats[CharacterStat.Character];
+            Mod1 * charInfo.Stats[CharacterAttribute.Physique] + 
+            Mod2 * charInfo.Stats[CharacterAttribute.Character];
 
         return Mathf.RoundToInt(Mod3 * result / (Mod1 + Mod2));
     }
@@ -192,8 +318,8 @@ public static class StatsRuleSet
         float Mod3 = 1f;
 
         int result =
-            Mod1 * charInfo.Stats[CharacterStat.Physique] +
-            Mod2 * charInfo.Stats[CharacterStat.Agility];
+            Mod1 * charInfo.Stats[CharacterAttribute.Physique] +
+            Mod2 * charInfo.Stats[CharacterAttribute.Agility];
             
 
         return Mathf.RoundToInt( Mod3 * result / (Mod1 + Mod2) );
@@ -213,8 +339,8 @@ public static class StatsRuleSet
     public static int HealRate(CharacterInfo charInfo)
     {
         int result =
-            5 * charInfo.Stats[CharacterStat.Physique] +
-            2 * charInfo.Stats[CharacterStat.Character];
+            5 * charInfo.Stats[CharacterAttribute.Physique] +
+            2 * charInfo.Stats[CharacterAttribute.Character];
 
         return 1 + Mathf.RoundToInt(result / 30.0f);
     }
@@ -246,8 +372,8 @@ public static class StatsRuleSet
         float Mod3 = 10f;
 
         int result =
-            modCh * charInfo.Stats[CharacterStat.Character] +
-            modWt * charInfo.Stats[CharacterStat.Wits];
+            modCh * charInfo.Stats[CharacterAttribute.Character] +
+            modWt * charInfo.Stats[CharacterAttribute.Wits];
 
         return Mathf.RoundToInt(Mod3 * result / (modCh + modWt));
     }
@@ -287,7 +413,7 @@ public static class StatsRuleSet
         return
             10 + Mathf.RoundToInt(
                     (20 -
-                        (CHMod * charInfo.Stats[CharacterStat.Character] + WTMod * charInfo.Stats[CharacterStat.Wits]) / ((float)CHMod + WTMod))
+                        (CHMod * charInfo.Stats[CharacterAttribute.Character] + WTMod * charInfo.Stats[CharacterAttribute.Wits]) / ((float)CHMod + WTMod))
                      * 15 / 19.0f);
     }
 
@@ -351,8 +477,8 @@ public static class StatsRuleSet
         int PHMod = 1;
 
         float walkingAttributeValue =
-            ((float)AGMod * (charInfo.Stats[CharacterStat.Agility] - 1 ) + 
-                PHMod * (charInfo.Stats[CharacterStat.Physique] - 1 )) / (AGMod + PHMod);
+            ((float)AGMod * (charInfo.Stats[CharacterAttribute.Agility] - 1 ) + 
+                PHMod * (charInfo.Stats[CharacterAttribute.Physique] - 1 )) / (AGMod + PHMod);
         float value = WalkingSpeedMin + (WalkingSpeedMax - WalkingSpeedMin) * walkingAttributeValue / 19;
 
         return Mathf.RoundToInt(value);
@@ -384,7 +510,7 @@ public class CharacterInfoScript : MonoBehaviour
         currentSanity = MaxSanity;
     }
 
-    public int GetStat(CharacterStat stat)
+    public int GetStat(CharacterAttribute stat)
     {
         return PlayerInfo.Stats[stat];
     }
@@ -419,11 +545,11 @@ public class CharacterInfoScript : MonoBehaviour
     public string Name { get { return PlayerInfo.CharName; } }
 
     #region Basic Stats
-    public int Agility { get { return PlayerInfo.Stats[CharacterStat.Agility]; } }
-    public int Perception { get { return PlayerInfo.Stats[CharacterStat.Perception]; } }
-    public int Character { get { return PlayerInfo.Stats[CharacterStat.Character]; } }
-    public int Wits { get { return PlayerInfo.Stats[CharacterStat.Wits]; } }
-    public int Physique { get { return PlayerInfo.Stats[CharacterStat.Physique]; } }
+    public int Agility { get { return PlayerInfo.Stats[CharacterAttribute.Agility]; } }
+    public int Perception { get { return PlayerInfo.Stats[CharacterAttribute.Perception]; } }
+    public int Character { get { return PlayerInfo.Stats[CharacterAttribute.Character]; } }
+    public int Wits { get { return PlayerInfo.Stats[CharacterAttribute.Wits]; } }
+    public int Physique { get { return PlayerInfo.Stats[CharacterAttribute.Physique]; } }
     #endregion
 
     #region Health Points
@@ -589,7 +715,7 @@ public class CharacterInfoScript : MonoBehaviour
     }
 }
 
-public enum CharacterStat
+public enum CharacterAttribute
 {
     Agility,
     Perception,
@@ -598,71 +724,108 @@ public enum CharacterStat
     Physique
 }
 
+public enum CharacterStatistic
+{
+    Vitality,
+    Sanity,
+    BaseDamage,
+    HealRatesCombined,
+    HealRateVitality,
+    HealRateSanity,
+    WalkingSpeed
+}
+
 public static class CharacterStatExtension
 {
+    public static CharacterStatistic FromStringStatistic(string from)
+    {
+        from = from.ToLower();
 
-    public static CharacterStat FromString(string from)
+        switch(from)
+        {
+            case "basedmg":
+                return CharacterStatistic.BaseDamage;
+
+            case "hrsanity":
+                return CharacterStatistic.HealRateSanity;
+
+            case "hrvitality":
+                return CharacterStatistic.HealRateVitality;
+
+            case "hrcombined":
+                return CharacterStatistic.HealRatesCombined;
+
+            case "sanity":
+                return CharacterStatistic.Sanity;
+
+            case "vitality":
+                return CharacterStatistic.Vitality;
+
+            case "walkspeed":
+                return CharacterStatistic.WalkingSpeed;
+        }
+
+        throw new InvalidCastException();
+    }
+
+
+    public static CharacterAttribute FromString(string from)
     {
         from = from.ToLower();
 
         switch (from)
         {
             case "agility":
-                return CharacterStat.Agility;
+                return CharacterAttribute.Agility;
 
             case "perception":
-                return CharacterStat.Perception;
+                return CharacterAttribute.Perception;
 
             case "character":
-                return CharacterStat.Character;
+                return CharacterAttribute.Character;
 
             case "wits":
-                return CharacterStat.Wits;
+                return CharacterAttribute.Wits;
 
             case "physique":
-                return CharacterStat.Physique;
+                return CharacterAttribute.Physique;
 
             case "ag":
-                return CharacterStat.Agility;
+                return CharacterAttribute.Agility;
 
             case "pe":
-                return CharacterStat.Perception;
+                return CharacterAttribute.Perception;
 
             case "ch":
-                return CharacterStat.Character;
+                return CharacterAttribute.Character;
 
             case "wt":
-                return CharacterStat.Wits;
+                return CharacterAttribute.Wits;
 
             case "ph":
-                return CharacterStat.Physique;
+                return CharacterAttribute.Physique;
         }
 
         throw new InvalidCastException();
     }
 
-    public static CharacterStat FromString(this CharacterStat stat, string from)
-    {
-        return FromString(from);
-    }
-
-    public static string GetString(this CharacterStat stat)
+    public static string GetString(this CharacterAttribute stat)
     {
         switch (stat)
         {
-            case CharacterStat.Agility:
+            case CharacterAttribute.Agility:
                 return "Agility";
 
-            case CharacterStat.Character:
+            case CharacterAttribute.Character:
                 return "Character";
 
-            case CharacterStat.Perception:
+            case CharacterAttribute.Perception:
                 return "Perception";
 
-            case CharacterStat.Physique:
+            case CharacterAttribute.Physique:
                 return "Physique";
 
-            case CharacterStat.Wits:
+            case CharacterAttribute.Wits:
                 return "Wits";
         }
 

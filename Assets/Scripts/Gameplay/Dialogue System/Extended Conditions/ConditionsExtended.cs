@@ -83,7 +83,7 @@ public partial class ConditionNode
         }
     }    
 
-    public void SetAttributeCheckCondition(CharacterStat stat, int value, InequalityTypes type)
+    public void SetAttributeCheckCondition(CharacterAttribute stat, int value, InequalityTypes type)
     {
         conditionTypeSet = ConditionTypes.AttributeCheck;
 
@@ -96,7 +96,7 @@ public partial class ConditionNode
         attributeCheckCondition.ValueChecked = value;
         attributeCheckCondition.InequalityType = type;
     }
-    public void SetAttributeTestCondition(CharacterStat stat, int mod, CharacterSkills skill)
+    public void SetAttributeTestCondition(CharacterAttribute stat, int mod, CharacterSkills skill)
     {
         conditionTypeSet = ConditionTypes.AttributeTest;
 
@@ -210,7 +210,7 @@ public partial class ConditionNode
 [System.Serializable]
 public class AttributeCheckCondition : ConditionNodeBase
 {
-    public CharacterStat Attribute;
+    public CharacterAttribute Attribute;
     public int ValueChecked;
     public InequalityTypes InequalityType;
 
@@ -228,7 +228,7 @@ public class AttributeCheckCondition : ConditionNodeBase
 [System.Serializable]
 public class AttributeTestCondition : ConditionNodeBase
 {
-    public CharacterStat Attribute;
+    public CharacterAttribute Attribute;
     public int AttributeMod;
     public CharacterSkills Skill;
 

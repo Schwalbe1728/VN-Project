@@ -48,11 +48,11 @@ public class AttributeDescriptionScript : MonoBehaviour
 
     [Multiline]
     [SerializeField]
-    private string MaxStressPenalty;
+    private string MaxSanity;
 
     [Multiline]
     [SerializeField]
-    private string MaxSanity;
+    private string WalkingSpeed;
     #endregion
 
     public void SetDescriptionText(string text, bool dump)
@@ -62,62 +62,82 @@ public class AttributeDescriptionScript : MonoBehaviour
 
     public void SetDescriptionText(string stat)
     {
-        string result = null;
-
         try
         {
-            CharacterStat statEnum = CharacterStat.Physique.FromString(stat);
-
-            switch (statEnum)
-            {
-                case CharacterStat.Agility:
-                    result = Agility;
-                    break;
-
-                case CharacterStat.Perception:
-                    result = Perception;
-                    break;
-
-                case CharacterStat.Character:
-                    result = Character;
-                    break;
-
-                case CharacterStat.Wits:
-                    result = Wits;
-                    break;
-
-                case CharacterStat.Physique:
-                    result = Physique;
-                    break;
-            }
+            CharacterAttribute attr = CharacterStatExtension.FromString(stat);
+            SetDescriptionText(attr);
         }
-        catch (System.InvalidCastException)
+        catch(System.InvalidCastException e)
         {
-            stat = stat.ToLower();
-
-            switch(stat)
+            try
             {
-                case "hp":
-                    result = HealthPoints;
-                    break;
-
-                case "bdmg":
-                    result = BaseDMG;
-                    break;
-
-                case "hr":
-                    result = HealRate;
-                    break;
-
-                case "maxsp":
-                    result = MaxStressPenalty;
-                    break;
-
-                case "sanity":
-                    result = MaxSanity;
-                    break;
+                CharacterStatistic statistic = CharacterStatExtension.FromStringStatistic(stat);
+                SetDescriptionText(statistic);
+            }
+            catch(System.InvalidCastException ex)
+            {
+                Debug.LogWarning("Nieprawidłowa nazwa cechy postaci: " + stat);
             }
         }
+        
+    }
+    
+    public void SetDescriptionText(CharacterStatistic stat)
+    {
+        string result = "";
+
+        switch(stat)
+        {
+            case CharacterStatistic.BaseDamage:
+                result = BaseDMG;
+                break;
+
+            case CharacterStatistic.HealRatesCombined:
+                result = HealRate;
+                break;
+
+            case CharacterStatistic.Sanity:
+                result = MaxSanity;
+                break;
+
+            case CharacterStatistic.Vitality:
+                result = HealthPoints;
+                break;
+
+            case CharacterStatistic.WalkingSpeed:
+                result = WalkingSpeed;
+                break;
+        }
+
+        Description = result;
+    }
+
+    public void SetDescriptionText(CharacterAttribute stat)
+    {
+        string result = "";
+
+        switch (stat)
+        {
+            case CharacterAttribute.Agility:
+                result = Agility;
+                break;
+
+            case CharacterAttribute.Perception:
+                result = Perception;
+                break;
+
+            case CharacterAttribute.Character:
+                result = Character;
+                break;
+
+            case CharacterAttribute.Wits:
+                result = Wits;
+                break;
+
+            case CharacterAttribute.Physique:
+                result = Physique;
+                break;
+        }        
 
         Description = result;
     }

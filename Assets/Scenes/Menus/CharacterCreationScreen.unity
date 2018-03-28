@@ -2140,7 +2140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: sanity
+  AttrDefinition: 0
+  StatDefinition: 1
+  IsAttribute: 0
 --- !u!114 &319531338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2395,7 +2397,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HR
+          m_StringArgument: HRCombined
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -4079,7 +4081,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: BDmg
+            m_StringArgument: BaseDmg
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -4164,7 +4166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Agility
+  AttrDefinition: 0
+  StatDefinition: 0
+  IsAttribute: 1
 --- !u!114 &583597627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4654,7 +4658,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HP
+          m_StringArgument: vitality
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -4676,7 +4680,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: HP
+  AttrDefinition: 0
+  StatDefinition: 0
+  IsAttribute: 0
 --- !u!114 &603264997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5158,7 +5164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Perception
+  AttrDefinition: 1
+  StatDefinition: 0
+  IsAttribute: 1
 --- !u!114 &619680663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5494,7 +5502,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: HP
+            m_StringArgument: vitality
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -6124,7 +6132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Speed
+  AttrDefinition: 0
+  StatDefinition: 6
+  IsAttribute: 0
 --- !u!114 &794555733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6205,7 +6215,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MaxSP
+          m_StringArgument: walkspeed
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -7590,7 +7600,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HP
+          m_StringArgument: vitality
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -8507,7 +8517,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HR
+          m_StringArgument: HRCombined
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -8529,7 +8539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: HealRate
+  AttrDefinition: 0
+  StatDefinition: 3
+  IsAttribute: 1
 --- !u!114 &1219115245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9430,8 +9442,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 232028856}
   m_HandleRect: {fileID: 232028855}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.94979876
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9588,7 +9600,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: MaxSP
+            m_StringArgument: walkspeed
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -9672,7 +9684,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 37.21376
+      value: 64.74126
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -9682,7 +9694,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 54.42752
+      value: 109.48251
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -9910,7 +9922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Wits
+  AttrDefinition: 3
+  StatDefinition: 0
+  IsAttribute: 1
 --- !u!114 &1383940468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10827,7 +10841,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: HR
+            m_StringArgument: HRCombined
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -11259,7 +11273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Physique
+  AttrDefinition: 4
+  StatDefinition: 0
+  IsAttribute: 1
 --- !u!114 &1604611502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11863,7 +11879,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: BDmg
+          m_StringArgument: BaseDmg
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -11885,7 +11901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: BaseDMG
+  AttrDefinition: 0
+  StatDefinition: 2
+  IsAttribute: 0
 --- !u!114 &1649951214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12185,7 +12203,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 37.21376
+      value: 64.74126
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -12195,7 +12213,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 54.42752
+      value: 109.48251
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -12464,7 +12482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff540ee2a670a46ac90a662d08506e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatDefinition: Character
+  AttrDefinition: 2
+  StatDefinition: 0
+  IsAttribute: 1
 --- !u!114 &1776304012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12932,7 +12952,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 112.44, y: 30.462502}
+  m_CellSize: {x: 192.51999, y: 44.712505}
   m_Spacing: {x: 0, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -13060,7 +13080,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 37.21376
+      value: 64.74126
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -13070,7 +13090,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 54.42752
+      value: 109.48251
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -13298,42 +13318,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb24cc3a968f6734781e31ee02f8c36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapons:
-    _Buckets: ffffffffffffffff
-    _HashCodes: 0000000000000000
-    _Next: 0000000000000000
-    _Count: 0
-    _Version: 0
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys:
-    - 
-    - 
-    _Values: 0000000000000000
-  Consumables:
-    _Buckets: ffffffffffffffff
-    _HashCodes: 0000000000000000
-    _Next: 0000000000000000
-    _Count: 0
-    _Version: 0
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys:
-    - 
-    - 
-    _Values: 0000000000000000
-  QuestItems:
-    _Buckets: ffffffffffffffff
-    _HashCodes: 0000000000000000
-    _Next: 0000000000000000
-    _Count: 0
-    _Version: 0
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys:
-    - 
-    - 
-    _Values: 0000000000000000
+  Equipment:
+    Weapons:
+      _Buckets: ffffffffffffffff
+      _HashCodes: 0000000000000000
+      _Next: 0000000000000000
+      _Count: 0
+      _Version: 0
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - 
+      - 
+      _Values: 0000000000000000
+    Consumables:
+      _Buckets: ffffffffffffffff
+      _HashCodes: 0000000000000000
+      _Next: 0000000000000000
+      _Count: 0
+      _Version: 0
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - 
+      - 
+      _Values: 0000000000000000
+    QuestItems:
+      _Buckets: ffffffffffffffff
+      _HashCodes: 0000000000000000
+      _Next: 0000000000000000
+      _Count: 0
+      _Version: 0
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - 
+      - 
+      _Values: 0000000000000000
   money: 0
 --- !u!1 &1918940153
 GameObject:
@@ -14415,7 +14436,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 54.42752, y: 0}
+  m_SizeDelta: {x: 109.48251, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2045767311
 MonoBehaviour:
@@ -14514,14 +14535,11 @@ MonoBehaviour:
 
 
     (explanation)'
-  MaxStressPenalty: 'MAX STRESS PENALTY (MaxSP)
-
-
-    (explanation)'
   MaxSanity: 'MAX SANITY (MaxSAN)
 
 
     (explanation)'
+  WalkingSpeed: 
 --- !u!114 &2045767315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14696,7 +14714,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MaxSP
+          m_StringArgument: walkspeed
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -15405,7 +15423,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 19.55375, y: 8.648252}
+  m_CellSize: {x: 53.241257, y: 14.03475}
   m_Spacing: {x: 10, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2

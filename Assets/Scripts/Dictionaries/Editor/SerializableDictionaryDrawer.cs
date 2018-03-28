@@ -182,7 +182,7 @@ public class NodeIDToSpriteDictionaryDrawer : DictionaryDrawer<int, Sprite> { }
 public class NodeIDToAudioClipDictionaryDrawer : DictionaryDrawer<int, AudioClip> { }
 
 [CustomPropertyDrawer(typeof(CharStatsToValueDictionary))]
-public class CharStatsToValueDictionaryDrawer : DictionaryDrawer<CharacterStat, int> { }
+public class CharStatsToValueDictionaryDrawer : DictionaryDrawer<CharacterAttribute, int> { }
 
 [CustomPropertyDrawer(typeof(PlotValuesDictionary))]
 public class PlotValuesDictionaryDrawer : DictionaryDrawer<string, string> { }

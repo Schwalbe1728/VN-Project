@@ -54,18 +54,18 @@ public class NodeIDToAudioClipDictionary : SerializableDictionary<int, AudioClip
 }
 
 [Serializable]
-public class CharStatsToValueDictionary : SerializableDictionary<CharacterStat, int>
+public class CharStatsToValueDictionary : SerializableDictionary<CharacterAttribute, int>
 {
     public CharStatsToValueDictionary(int basicValue = 1) : base()
     {
-        Add(CharacterStat.Agility, basicValue);
-        Add(CharacterStat.Perception, basicValue);
-        Add(CharacterStat.Character, basicValue);
-        Add(CharacterStat.Wits, basicValue);
-        Add(CharacterStat.Physique, basicValue);
+        Add(CharacterAttribute.Agility, basicValue);
+        Add(CharacterAttribute.Perception, basicValue);
+        Add(CharacterAttribute.Character, basicValue);
+        Add(CharacterAttribute.Wits, basicValue);
+        Add(CharacterAttribute.Physique, basicValue);
     }
 
-    public new int this[CharacterStat key]
+    public new int this[CharacterAttribute key]
     {
         get
         {

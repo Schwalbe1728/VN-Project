@@ -7,7 +7,7 @@ public class AttributePanelScript : MonoBehaviour
 {
 
     [SerializeField]
-    private CharacterStat Attribute;
+    private CharacterAttribute Attribute;
 
     private Text AttributeValueText;
     private CharacterCreationScript creationScript;
@@ -22,7 +22,9 @@ public class AttributePanelScript : MonoBehaviour
 
     public void DecreseStat()
     {
-        if (creationScript.DecreaseStat(Attribute))
+        bool temp;
+
+        if (creationScript.DecreaseStat(Attribute, out temp))
         {
             GameObject.Find("Points Left Value").GetComponent<Text>().text =
                 creationScript.StatPointsLeft.ToString();
@@ -31,7 +33,9 @@ public class AttributePanelScript : MonoBehaviour
 
     public void IncreaseStat()
     {
-        if (creationScript.IncreaseStat(Attribute))
+        bool temp;
+
+        if (creationScript.IncreaseStat(Attribute, out temp))
         {
             GameObject.Find("Points Left Value").GetComponent<Text>().text =
                 creationScript.StatPointsLeft.ToString();            

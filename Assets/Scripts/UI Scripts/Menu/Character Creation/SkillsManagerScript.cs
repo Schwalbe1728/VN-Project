@@ -17,12 +17,12 @@ public class SkillsManagerScript : MonoBehaviour
     [SerializeField]
     private int SkillCost = 2;   
 
-    public bool SetSkill(CharacterSkills skill, bool value)
+    public bool SetSkill(CharacterSkills skill, bool value, out bool pointRelatedIssue)
     {
         bool result =
             (value) ?
-                characterCreation.TryDecreasingStatPoints(SkillCost) :
-                characterCreation.IncreaseStatPoints(SkillCost);
+                characterCreation.TryDecreasingStatPoints(SkillCost, out pointRelatedIssue) :
+                characterCreation.IncreaseStatPoints(SkillCost, out pointRelatedIssue);
 
         if (result)
         {
@@ -37,6 +37,8 @@ public class SkillsManagerScript : MonoBehaviour
         }
 
         characterCreation.Skills = GetSkills();
+
+        //pointRelatedIssue = !pointRelatedIssue;
 
         return result;
     }

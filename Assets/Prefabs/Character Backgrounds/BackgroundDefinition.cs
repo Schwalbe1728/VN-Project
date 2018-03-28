@@ -26,7 +26,7 @@ public class BackgroundDefinition : ScriptableObject
     [SerializeField]
     private int Physique;
 
-    private CharacterStat[] modifiedStatDeclaration;
+    private CharacterAttribute[] modifiedStatDeclaration;
     private int[] modifiedStatValues;
 
     [Space(10)]
@@ -50,13 +50,13 @@ public class BackgroundDefinition : ScriptableObject
         if (modifiedStatDeclaration == null || modifiedStatDeclaration.Length == 0)
         {
             modifiedStatDeclaration =
-                new CharacterStat[]
+                new CharacterAttribute[]
                 {
-                    CharacterStat.Agility,
-                    CharacterStat.Perception,
-                    CharacterStat.Character,
-                    CharacterStat.Wits,
-                    CharacterStat.Physique
+                    CharacterAttribute.Agility,
+                    CharacterAttribute.Perception,
+                    CharacterAttribute.Character,
+                    CharacterAttribute.Wits,
+                    CharacterAttribute.Physique
                 };
         }
 

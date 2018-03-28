@@ -140,14 +140,14 @@ public partial class DialogueEditor
         return result;
     }
 
-    bool DrawCharacterAttributeField(CharacterStat prevStat, int labelWidth, out CharacterStat stat)
+    bool DrawCharacterAttributeField(CharacterAttribute prevStat, int labelWidth, out CharacterAttribute stat)
     {
         bool result = false;
 
         GUILayout.BeginHorizontal();
         {
             EditorGUILayout.PrefixLabel("Attribute"/*, GUILayout.Width(labelWidth)*/);
-            stat = (CharacterStat)EditorGUILayout.EnumPopup(prevStat);
+            stat = (CharacterAttribute)EditorGUILayout.EnumPopup(prevStat);
 
             result |= prevStat != stat;
         }
@@ -246,7 +246,7 @@ public partial class DialogueEditor
         bool result = false;
         int labelWidth = 90;
 
-        CharacterStat stat;
+        CharacterAttribute stat;
         int value;
         InequalityTypes inequality;        
 
@@ -272,7 +272,7 @@ public partial class DialogueEditor
         bool result = false;
         int labelWidth = 90;
 
-        CharacterStat stat;
+        CharacterAttribute stat;
         int modificator;
         CharacterSkills skill;
 
