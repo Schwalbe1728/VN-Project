@@ -34,6 +34,9 @@ public partial class ConditionNode
     [SerializeField]
     private BackgroundRequiredCondition backgroundRequiredCondition;
 
+    [SerializeField]
+    private StatisticsCheckCondition statisticCheckCondition;
+
     public ConditionTypes ConditionType { get { return conditionTypeSet; } }
 
     public AttributeCheckCondition AttributeCheck { get { return (attributeCheckCondition != null)? attributeCheckCondition : new AttributeCheckCondition(); } }
@@ -45,6 +48,7 @@ public partial class ConditionNode
     public WorldDateCondition WorldDate { get { return (worldDateCondition != null)? worldDateCondition : new WorldDateCondition(); } }
     public WithinTimeRangeCondition WithinTimeRange { get { return (worldDateRangeCondition != null) ? worldDateRangeCondition : new WithinTimeRangeCondition(); } }
     public BackgroundRequiredCondition BackgroundRequired { get { return (backgroundRequiredCondition != null)? backgroundRequiredCondition : new BackgroundRequiredCondition(); } }
+    public StatisticsCheckCondition StatisticCheck { get { return (statisticCheckCondition != null) ? statisticCheckCondition : new StatisticsCheckCondition(); } }
 
     public override bool ConditionTest()
     {
@@ -76,6 +80,9 @@ public partial class ConditionNode
 
             case ConditionTypes.PlayerHasMoney:
                 return PlayerHasMoney.ConditionTest();
+
+            case ConditionTypes.StatisticCheck:
+                return StatisticCheck.ConditionTest();
 
             default:
                 Debug.Log("Wtf, ConditionTest default");
@@ -204,6 +211,20 @@ public partial class ConditionNode
 
         backgroundRequiredCondition.Background = background;
         backgroundRequiredCondition.Required = isRequired;
+    }
+
+    public void SetStatisticCheckCondition(CharacterStatistic statistic, InequalityTypes ineqType, float valueToCheck)
+    {
+        conditionTypeSet = ConditionTypes.StatisticCheck;
+
+        if(statisticCheckCondition == null)
+        {
+            statisticCheckCondition = new StatisticsCheckCondition();
+        }
+
+        statisticCheckCondition.InequalityType = ineqType;
+        statisticCheckCondition.Statistic = statistic;
+        statisticCheckCondition.ValueChecked = valueToCheck;
     }
 }
 
@@ -386,5 +407,23 @@ public class BackgroundRequiredCondition : ConditionNodeBase
             (Required) ?
                 playerBackground.Name.Equals(Background.Name) :
                 !playerBackground.Name.Equals(Background.Name);
+    }
+}
+
+[System.Serializable]
+public class StatisticsCheckCondition : ConditionNodeBase
+{
+    public CharacterStatistic Statistic;
+    public float ValueChecked;
+    public InequalityTypes InequalityType;
+
+    public override bool ConditionTest()
+    {
+        float attributeValue =
+            GameObject.Find("Game Info Component").
+            GetComponent<CharacterInfoScript>().
+            GetStat(Statistic);
+
+        return InequalityType.Value(attributeValue, ValueChecked);
     }
 }

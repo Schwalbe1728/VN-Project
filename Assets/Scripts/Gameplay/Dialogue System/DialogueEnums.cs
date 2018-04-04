@@ -36,6 +36,7 @@ public enum ConditionTypes
     AttributeTest,
     BackgroundRequired,
     SkillPossessed,
+    StatisticCheck,
     PlayerHasItem,
     PlayerHasMoney,
     StoryStateHappened,
@@ -70,6 +71,29 @@ public static class InequalityTypeExtension
     public static bool Value(this InequalityTypes type, int Prev, int Next)
     {
         switch(type)
+        {
+            case InequalityTypes.Equal:
+                return Prev == Next;
+
+            case InequalityTypes.Greater:
+                return Prev > Next;
+
+            case InequalityTypes.GreaterOrEqual:
+                return Prev >= Next;
+
+            case InequalityTypes.Less:
+                return Prev < Next;
+
+            case InequalityTypes.LessOrEqual:
+                return Prev <= Next;
+
+            default: return false;
+        }
+    }
+
+    public static bool Value(this InequalityTypes type, float Prev, float Next)
+    {
+        switch (type)
         {
             case InequalityTypes.Equal:
                 return Prev == Next;

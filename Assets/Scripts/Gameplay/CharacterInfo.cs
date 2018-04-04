@@ -515,6 +515,11 @@ public class CharacterInfoScript : MonoBehaviour
         return PlayerInfo.Stats[stat];
     }
 
+    public float GetStat(CharacterStatistic stat)
+    {
+        return StatsRuleSet.GetStatValue(this, stat);
+    }
+
     public bool HasSkill(CharacterSkills skill)
     {
         return PlayerInfo.HasSkill(skill);

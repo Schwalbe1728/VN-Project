@@ -62,6 +62,10 @@ MonoBehaviour:
       backgroundRequiredCondition:
         Background: {fileID: 0}
         Required: 1
+      statisticCheckCondition:
+        Statistic: 0
+        ValueChecked: 0
+        InequalityType: 0
     entryConditionSet: 0
     OptionText: "Chodz\u0105 s\u0142uchy, \u017Ce znajdzie si\u0119 u Ciebie robota."
     VisitOnce: 0
@@ -113,6 +117,10 @@ MonoBehaviour:
       backgroundRequiredCondition:
         Background: {fileID: 0}
         Required: 1
+      statisticCheckCondition:
+        Statistic: 0
+        ValueChecked: 0
+        InequalityType: 0
     entryConditionSet: 1
     OptionText: 
     VisitOnce: 0
@@ -164,6 +172,10 @@ MonoBehaviour:
       backgroundRequiredCondition:
         Background: {fileID: 0}
         Required: 1
+      statisticCheckCondition:
+        Statistic: 0
+        ValueChecked: 0
+        InequalityType: 0
     entryConditionSet: 0
     OptionText: 
     VisitOnce: 0
@@ -171,6 +183,7 @@ MonoBehaviour:
   Nodes:
   - nodeID: 0
     isImmediateNode: 0
+    addContinue: 0
     nextID: -1
     nextType: 0
     NodeText: Czego?
@@ -205,6 +218,7 @@ MonoBehaviour:
     secondsConsumed: 0
   - nodeID: 1
     isImmediateNode: 0
+    addContinue: 0
     nextID: -1
     nextType: 0
     NodeText: "Nie zrozum mnie \u017Ale, kole\u015B, ale jeste\u015B za cwany na to,
@@ -241,6 +255,7 @@ MonoBehaviour:
     secondsConsumed: 0
   - nodeID: 2
     isImmediateNode: 0
+    addContinue: 0
     nextID: -1
     nextType: 0
     NodeText: "Znalaz\u0142aby si\u0119, ale jeste\u015B za cienki w uszach na ni\u0105
@@ -276,6 +291,7 @@ MonoBehaviour:
     secondsConsumed: 0
   - nodeID: 3
     isImmediateNode: 0
+    addContinue: 0
     nextID: -1
     nextType: 0
     NodeText: "Mog\u0119 mie\u0107, owszem. I nawet wygl\u0105dasz mi na takiego co
@@ -353,6 +369,10 @@ MonoBehaviour:
     backgroundRequiredCondition:
       Background: {fileID: 0}
       Required: 1
+    statisticCheckCondition:
+      Statistic: 0
+      ValueChecked: -1.47
+      InequalityType: 0
   - conditionID: 1
     targetIDIfPassed: 3
     targetTypeIfPassed: 1
@@ -395,6 +415,10 @@ MonoBehaviour:
     backgroundRequiredCondition:
       Background: {fileID: 0}
       Required: 1
+    statisticCheckCondition:
+      Statistic: 0
+      ValueChecked: 0
+      InequalityType: 0
   - conditionID: 2
     targetIDIfPassed: -1
     targetTypeIfPassed: 0
@@ -437,6 +461,10 @@ MonoBehaviour:
     backgroundRequiredCondition:
       Background: {fileID: 0}
       Required: 1
+    statisticCheckCondition:
+      Statistic: 0
+      ValueChecked: 0
+      InequalityType: 0
   editorInfo:
     Windows:
     - serializedVersion: 2

@@ -151,6 +151,22 @@ public partial class DialogueEditor
 
             result |= prevStat != stat;
         }
+        GUILayout.EndHorizontal();        
+
+        return result;
+    }
+
+    bool DrawCharacterStatisticField(CharacterStatistic prevStat, int labelWidth, out CharacterStatistic stat)
+    {
+        bool result = false;
+
+        GUILayout.BeginHorizontal();
+        {
+            EditorGUILayout.PrefixLabel("Attribute"/*, GUILayout.Width(labelWidth)*/);
+            stat = (CharacterStatistic)EditorGUILayout.EnumPopup(prevStat);
+
+            result |= prevStat != stat;
+        }
         GUILayout.EndHorizontal();
 
         return result;
@@ -186,7 +202,7 @@ public partial class DialogueEditor
         GUILayout.EndHorizontal();
 
         return result;
-    }
+    }    
 
     bool DrawPlayerSkillField(CharacterSkills prevSkill, int labelWidth, out CharacterSkills skill)
     {
@@ -261,6 +277,33 @@ public partial class DialogueEditor
         if (typeChangedToThis || result)
         {
             currentCondition.SetAttributeCheckCondition(stat, value, inequality);
+            Debug.Log("Zmiana attribute check");
+        }
+
+        return typeChangedToThis || result;
+    }
+
+    bool DrawStatisticCheckInterior(ConditionNode currentCondition, bool typeChangedToThis)
+    {
+        bool result = false;
+        int labelWidth = 90;
+
+        CharacterStatistic stat;
+        float value;
+        InequalityTypes inequality;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawCharacterStatisticField(currentCondition.StatisticCheck.Statistic, labelWidth, out stat);
+            result |= DrawInequalityField(currentCondition.StatisticCheck.InequalityType, labelWidth, out inequality);
+            result |= DrawGenericFloatField(currentCondition.StatisticCheck.ValueChecked, labelWidth, "Statistic Value", out value);
+                //DrawValueCheckedField(currentCondition.AttributeCheck.ValueChecked, labelWidth, out value);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (typeChangedToThis || result)
+        {
+            currentCondition.SetStatisticCheckCondition(stat, inequality, value);
             Debug.Log("Zmiana attribute check");
         }
 

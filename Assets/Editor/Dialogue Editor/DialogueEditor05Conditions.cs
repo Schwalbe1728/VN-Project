@@ -168,6 +168,10 @@ public partial class DialogueEditor
             case ConditionTypes.BackgroundRequired:
                 save |= DrawBackgroundRequiredInterior(currentCondition, prevType != newType);
                 break;
+
+            case ConditionTypes.StatisticCheck:
+                save |= DrawStatisticCheckInterior(currentCondition, prevType != newType);
+                break;
         }
 
         GUILayout.BeginHorizontal();
