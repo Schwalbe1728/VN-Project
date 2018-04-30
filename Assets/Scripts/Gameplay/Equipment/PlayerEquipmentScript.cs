@@ -13,6 +13,17 @@ public class PlayerEquipmentScript : MonoBehaviour {
     private int money;
 
     public int AbstractMoneyValue { get { return money; } }
+    public bool SubstractMoney(int abstractValue)
+    {
+        int after = money - abstractValue;
+        bool result = after >= 0;
+
+        if(result) { money -= abstractValue; }
+
+        return result;
+    }
+
+    public void AddMoney(int abstractValue) { money += abstractValue; }
 
     public void AddItems(ItemScript item, int quantity = 1)
     {

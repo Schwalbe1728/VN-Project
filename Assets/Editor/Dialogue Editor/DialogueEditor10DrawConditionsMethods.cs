@@ -8,6 +8,35 @@ public partial class DialogueEditor
 {
     #region Build Helpers
 
+    bool DrawGenericMoneyInterior(int prevAbstractValue, int labelWidth, out int newAbstractValue)
+    {
+        bool result = false;        
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericIntField(prevAbstractValue, labelWidth, "Abstract Value", out newAbstractValue, 0);
+
+            EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+            {
+                int pounds;
+                int shillings;
+                float pences;
+
+                ItemExtension.ToCoins(newAbstractValue, out pounds, out shillings, out pences);
+
+                result |= DrawGenericIntField(pounds, labelWidth, "Pounds", out pounds, 0);
+                result |= DrawGenericIntField(shillings, labelWidth, "Shillings", out shillings, 0);
+                result |= DrawGenericFloatField(pences, labelWidth, "Pences", out pences, 0);
+
+                newAbstractValue = ItemExtension.FromCoins(pounds, shillings, pences);
+            }
+            EditorGUILayout.EndVertical();
+        }
+        EditorGUILayout.EndVertical();
+
+        return result;
+    }
+
     bool DrawGenericBoolField(bool prevBool, int labelWidth, string labelText, out bool newBool)
     {
         bool result = false;
@@ -392,30 +421,9 @@ public partial class DialogueEditor
     {
         bool result = false;
         int labelWidth = 90;
-
         int abstractValue;
 
-        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
-        {
-            result |= DrawGenericIntField(currentCondition.PlayerHasMoney.AbstractValue, labelWidth, "Abstract Value", out abstractValue, 0);
-
-            EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
-            {
-                int pounds;
-                int shillings;
-                float pences;
-
-                ItemExtension.ToCoins(abstractValue, out pounds, out shillings, out pences);
-
-                result |= DrawGenericIntField(pounds, labelWidth, "Pounds", out pounds, 0);
-                result |= DrawGenericIntField(shillings, labelWidth, "Shillings", out shillings, 0);
-                result |= DrawGenericFloatField(pences, labelWidth, "Pences", out pences, 0);
-
-                abstractValue = ItemExtension.FromCoins(pounds, shillings, pences);
-            }
-            EditorGUILayout.EndVertical();
-        }
-        EditorGUILayout.EndVertical();
+        result |= DrawGenericMoneyInterior(currentCondition.PlayerHasMoney.AbstractValue, labelWidth, out abstractValue);
 
         if(result || typeChangedToThis)
         {

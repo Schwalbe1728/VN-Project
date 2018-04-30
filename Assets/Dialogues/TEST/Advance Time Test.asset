@@ -110,6 +110,14 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
+      acquireMoneySet: 0
+      acquireMoney:
+        AbstractValue: 0
+        Spend: 0
+      spendMoneySet: 0
+      spendMoney:
+        AbstractValue: 0
+        Spend: 1
       updateJournalSet: 0
       updateJournal:
         Entry: {fileID: 0}
@@ -153,6 +161,14 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
+      acquireMoneySet: 0
+      acquireMoney:
+        AbstractValue: 34
+        Spend: 0
+      spendMoneySet: 0
+      spendMoney:
+        AbstractValue: 1
+        Spend: 1
       updateJournalSet: 1
       updateJournal:
         Entry: {fileID: 11400000, guid: 502b16caa2c2bf24aafaf7143aadfbb4, type: 2}
@@ -172,10 +188,10 @@ MonoBehaviour:
       width: 276
       height: 172
     - serializedVersion: 2
-      x: 936
-      y: 108
-      width: 265
-      height: 374
+      x: 866
+      y: 27
+      width: 315
+      height: 566
     WindowTypes: 010000000200000001000000
     NodeTypesIDs: 000000000000000001000000
     OptionsIndexes: 01000000

@@ -222,6 +222,46 @@ public partial class DialogueEditor
         return result;
     }
 
+    bool DrawSpendMoneyInterior(DialogueAction currentAction)
+    {
+        bool result = false;
+        int abstractValue;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericMoneyInterior(currentAction.SpendMoney.AbstractValue, 90, out abstractValue);
+        }
+        EditorGUILayout.EndVertical();
+
+        if(result || currentAction.SpendMoney == null)
+        {
+            currentAction.SetSpendMoneyAction(abstractValue);
+            Debug.Log("Set Spend Money");
+        }
+
+        return result;
+    }
+
+    bool DrawAcquireMoneyInterior(DialogueAction currentAction)
+    {
+        bool result = false;
+        int abstractValue;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericMoneyInterior(currentAction.AcquireMoney.AbstractValue, 90, out abstractValue);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (result || currentAction.AcquireMoney == null)
+        {
+            currentAction.SetAcquireMoneyAction(abstractValue);
+            Debug.Log("Set Acquire Money");
+        }
+
+        return result;
+    }
+
     bool DrawAdvanceTimeActionInterior(DialogueAction currentAction)
     {
         bool result = false;

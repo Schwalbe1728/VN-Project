@@ -459,6 +459,22 @@ public partial class DialogueEditor
                     save |= DrawUseItemInterior(currentAction);
                 }
 
+                currentAction.SpendMoneySet =
+                    EditorGUILayout.ToggleLeft("Spend Money", currentAction.SpendMoneySet);
+
+                if(currentAction.SpendMoneySet)
+                {
+                    save |= DrawSpendMoneyInterior(currentAction);
+                }
+
+                currentAction.AcquireMoneySet =
+                    EditorGUILayout.ToggleLeft("Acquire Money", currentAction.AcquireMoneySet);
+
+                if (currentAction.AcquireMoneySet)
+                {
+                    save |= DrawAcquireMoneyInterior(currentAction);
+                }
+
                 currentAction.UpdateJournalSet =
                     EditorGUILayout.ToggleLeft("Update Journal", currentAction.UpdateJournalSet);
 

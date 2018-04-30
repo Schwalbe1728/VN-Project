@@ -78,13 +78,32 @@ public partial class DialogueAction
     public UseItemAction UseItem { get { return useItem; } }
     #endregion
 
+    #region Give Money
+    [SerializeField]
+    private bool acquireMoneySet;
+    [SerializeField]
+    private AcquireMoneyAction acquireMoney;
+    public bool AcquireMoneySet { get { return acquireMoneySet; } set { acquireMoneySet = value; } }
+    public AcquireMoneyAction AcquireMoney { get { return acquireMoney; } }
+    #endregion
+
+    #region Give Money
+    [SerializeField]
+    private bool spendMoneySet;
+    [SerializeField]
+    private SpendMoneyAction spendMoney;
+    public bool SpendMoneySet { get { return spendMoneySet; } set { spendMoneySet = value; } }
+    public SpendMoneyAction SpendMoney { get { return spendMoney; } }
+    #endregion
+
+    #region Update Journal
     [SerializeField]
     private bool updateJournalSet;
     [SerializeField]
     private UpdateJournalAction updateJournal;
     public bool UpdateJournalSet { get { return updateJournalSet; } set { updateJournalSet = value; } }
     public UpdateJournalAction UpdateJournal { get { return updateJournal; } }
-
+    #endregion
 
     public override void DoAction()
     {
@@ -97,6 +116,8 @@ public partial class DialogueAction
         if (takeItemSet) takeItem.DoAction();
         if (useItemSet) useItem.DoAction();
         if (updateJournalSet) updateJournal.DoAction();
+        if (spendMoneySet) spendMoney.DoAction();
+        if (acquireMoneySet) acquireMoney.DoAction();
     }
 
     public void SetHurtPlayerAction(int damage)
@@ -190,6 +211,24 @@ public partial class DialogueAction
         updateJournalSet = false;
     }
 
+    public void SetSpendMoneyAction(int abstractValue)
+    {
+        spendMoney = new SpendMoneyAction();
+        spendMoney.AbstractValue = abstractValue;
+        spendMoneySet = true;
+    }
+
+    public void ClearSpendMoneyAction() { spendMoneySet = false; }
+
+    public void SetAcquireMoneyAction(int abstractValue)
+    {
+        acquireMoney = new AcquireMoneyAction();
+        acquireMoney.AbstractValue = abstractValue;
+        acquireMoneySet = true;
+    }
+
+    public void ClearAcquireMoneyAction() { acquireMoneySet = false; }
+
     public override string ToString()
     {
         int set = 0;
@@ -203,6 +242,8 @@ public partial class DialogueAction
         if (TakeItemSet) set++;
         if (UseItemSet) set++;
         if (UpdateJournalSet) set++;
+        if (SpendMoneySet) set++;
+        if (AcquireMoneySet) set++;
 
         return "Defined Actions: " + set.ToString();
     }
@@ -339,6 +380,41 @@ public class UpdateJournalAction : DialogueActionBase
         JournalUIScript.TryInsertEntry(entry);
         //wstaw do dziennika
     }
+}
+
+[System.Serializable]
+public abstract class ExchangeMoneyAction : DialogueActionBase
+{
+    public int AbstractValue;
+    [SerializeField]
+    protected bool Spend;
+
+    public override void DoAction()
+    {
+        PlayerEquipmentScript equipment =
+            GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
+
+        if(Spend)
+        {
+            equipment.SubstractMoney(AbstractValue);
+        }
+        else
+        {
+            equipment.AddMoney(AbstractValue);
+        }
+    }
+}
+
+[System.Serializable]
+public class SpendMoneyAction : ExchangeMoneyAction
+{
+    public SpendMoneyAction() { Spend = true; }
+}
+
+[System.Serializable]
+public class AcquireMoneyAction : ExchangeMoneyAction
+{
+    public AcquireMoneyAction() { Spend = false; }
 }
 
 #endregion
