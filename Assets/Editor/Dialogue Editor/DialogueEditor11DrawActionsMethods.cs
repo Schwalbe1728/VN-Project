@@ -5,6 +5,30 @@ using UnityEditor;
 
 public partial class DialogueEditor
 {
+    bool DrawAdvanceTimeField(int prevSeconds, int labelWidth, out int newSeconds)
+    {
+        bool result = false;
+
+        WorldDate temp = new WorldDate(prevSeconds, 0, 0, 0);
+        int seconds = temp.Seconds;
+        int minutes = temp.Minutes;
+        int hours = temp.Hours;
+        int days = temp.Days;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericIntField(days, labelWidth, "Days", out days, 0);
+            result |= DrawGenericIntField(hours, labelWidth, "Hours", out hours, 0);
+            result |= DrawGenericIntField(minutes, labelWidth, "Minutes", out minutes, 0);
+            result |= DrawGenericIntField(seconds, labelWidth, "Seconds", out seconds, 0);
+        }
+        EditorGUILayout.EndVertical();
+
+        newSeconds = TimeManagerScript.ToSeconds(days, hours, minutes, seconds);
+
+        return result;
+    }
+
     bool DrawGenericAudioClipField(AudioClip prevClip, int labelWidth, string labelText, out AudioClip newClip)
     {
         bool result = false;
@@ -171,6 +195,71 @@ public partial class DialogueEditor
         {
             currentAction.SetUseItemAction(item);
             Debug.Log("Set Use Item");
+        }
+
+        return result;
+    }
+
+    bool DrawUpdateJournalInterior(DialogueAction currentAction)
+    {
+        bool result = false;
+
+        JournalEntryScript entry;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawGenericAssetField<JournalEntryScript>(currentAction.UpdateJournal.Entry, 90, "Journal Entry", out entry);
+        }
+        EditorGUILayout.EndVertical();
+
+        if (result || currentAction.UpdateJournal == null)
+        {
+            currentAction.SetUpdateJournalAction(entry);
+            Debug.Log("Set Update Journal");
+        }
+
+
+        return result;
+    }
+
+    bool DrawAdvanceTimeActionInterior(DialogueAction currentAction)
+    {
+        bool result = false;
+
+        int totalSeconds = 0;
+        bool allowVariance;
+        float varianceValue;
+
+        float maxVariance = 0.5f;
+
+        EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
+        {
+            result |= DrawAdvanceTimeField(currentAction.AdvanceTime.Seconds, 90, out totalSeconds);
+            result |= DrawGenericBoolField(currentAction.AdvanceTime.VarianceSet, 90, "Allow Variance", out allowVariance);
+
+            if (allowVariance)
+            {
+                int temp;
+
+                result |= DrawGenericIntField(
+                    Mathf.RoundToInt(100 * currentAction.AdvanceTime.VarianceValue), 
+                    90, 
+                    "Variance (%)", 
+                    out temp, 0);
+
+                varianceValue = Mathf.Min(temp / 100.0f, maxVariance);
+            }
+            else
+            {
+                varianceValue = 0;
+            }
+        }
+        EditorGUILayout.EndVertical();
+
+        if(result)
+        {
+            currentAction.SetAdvanceTimeAction(totalSeconds, allowVariance, varianceValue);
+            Debug.Log("Set Advance Time");
         }
 
         return result;

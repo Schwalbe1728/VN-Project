@@ -191,6 +191,11 @@ MonoBehaviour:
     optionsIndexesList: 00000000
     nextDialogue: {fileID: 0}
     action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 0
+        VarianceSet: 0
+        VarianceValue: 0
       hurtPlayerSet: 0
       hurtPlayer:
         Damage: 0
@@ -214,6 +219,9 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
+      updateJournalSet: 0
+      updateJournal:
+        Entry: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   - nodeID: 1
@@ -228,6 +236,11 @@ MonoBehaviour:
     optionsIndexesList: 
     nextDialogue: {fileID: 0}
     action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 0
+        VarianceSet: 0
+        VarianceValue: 0
       hurtPlayerSet: 0
       hurtPlayer:
         Damage: 0
@@ -251,6 +264,9 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
+      updateJournalSet: 0
+      updateJournal:
+        Entry: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   - nodeID: 2
@@ -264,6 +280,11 @@ MonoBehaviour:
     optionsIndexesList: 
     nextDialogue: {fileID: 0}
     action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 0
+        VarianceSet: 0
+        VarianceValue: 0
       hurtPlayerSet: 0
       hurtPlayer:
         Damage: 0
@@ -287,6 +308,9 @@ MonoBehaviour:
       useItemSet: 0
       useItem:
         Item: {fileID: 0}
+      updateJournalSet: 0
+      updateJournal:
+        Entry: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   - nodeID: 3
@@ -301,6 +325,11 @@ MonoBehaviour:
     optionsIndexesList: 
     nextDialogue: {fileID: 0}
     action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 0
+        VarianceSet: 0
+        VarianceValue: 0
       hurtPlayerSet: 0
       hurtPlayer:
         Damage: 0
@@ -321,9 +350,12 @@ MonoBehaviour:
       takeItem:
         Item: {fileID: 0}
         Quantity: 0
-      useItemSet: 0
+      useItemSet: 1
       useItem:
-        Item: {fileID: 0}
+        Item: {fileID: 11400000, guid: 5bbcf05500ae92043a7d80ea0696b7b5, type: 2}
+      updateJournalSet: 0
+      updateJournal:
+        Entry: {fileID: 0}
     actionSet: 1
     secondsConsumed: 0
   Conditions:
@@ -500,8 +532,8 @@ MonoBehaviour:
     - serializedVersion: 2
       x: 1064
       y: 31
-      width: 232
-      height: 225
+      width: 321
+      height: 376
     - serializedVersion: 2
       x: 199
       y: 707

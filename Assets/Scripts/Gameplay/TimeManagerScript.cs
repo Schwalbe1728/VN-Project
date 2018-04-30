@@ -42,6 +42,12 @@ public class TimeManagerScript : MonoBehaviour
         ManagerScriptInstance.AddSecond(ToSeconds(0, hours, minutes, seconds));
     }
 
+    public static void AdvanceTimeWithRandomVariance(float var, int seconds, int minutes = 0, int hours = 0)
+    {
+        int zeit = Mathf.Max(1, Mathf.RoundToInt(Random.Range(1 - var, 1 + var) * ToSeconds(0, hours, minutes, seconds)) ) ;
+        ManagerScriptInstance.AddSecond(zeit);
+    }
+
     public void GetHour(out int seconds, out int minutes, out int hours)
     {
         seconds = Second;

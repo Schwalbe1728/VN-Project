@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player Portrait", menuName = "Player Portrait")]
+[CreateAssetMenu(fileName = "New Player Portrait", menuName = "VN-Project/Player Portrait")]
 public class PlayerPortraitScript : ScriptableObject
 {
     [SerializeField]   

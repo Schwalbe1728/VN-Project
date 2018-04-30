@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858873df6999844b3efb9ec26e4bab, type: 3}
+  m_Name: Advance Time Test
+  m_EditorClassIdentifier: 
+  startID: 0
+  startType: 0
+  currentNodeID: 1
+  Options:
+  - optionID: 0
+    nextID: 1
+    nextType: 1
+    alreadyVisited: 1
+    entryCondition:
+      conditionID: 0
+      targetIDIfPassed: -1
+      targetTypeIfPassed: 0
+      targetIDIfFailed: -1
+      targetTypeIfFailed: 0
+      nextDialogueIfPassed: {fileID: 0}
+      nextDialogueIfFailed: {fileID: 0}
+      conditionTypeSet: 0
+      attributeCheckCondition:
+        Attribute: 0
+        ValueChecked: 0
+        InequalityType: 0
+      attributeTestCondition:
+        Attribute: 0
+        AttributeMod: 0
+        Skill: 0
+      skillPossessedCondition:
+        SkillToCheck: 0
+        IsNeeded: 1
+      playerHasItemCondition:
+        Item: {fileID: 0}
+        Quantity: 0
+        IsRequired: 1
+      playerHasMoneyCondition:
+        AbstractValue: 0
+      storyStateHappenedCondition:
+        PlotName: 
+        StateName: 
+        HasHappened: 0
+      worldDateCondition:
+        Date:
+          ShowInFoldout: 0
+        TimeOrientation: 0
+      worldDateRangeCondition:
+        Start:
+          ShowInFoldout: 0
+        Finish:
+          ShowInFoldout: 0
+        HoursOnly: 0
+      backgroundRequiredCondition:
+        Background: {fileID: 0}
+        Required: 1
+      statisticCheckCondition:
+        Statistic: 0
+        ValueChecked: 0
+        InequalityType: 0
+    entryConditionSet: 0
+    OptionText: Mhm
+    VisitOnce: 0
+    nextDialogue: {fileID: 0}
+  Nodes:
+  - nodeID: 0
+    isImmediateNode: 0
+    addContinue: 0
+    nextID: -1
+    nextType: 0
+    NodeText: Blergh reeee reeee reee kum kum kum skoooma dafuq erm I dun get it what
+      the fuck am I even writing
+    customID: 
+    optionsIndexesList: 00000000
+    nextDialogue: {fileID: 0}
+    action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 10
+        VarianceSet: 1
+        VarianceValue: 0.075
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+      updateJournalSet: 0
+      updateJournal:
+        Entry: {fileID: 0}
+    actionSet: 1
+    secondsConsumed: 0
+  - nodeID: 1
+    isImmediateNode: 0
+    addContinue: 0
+    nextID: -1
+    nextType: 0
+    NodeText: Yes.
+    customID: 
+    optionsIndexesList: 
+    nextDialogue: {fileID: 0}
+    action:
+      advanceTimeSet: 0
+      advanceTime:
+        Seconds: 1
+        VarianceSet: 1
+        VarianceValue: 0.075
+      hurtPlayerSet: 0
+      hurtPlayer:
+        Damage: 0
+      hurtPlayerSanitySet: 0
+      hurtPlayerSanity:
+        Damage: 0
+      changeMusicSet: 0
+      changeMusic:
+        Clip: {fileID: 0}
+      changeAmbienceSet: 0
+      changeAmbience:
+        Clip: {fileID: 0}
+      giveItemSet: 0
+      giveItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      takeItemSet: 0
+      takeItem:
+        Item: {fileID: 0}
+        Quantity: 0
+      useItemSet: 0
+      useItem:
+        Item: {fileID: 0}
+      updateJournalSet: 1
+      updateJournal:
+        Entry: {fileID: 11400000, guid: 502b16caa2c2bf24aafaf7143aadfbb4, type: 2}
+    actionSet: 1
+    secondsConsumed: 0
+  Conditions: []
+  editorInfo:
+    Windows:
+    - serializedVersion: 2
+      x: 181
+      y: 79
+      width: 226
+      height: 188
+    - serializedVersion: 2
+      x: 507
+      y: 105
+      width: 276
+      height: 172
+    - serializedVersion: 2
+      x: 936
+      y: 108
+      width: 265
+      height: 374
+    WindowTypes: 010000000200000001000000
+    NodeTypesIDs: 000000000000000001000000
+    OptionsIndexes: 01000000
+    NodesIndexes: 0000000002000000
+    ConditionsIndexes: 
+    Nodes: 2
+    Options: 1
+    Conditions: 0

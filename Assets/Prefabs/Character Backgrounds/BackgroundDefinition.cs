@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Character Background", menuName = "Character Background")]
+[CreateAssetMenu(fileName = "New Character Background", menuName = "VN-Project/Character Background")]
 public class BackgroundDefinition : ScriptableObject
 {
     [Header("Description")]

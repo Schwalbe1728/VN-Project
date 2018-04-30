@@ -9684,7 +9684,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.74126
+      value: 76.96501
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -9694,7 +9694,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 109.48251
+      value: 133.93002
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -12203,7 +12203,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.74126
+      value: 76.96501
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -12213,7 +12213,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 109.48251
+      value: 133.93002
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -12952,7 +12952,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 192.51999, y: 44.712505}
+  m_CellSize: {x: 228.08002, y: 49.34375}
   m_Spacing: {x: 0, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -13080,7 +13080,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.74126
+      value: 76.96501
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -13090,7 +13090,7 @@ Prefab:
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 109.48251
+      value: 133.93002
       objectReference: {fileID: 0}
     - target: {fileID: 224518606119821614, guid: 75344288409bf2249929bbf942802d49,
         type: 2}
@@ -13246,6 +13246,7 @@ GameObject:
   - component: {fileID: 1884535235}
   - component: {fileID: 1884535234}
   - component: {fileID: 1884535237}
+  - component: {fileID: 1884535238}
   m_Layer: 0
   m_Name: Game Info Component
   m_TagString: Untagged
@@ -13356,6 +13357,20 @@ MonoBehaviour:
       - 
       _Values: 0000000000000000
   money: 0
+--- !u!114 &1884535238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1884535232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9ac70ea02ff4842a2eaca9168d84db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testEntry: {fileID: 11400000, guid: 502b16caa2c2bf24aafaf7143aadfbb4, type: 2}
+  journalUpdatedSound: {fileID: 8300000, guid: 0be3ef0d467c3ee48a5a2206654133b4, type: 3}
+  sfxAudioSource: {fileID: 0}
 --- !u!1 &1918940153
 GameObject:
   m_ObjectHideFlags: 0
@@ -14436,7 +14451,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 109.48251, y: 0}
+  m_SizeDelta: {x: 133.93002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2045767311
 MonoBehaviour:
@@ -15423,7 +15438,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 53.241257, y: 14.03475}
+  m_CellSize: {x: 25.810013, y: 18.779999}
   m_Spacing: {x: 10, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2

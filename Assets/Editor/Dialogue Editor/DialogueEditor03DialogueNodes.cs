@@ -393,6 +393,15 @@ public partial class DialogueEditor
         {
             Rect dummy = EditorGUILayout.BeginVertical(Config.FoldoutInteriorStyle);
             {
+                currentAction.AdvanceTimeSet =
+                    EditorGUILayout.ToggleLeft("Advance Time", currentAction.AdvanceTimeSet);
+
+                if (currentAction.AdvanceTimeSet)
+                {
+                    //rysuj kontrolkę HurtPlayer
+                    save |= DrawAdvanceTimeActionInterior(currentAction);
+                }
+
                 currentAction.HurtPlayerSet =
                     EditorGUILayout.ToggleLeft("Hurt Player", currentAction.HurtPlayerSet);
 
@@ -450,6 +459,13 @@ public partial class DialogueEditor
                     save |= DrawUseItemInterior(currentAction);
                 }
 
+                currentAction.UpdateJournalSet =
+                    EditorGUILayout.ToggleLeft("Update Journal", currentAction.UpdateJournalSet);
+
+                if(currentAction.UpdateJournalSet)
+                {
+                    save |= DrawUpdateJournalInterior(currentAction);
+                }
             }
             EditorGUILayout.EndVertical();
         }

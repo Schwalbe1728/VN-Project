@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueNode : DialogueElement
 {
+    private static int textLettersPerSecond = 10;
+
     [SerializeField]
     private int nodeID;
 
@@ -78,18 +80,16 @@ public class DialogueNode : DialogueElement
         action = null;
         actionSet = false;
     }
-
+    
     public int SecondsConsumed
     {
-        get { return secondsConsumed; }
-        set
+        get
         {
-            if(value >= 0)
-            {
-                secondsConsumed = value;
-            }
+            float temp = NodeText.Length;
+
+            return Mathf.CeilToInt(temp / textLettersPerSecond);
         }
-    }    
+    }       
 
     #region Options Attached
     public int[] OptionsAttached
@@ -157,8 +157,24 @@ public class DialogueNode : DialogueElement
     {
         if(Action != null)
         {
+            bool advanceTimeArtificiallyCreated = false;
+
+            if (!Action.AdvanceTimeSet && SecondsConsumed > 0)
+            {
+                // utwórz akcję o czasie trwanie SecondsConsumed 
+                float timeVarianceForDefaultNode = 0.075f;
+
+                Action.SetAdvanceTimeAction(SecondsConsumed, true, timeVarianceForDefaultNode);
+                advanceTimeArtificiallyCreated = true;
+            }             
+
             Action.DoAction();
-        }
+
+            if(advanceTimeArtificiallyCreated)
+            {
+                Action.ClearAdvanceTimeAction();
+            }
+        }        
     }
 
     public int TargetID { get { return nextID; } }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public delegate void DialogueReachedEnd(Dialogue next);
 
-[CreateAssetMenu(menuName = "Dialogue")]
+[CreateAssetMenu(menuName = "VN-Project/Dialogue")]
 public class Dialogue : ScriptableObject
 {
     public const int ExitDialogue = -1;

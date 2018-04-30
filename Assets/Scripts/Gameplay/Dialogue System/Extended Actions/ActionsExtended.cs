@@ -4,6 +4,16 @@ using UnityEngine;
 
 public partial class DialogueAction
 {
+    #region Game State
+
+    [SerializeField]
+    private bool advanceTimeSet;
+    [SerializeField]
+    private AdvanceTimeAction advanceTime;
+    public bool AdvanceTimeSet { get { return advanceTimeSet; } set { advanceTimeSet = value; } }
+    public AdvanceTimeAction AdvanceTime { get { return advanceTime; } }
+
+    #endregion
     #region Hurt Player
     [SerializeField]
     private bool hurtPlayerSet;
@@ -68,8 +78,17 @@ public partial class DialogueAction
     public UseItemAction UseItem { get { return useItem; } }
     #endregion
 
+    [SerializeField]
+    private bool updateJournalSet;
+    [SerializeField]
+    private UpdateJournalAction updateJournal;
+    public bool UpdateJournalSet { get { return updateJournalSet; } set { updateJournalSet = value; } }
+    public UpdateJournalAction UpdateJournal { get { return updateJournal; } }
+
+
     public override void DoAction()
     {
+        if (advanceTimeSet) advanceTime.DoAction();
         if (hurtPlayerSet) hurtPlayer.DoAction();
         if (hurtPlayerSanitySet) hurtPlayerSanity.DoAction();
         if (changeMusicSet) changeMusic.DoAction();
@@ -77,6 +96,7 @@ public partial class DialogueAction
         if (giveItemSet) giveItem.DoAction();
         if (takeItemSet) takeItem.DoAction();
         if (useItemSet) useItem.DoAction();
+        if (updateJournalSet) updateJournal.DoAction();
     }
 
     public void SetHurtPlayerAction(int damage)
@@ -144,10 +164,37 @@ public partial class DialogueAction
 
     public void ClearUseItemAction() { UseItemSet = false; }
 
+    public void SetAdvanceTimeAction(int seconds, bool allowVariance, float varianceValue)
+    {
+        advanceTime = new AdvanceTimeAction();
+        advanceTime.Seconds = seconds;
+        advanceTime.VarianceSet = allowVariance;
+        advanceTime.VarianceValue = varianceValue;
+        advanceTimeSet = true;
+    }
+
+    public void ClearAdvanceTimeAction()
+    {
+        AdvanceTimeSet = false;
+    }
+
+    public void SetUpdateJournalAction(JournalEntryScript entry)
+    {
+        updateJournal = new UpdateJournalAction();
+        updateJournal.Entry = entry;
+        updateJournalSet = true;
+    }
+
+    public void ClearUpdateJournalAction()
+    {
+        updateJournalSet = false;
+    }
+
     public override string ToString()
     {
         int set = 0;
 
+        if (AdvanceTimeSet) set++;
         if (ChangeAmbienceSet) set++;
         if (ChangeMusicSet) set++;
         if (GiveItemSet) set++;
@@ -155,8 +202,29 @@ public partial class DialogueAction
         if (HurtPlayerSet) set++;
         if (TakeItemSet) set++;
         if (UseItemSet) set++;
+        if (UpdateJournalSet) set++;
 
         return "Defined Actions: " + set.ToString();
+    }
+}
+
+[System.Serializable]
+public class AdvanceTimeAction : DialogueActionBase
+{
+    public int Seconds;
+    public bool VarianceSet;
+    public float VarianceValue;
+
+    public override void DoAction()
+    {
+        if (VarianceSet)
+        {
+            TimeManagerScript.AdvanceTimeWithRandomVariance(VarianceValue, Seconds);
+        }
+        else
+        {
+            TimeManagerScript.AdvanceTime(Seconds);
+        }
     }
 }
 
@@ -255,6 +323,21 @@ public class UseItemAction : EquipmentChangeAction
             GameObject.Find("Game Info Component").GetComponent<PlayerEquipmentScript>();
 
         equipment.UseItem(Item);
+    }
+}
+
+[System.Serializable]
+public class UpdateJournalAction : DialogueActionBase
+{
+    public JournalEntryScript Entry;
+
+    public override void DoAction()
+    {
+        //sprawdź czy wpis został już dodany do dziennika       
+
+        JournalEntry entry = Entry.GetEntry(TimeManagerScript.GetDate());
+        JournalUIScript.TryInsertEntry(entry);
+        //wstaw do dziennika
     }
 }
 
